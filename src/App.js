@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+
+import MembershipLeft from "./components/membership/Membership";
+
+// import './App.css';
+
+
+
+/*
+  This is a project created with React App.
+  Please, consult the tailwind.config.js file to confirm customisation
+
+**/
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MembershipLeft />
     </div>
   );
 }
