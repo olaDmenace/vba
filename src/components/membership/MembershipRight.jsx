@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Socials from './Socials'
+import Circle from '../../images/Ellipse.png'
+
 
 /*
 
@@ -9,28 +11,17 @@ This is the right hand side of the registration screen that is re-rendered on cl
 
 const MembershipRight = (props) => {
     return (
-        <div className='min-h-screen grid'>
-            <div className='grid mih-screen content-center'>
+        <div className='min-h-screen grid gap-32 lg:gap-0 relative'>
+            <div className='absolute -top-1/3 lg:-top-1/2 -right-1/3 lg:-right-1/2'>
+                <img src={Circle} alt="" />
+            </div>
+            <div className='grid gap-8'>
                 <div className='lg:hidden space-y-6'>
-                    <h1 className='text-Heading1 text-primary font-bold'>Welcome to our community</h1>
-                    <p className='font-medium text-white'>Your journey to successful crypto  trading starts here!</p>
+                    <h1 className='text-Heading1 text-primary font-bold'>{props.Heading}</h1>
+                    <p className='font-medium text-white'>{props.Desc}</p>
                 </div>
-                <div>
-                    <form action="" className='grid text-lg text-white/80 gap-7'>
-                        <label htmlFor="">
-                            Email Address
-                            <input className='rounded w-full h-10 bg-[#32393C66]/40 px-2' type="email" name="" id="" />
-                        </label>
-                        <label htmlFor="">
-                            Password
-                            <input className='rounded w-full h-10 bg-[#32393C66]/40 px-2' type="password" name="" id="" />
-                        </label>
-                        <label htmlFor="">
-                            Confirm Password
-                            <input className='rounded w-full h-10 bg-[#32393C66]/40 px-2' type="password" name="" id="" />
-                        </label>
-                        <button className='rounded w-1/3 mx-auto bg-primary text-white active:bg-primary-dark ease-in-out transition-colors duration-500 px-4 py-2' type="submit">Sign Up</button>
-                    </form>
+                <div className=''>
+                    {props.Form()}
                 </div>
             </div>
             <div className='self-end'>

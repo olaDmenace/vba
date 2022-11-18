@@ -1,5 +1,5 @@
 import React from 'react'
-// import Woman from '../../images/Woman.png'
+import Woman from '../../images/Woman.png'
 // import Bg from '../../images /Rectangle.png'
 
 /*
@@ -9,22 +9,22 @@ when a link is is clicked.
 
 **/
 
-const MembershipLeft = () => {
+const MembershipLeft = (props) => {
     return (
         <div className='relative'>
             <img src="" alt="" />
             <div className='min-h-screen relative'>
-                <div className='grid min-h-screen content-auto'>
+                <div className='grid'>
                     <div className='space-y-6'>
-                        <h1 className='text-Heading1 text-primary font-bold'>Welcome to our community</h1>
-                        <p className='font-medium text-white'>Your journey to successful crypto  trading starts here!</p>
+                        <h1 className='text-Heading1 text-primary font-bold'>{props.Title}</h1>
+                        <p className='font-medium text-white'>{props.Desc}</p>
                     </div>
                 </div>
-                {/* <div className='relative'>
-                    <img className='absolute ' src={Woman} alt="" />
-                </div> */}
+                <div>
+                    <img className='absolute top-1/3 left-1/3 h-1/2' src={Woman} alt="" />
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 
-import MembershipLeft from "./components/membership/Membership";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignIn from "./components/membership/SignIn";
+import SignUp from "./components/membership/SignUp";
 
 // import './App.css';
 
@@ -15,7 +17,12 @@ import MembershipLeft from "./components/membership/Membership";
 function App() {
   return (
     <div className="App">
-      <MembershipLeft />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/SignUp" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

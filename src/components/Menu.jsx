@@ -1,13 +1,16 @@
 import React from 'react'
 import Logo from '../images/Logo.png'
+import { Link } from 'react-router-dom'
 
 const Menu = () => {
     return (
         <div>
-            <div className='flex justify-between items-center text-white'>
-                <img src={Logo} alt="" />
+            <div className='flex justify-between items-center text-white z-50'>
+                <Link to={'/'}>
+                    <img src={Logo} alt="" />
+                </Link>
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 lg:hidden cursor-pointer">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                     <div className='hidden lg:block'>
