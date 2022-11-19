@@ -16,6 +16,7 @@ const Menu = () => {
                     <div className='hidden lg:block'>
                         <div className='flex gap-8 items-center'>
                             <div className='flex gap-8'>
+                                <p>Home</p>
                                 <p>Marketplace</p>
                                 <p>Help Center</p>
                                 <p>Pricing</p>

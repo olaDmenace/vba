@@ -1,8 +1,10 @@
 // import logo from './logo.svg';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./components/membership/dashboard/Dashboard";
 import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
+
 
 // import './App.css';
 
@@ -21,6 +23,9 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
+        </Routes>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
