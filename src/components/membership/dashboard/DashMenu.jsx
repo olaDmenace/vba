@@ -6,7 +6,7 @@ import MenuItem from './MenuItem'
 
 const DashMenu = () => {
     return (
-        <div className='bg-back-light h-screen'>
+        <div className='bg-back-light h-full'>
             <div className='grid gap-6 divide-y divide-white/40 border-y border-white/40 py-6'>
                 <div className='w-4/5 mx-auto'>
                     <DashMenuTop />
