@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Boiler from "./components/membership/dashboard/Boiler";
 import Dashboard from "./components/membership/dashboard/Dashboard";
 import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
@@ -23,9 +24,9 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
-        </Routes>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path='/dashboard' element={<Boiler />}>
+            <Route path='' element={<Dashboard />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

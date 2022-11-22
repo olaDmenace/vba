@@ -1,22 +1,44 @@
 import React from 'react'
-import DashMenu from './DashMenu'
-import Logo from '../../../images/Logo.png'
-import { Link, Outlet } from 'react-router-dom'
+import { VictoryPie, VictoryTheme, VictoryLabel } from 'victory'
 
 const Dashboard = () => {
     return (
-        <div className='bg-back'>
-            <div className='w-screen px-8 bg-back-light border-b border-white/40'>
-                <Link>
-                    <img src={Logo} alt="VBA Logo" />
-                </Link>
-            </div>
-            <div className='grid lg:grid-cols-12 min-h-screen'>
-                <div className='col-span-2'>
-                    <DashMenu />
+        <div>
+            <div className='grid gap-5 md:flex'>
+                <div className='text-white/70 grid gap-5 md:gap-0'>
+                    <h3>My Wallet</h3>
+                    <h6>Your profile is almost complete!</h6>
+                    <button className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Connect Exchange Wallet</button>
                 </div>
-                <div className='lg:col-span-10 bg-back-light m-8 rounded-lg'>
-                    <Outlet />
+                <div className='mx-auto'>
+                    <svg width={250} height={250}>
+                        <VictoryPie
+                            standalone={false}
+                            width={250}
+                            height={250}
+                            padAngle={3}
+                            innerRadius={80}
+                            data={[{ x: 1, y: 1 }]}
+                            colorScale={["#01C063", "#4B4190", "#02695C"]}
+                            labels={() => null}
+                        />
+                        <VictoryLabel
+                            textAnchor="middle"
+                            verticalAnchor="middle"
+                            style={[
+                                {
+                                    fontSize: 35,
+                                    color: "#28323B",
+                                    fontWeight: "600",
+                                    lineHeight: 40
+                                },
+                                { fontWeight: "600", fontSize: 16 }
+                            ]}
+                            x={250 * 0.5}
+                            y={250 * 0.525}
+                            text={["$0.00", "Total Balance"]}
+                        />
+                    </svg>
                 </div>
             </div>
         </div>

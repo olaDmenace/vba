@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -13,10 +13,10 @@ const MenuItem = (props) => {
     return (
         <div>
             <div className='divide-y divide-white/10'>
-                <Link to={props.Link} className='text-white/40 flex items-center gap-3 hover:text-primary active:bg-primary'>
+                <NavLink to={props.Link} className='text-white/40 flex items-center gap-3 hover:text-primary active:bg-primary'>
                     <div>{props.Icon}</div>
                     <p className='font-semibold'>{props.Title}</p>
-                </Link>
+                </NavLink>
             </div>
         </div>
     )
