@@ -14,7 +14,8 @@ module.exports = {
         },
         back: {
           DEFAULT: '#030303',
-          light: '#131313'
+          light: '#131313',
+          back: '#32393C33'
         }
         // primary: "#76CEF1",
       },
