@@ -44,11 +44,11 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className='top-0 left-0 fixed w-full'>
+            {/* <div className='top-0 left-0 fixed w-full'>
                 <PopUp>
                     <ConnectExchange />
                 </PopUp>
-            </div>
+            </div> */}
         </div>
     )
 }
