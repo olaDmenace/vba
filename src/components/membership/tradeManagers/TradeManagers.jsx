@@ -1,0 +1,53 @@
+import React from 'react'
+import Button from '../../Button'
+import TradeManager from './SingleTradeManager'
+
+const TradeManagers = () => {
+    return (
+        <div>
+            <div className='space-x-5'>
+                <Button text={'Trade Manager'} />
+                <Button text={'Signal Group'} />
+            </div>
+            <div className='text-white/70'>
+                <table className=''>
+                    <thead>
+                        <tr className='text-left'>
+                            <th>Name</th>
+                            <th>Subscription</th>
+                            <th>Analytics</th>
+                            <th>Signals</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td className='flex gap-1 items-center'>
+                            <div className='rounded-full h-8 w-8 bg-white/70'></div>
+                            <p>CryptoMAs</p>
+                        </td>
+                        <td>
+                            <ul className='list-disc'>
+                                <li className='font-semibold'>Profit sharing 25% (over net monthly gains)</li>
+                                <li>Min allocation: $1,000.00 USDT</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul className='list-disc font-semibold'>
+                                <li>Win rate: 65%</li>
+                                <li>Risk-to-Reward ration: 1:1.25</li>
+                            </ul>
+                        </td>
+                        <td className='font-semibold'>
+                            <p>93</p>
+                        </td>
+                        <td>
+                            <Button text={'Connect'} />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    )
+}
+
+export default TradeManagers

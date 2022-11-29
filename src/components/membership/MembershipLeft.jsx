@@ -1,5 +1,5 @@
 import React from 'react'
-import Woman from '../../images/Woman.png'
+// import Woman from '../../images/Woman.png'
 // import Bg from '../../images /Rectangle.png'
 
 /*
@@ -20,9 +20,9 @@ const MembershipLeft = (props) => {
                         <p className='font-medium text-white'>{props.Desc}</p>
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <img className='absolute top-1/3 left-1/3 h-1/2' src={Woman} alt="" />
-                </div>
+                </div> */}
             </div>
         </div >
     )

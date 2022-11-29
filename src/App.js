@@ -3,6 +3,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Boiler from "./components/membership/dashboard/Boiler";
 import Dashboard from "./components/membership/dashboard/Dashboard";
+import TradeManager from "./components/membership/tradeManagers/TradeManagers";
 import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path='/dashboard' element={<Boiler />}>
             <Route path='' element={<Dashboard />} />
+            <Route path='TradeManagers' element={<TradeManager />} />
           </Route>
         </Routes>
       </BrowserRouter>
