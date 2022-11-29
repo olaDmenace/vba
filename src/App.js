@@ -6,6 +6,7 @@ import Dashboard from "./components/membership/dashboard/Dashboard";
 import TradeManager from "./components/membership/tradeManagers/TradeManagers";
 import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
+import Bots from "./components/membership/Bots/Bots";
 
 
 // import './App.css';
@@ -28,6 +29,7 @@ function App() {
           <Route path='/dashboard' element={<Boiler />}>
             <Route path='' element={<Dashboard />} />
             <Route path='TradeManagers' element={<TradeManager />} />
+            <Route path='Bots' element={<Bots />} />
           </Route>
         </Routes>
       </BrowserRouter>
