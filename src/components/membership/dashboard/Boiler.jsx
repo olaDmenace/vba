@@ -18,7 +18,7 @@ const Boiler = () => {
                 <div className='col-span-2 hidden md:block'>
                     <DashMenu />
                 </div>
-                <div className='md:col-span-10 bg-back-light m-8 rounded-lg p-6'>
+                <div className='md:col-span-10 bg-back-light m-8 rounded-lg p-6 overflow-hidden'>
                     <Outlet />
                 </div>
             </div>
