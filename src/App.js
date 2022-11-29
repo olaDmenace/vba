@@ -7,6 +7,7 @@ import TradeManager from "./components/membership/tradeManagers/TradeManagers";
 import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
 import Bots from "./components/membership/Bots/Bots";
+import EditBot from "./components/membership/Bots/EditBot";
 
 
 // import './App.css';
@@ -30,6 +31,7 @@ function App() {
             <Route path='' element={<Dashboard />} />
             <Route path='TradeManagers' element={<TradeManager />} />
             <Route path='Bots' element={<Bots />} />
+            <Route path='Edit' element={<EditBot />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -6,7 +6,7 @@ import Button from '../../Button'
 const VBABotDetails = () => {
     return (
         <div className='border rounded-lg text-white/70'>
-            <div className='p-5 border-b grid gap-5 md:flex'>
+            <div className='p-5 border-b grid gap-5 md:flex justify-between'>
                 <div>
                     <h6 className='font-semibold'>EMA Cross 50 200 +ADX (Long)</h6>
                     <p>Distribution Bot</p>

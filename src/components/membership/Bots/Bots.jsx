@@ -22,7 +22,7 @@ const Bots = () => {
                     <p className='font-semibold text-white/70'>VBA Bots</p>
                     <p className='text-primary hover:text-primary-light active:text-primary-dark cursor-pointer'>Create New Bot</p>
                 </div>
-                <div className='grid gap-5 md:flex'>
+                <div className='grid gap-5 lg:flex'>
                     <div className='basis-1/2'>
                         <div className='rounded border py-5 h-full'>
                             <div className='px-5 text-white/70 border-b'>
