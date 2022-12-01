@@ -1,6 +1,5 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React from 'react'
-import Button from '../../Button'
 import CoinCard from './CoinCard'
 import Currency from './Currency'
 import EditBotHeader from './EditBotHeader'
@@ -34,10 +33,6 @@ const EditBot1 = () => {
                     <p>You have selected 5 Coins. You have reached the limit.</p>
                     <SelectedCoin />
                 </div>
-            </div>
-            <div className='flex gap-5'>
-                <button className='py-3 px-4 rounded bg-back-back text-white/70'>Back</button>
-                <Button text={'Next'} />
             </div>
         </div>
     )

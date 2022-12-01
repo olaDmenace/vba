@@ -3,7 +3,7 @@ import React from 'react'
 
 const RiskLimit = () => {
     return (
-        <div className='p-5 bg-back-back rounded-lg grid gap-5'>
+        <div className='p-5 bg-back-back rounded-lg grid gap-5 h-full'>
             <div className='space-y-2'>
                 <h6 className='font-medium'>Risk Limit</h6>
                 <p>Defines the maximum exposure of your allocated capital in active trades. When the limit is hit, new positions will not be opened for this provider until the existing ones are closed or the stop-loss orders shift to lower risk areas.</p>

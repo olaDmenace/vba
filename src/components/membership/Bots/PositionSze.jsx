@@ -3,7 +3,7 @@ import React from 'react'
 
 const PositionSze = () => {
     return (
-        <div className='p-5 bg-back-back rounded-lg grid gap-5'>
+        <div className='p-5 bg-back-back rounded-lg grid gap-5 h-full'>
             <div className='space-y-2'>
                 <h6 className='font-medium'>Position Size Calculation</h6>
                 <p>Position sizing refers to calculation method to define the amount to invest on a trade in relation to the capital allocation.</p>

@@ -4,7 +4,7 @@ import React from 'react'
 const AutoInvestEditBot2 = () => {
     return (
         <div>
-            <div className='bg-back-back p-5 rounded-lg grid gap-5'>
+            <div className='bg-back-back p-5 rounded-lg grid gap-5 h-full'>
                 <div className='space-y-2'>
                     <h5 className='font-medium'>Auto Invest</h5>
                     <h6 className='font-medium'>Define the investment allocation</h6>
