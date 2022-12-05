@@ -9,7 +9,7 @@ const TradeManagers = () => {
                 <Button text={'Trade Manager'} />
                 <Button text={'Signal Group'} />
             </div>
-            <div className='text-white/70 overflow-x-scroll'>
+            <div className='text-white/70 overflow-x-scroll lg:overflow-hidden'>
                 <table className='w-full'>
                     <thead className='w-40 h-16'>
                         <tr className='text-left'>

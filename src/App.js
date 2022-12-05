@@ -8,6 +8,8 @@ import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
 import Bots from "./components/membership/Bots/Bots";
 import EditBot from "./components/membership/Bots/EditBot";
+import Analytics from "./components/membership/analytics/Analytics";
+
 
 
 // import './App.css';
@@ -32,6 +34,7 @@ function App() {
             <Route path='TradeManagers' element={<TradeManager />} />
             <Route path='Bots' element={<Bots />} />
             <Route path='Edit' element={<EditBot />} />
+            <Route path='Analytics' element={<Analytics />} />
           </Route>
         </Routes>
       </BrowserRouter>
