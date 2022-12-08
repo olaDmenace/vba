@@ -20,7 +20,7 @@ const EditBot = () => {
     return (
         <div className="grid gap-10">
             <div className="grid gap-5 lg:flex justify-between">
-                <div className="flex items-center text-white/70">
+                <div className="flex items-center gap-3 text-white/70">
                     <div>
                         <ChevronLeftIcon className='h-6' />
                     </div>
