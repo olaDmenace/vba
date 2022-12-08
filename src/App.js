@@ -11,6 +11,7 @@ import EditBot from "./components/membership/Bots/EditBot";
 import Analytics from "./components/membership/analytics/Analytics";
 import SignalGroup from "./components/membership/signalGroups/SignalGroup";
 import SignalManagement from "./components/membership/signalGroups/SignalManagement";
+import MyTrades from "./components/membership/myTrades/MyTrades";
 
 
 
@@ -39,6 +40,7 @@ function App() {
             <Route path='Analytics' element={<Analytics />} />
             <Route path='Signal' element={<SignalGroup />} />
             <Route path="SignalManagement" element={<SignalManagement />} />
+            <Route path='MyTrades' element={<MyTrades />} />
           </Route>
         </Routes>
       </BrowserRouter>
