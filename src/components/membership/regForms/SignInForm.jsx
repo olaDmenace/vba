@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SignInForm = () => {
+
+    //Collecting data from the input fields
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    // Submit handler function
+    const submitHandler = (e) => {
+        e.preventDefault()
+        console.log(email, password)
+    }
+
     return (
         <div className='space-y-10'>
-            <form action="" className='grid text-lg text-white/80 gap-7'>
+            <form onSubmit={submitHandler} action="" className='grid text-lg text-white/80 gap-7'>
                 <label htmlFor="">
                     Email Address
-                    <input className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='you@example.com' type="email" name="" id="" />
+                    <input value={email} onChange={(e) => { setEmail(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='you@example.com' type="email" name="" id="" />
                 </label>
                 <label htmlFor="">
                     Password
-                    <input className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Minimum 8 characters' type="password" name="" id="" />
+                    <input value={password} onChange={(e) => { setPassword(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Minimum 8 characters' type="password" name="" id="" />
                 </label>
                 <button
+                    onClick={submitHandler}
                     className='rounded
                         mx-auto
                         w-1/2
