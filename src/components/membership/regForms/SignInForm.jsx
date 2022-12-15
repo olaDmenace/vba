@@ -10,6 +10,10 @@ const SignInForm = () => {
     // Submit handler function
     const submitHandler = (e) => {
         e.preventDefault()
+        const data = {
+            email,
+            password
+        }
         console.log(email, password)
     }
 
@@ -18,11 +22,11 @@ const SignInForm = () => {
             <form onSubmit={submitHandler} action="" className='grid text-lg text-white/80 gap-7'>
                 <label htmlFor="">
                     Email Address
-                    <input value={email} onChange={(e) => { setEmail(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='you@example.com' type="email" name="" id="" />
+                    <input value={email} onChange={(e) => { setEmail(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='you@example.com' type="email" name="" id="email" />
                 </label>
                 <label htmlFor="">
                     Password
-                    <input value={password} onChange={(e) => { setPassword(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Minimum 8 characters' type="password" name="" id="" />
+                    <input value={password} onChange={(e) => { setPassword(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Minimum 8 characters' type="password" name="" id="password" />
                 </label>
                 <button
                     onClick={submitHandler}

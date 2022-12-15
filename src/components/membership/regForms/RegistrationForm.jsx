@@ -7,17 +7,53 @@ import { Link } from 'react-router-dom'
 
 const RegistrationForm = () => {
 
+    // Form data collection
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        // confirmPassword: '',
+        // firstName: '',
+        // lastName: '',
+        // country: '',
+        // altEmail: '',
+        // dob: ''
+
+    })
+
+    const submitHandler = (e) => {
+        console.log(formData)
+        const data = { formData }
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    ...formData
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(res => {
+            if (res.ok) {
+                alert('Account Created Successfully! Verify Account')
+            } else {
+                console.log(res)
+            }
+        })
+    }
+
+
     // Visible form state 
     const [form, setForm] = useState(0)
 
     // Visible for Selector
     const visibleForm = () => {
         if (form === 0) {
-            return <RegForm1 />
+            return <RegForm1 formData={formData} setFormData={setFormData} />
         } else if (form === 1) {
-            return <RegForm2 />
+            return <RegForm2 formData={formData} setFormData={setFormData} />
         } else {
-            return <RegForm3 />
+            return <RegForm3 formData={formData} setFormData={setFormData} />
         }
     }
 
@@ -33,7 +69,7 @@ const RegistrationForm = () => {
     }
 
     return (
-        <div className='grid gap-10'>
+        <div onSubmit={submitHandler} className='grid gap-10'>
             <div>
                 {visibleForm()}
             </div>
@@ -49,7 +85,11 @@ const RegistrationForm = () => {
                 ease-in-out transition-colors duration-500'
                 type="submit"
                 onClick={() => {
-                    setForm((form) => (form + 1))
+                    if (form === 2) {
+                        submitHandler()
+                    } else {
+                        setForm((form) => (form + 1))
+                    }
                 }}
             >
                 {text()}
