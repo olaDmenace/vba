@@ -5,9 +5,18 @@ import ConnectExchange from './ConnectExchange'
 import ExchangeWallet from './ExchangeWallet'
 import Memberships from './Memberships'
 import VBAProTraders from './VBAProTraders'
+import TradeManager from './VBAProTraders'
+import { useState } from 'react'
 
 
 const Dashboard = () => {
+
+    const [tradeManagers, setTradeManager] = useState(false)
+
+    const showTrade = (arg) => {
+        setTradeManager(!tradeManagers)
+    }
+
     return (
         <div className='space-y-5'>
             <div className='grid gap-5 lg:flex'>
@@ -28,10 +37,10 @@ const Dashboard = () => {
             <div className='text-white/70 space-y-6 bg-back-back rounded-lg p-6'>
                 <div className='flex justify-between gap-5'>
                     <h3>Trade Managers</h3>
-                    <p className='text-primary hover:text-primary-light active:text-primary-dark cursor-pointer'>Connect With Other Trade Managers</p>
+                    <p className='text-primary hover:text-primary-light active:text-primary-dark cursor-pointer'>Become a Trade Manager</p>
                 </div>
                 <div className='grid lg:flex gap-5'>
-                    <div className='border rounded divide-y md:basis-1/2 h-96'>
+                    {!tradeManagers && <div className='border rounded divide-y md:basis-1/2 h-96'>
                         <div className='p-5 space-y-2'>
                             <h3>Trades</h3>
                             <p>Trade Managr Signal Groups You Manage</p>
@@ -39,12 +48,15 @@ const Dashboard = () => {
                         <div className='p-5 space-y-10'>
                             <h5>Welcome Johnson</h5>
                             <p>You do not manage any group yet. You could become a trade manager by creating signal groups</p>
-                            <button className='border h-12 px-4 rounded border-primary hover:bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Become a Trade Manager</button>
+                            <button onClick={showTrade} className='border h-12 px-4 rounded border-primary hover:bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Connect With Trade Managers</button>
                         </div>
-                    </div>
-                    <div className='md:basis-1/2'>
+                    </div>}
+                    {tradeManagers &&
+                        <TradeManager />
+                    }
+                    {tradeManagers && <div className='md:basis-1/2'>
                         <Memberships />
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

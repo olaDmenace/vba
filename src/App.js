@@ -13,6 +13,8 @@ import SignalGroup from "./components/membership/signalGroups/SignalGroup";
 import SignalManagement from "./components/membership/signalGroups/SignalManagement";
 import MyTrades from "./components/membership/myTrades/MyTrades";
 
+import { Provider } from 'react-redux';
+
 
 
 // import './App.css';

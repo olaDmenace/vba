@@ -5,6 +5,10 @@ import RegForm3 from './RegForm3'
 import { Link } from 'react-router-dom'
 
 
+// Spinner Loader import
+import { Oval } from 'react-loader-spinner'
+
+
 const RegistrationForm = () => {
 
     // Form data collection
@@ -20,7 +24,10 @@ const RegistrationForm = () => {
 
     })
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const submitHandler = (e) => {
+        setIsLoading(true)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
             {
                 method: 'POST',
@@ -32,6 +39,7 @@ const RegistrationForm = () => {
                 }
             }
         ).then(res => {
+            setIsLoading(false)
             if (res.ok) {
                 alert('Account Created Successfully! Verify Account')
             } else {
@@ -71,7 +79,7 @@ const RegistrationForm = () => {
             <div>
                 {visibleForm()}
             </div>
-            <button
+            {!isLoading && <button
                 className='rounded
                 mx-auto
                 w-1/2
@@ -91,7 +99,21 @@ const RegistrationForm = () => {
                 }}
             >
                 {text()}
-            </button>
+            </button>}
+            {isLoading && <div className='mx-auto w-fit text-center'>
+                <Oval
+                    height={30}
+                    width={30}
+                    color="#00B6FF"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor="#24718C"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                />
+            </div>}
             <p className='text-white text-center'>Already have an account? <Link to={'/'}><span className='text-primary hover:text-[#66BBDC] cursor-pointer'>Sign In</span></Link></p>
         </div>
     )

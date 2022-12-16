@@ -6,7 +6,7 @@ const initialAuthState = {
 
 const authSlice = createSlice({
     name: 'authentication',
-    initialState: isAuthenticated,
+    initialState: initialAuthState,
     reducers: {
         login(state) {
             state.isAuthenticated = true;
