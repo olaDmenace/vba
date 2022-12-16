@@ -6,15 +6,41 @@ const SignInForm = () => {
     //Collecting data from the input fields
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
 
-    // Submit handler function
+
     const submitHandler = (e) => {
         e.preventDefault()
-        const data = {
-            email,
-            password
-        }
-        console.log(email, password)
+        fetch('http://130.185.118.52:1234/api/v1/auth/signin',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then(res => {
+            if (res.ok) {
+                return res.json()
+            } else if (res.status === 401) {
+                setMessage('Incorrect details, please check and correct')
+                throw new Error('incorrect details')
+            } else {
+                setMessage('Account Not Found')
+            }
+        }).then(data => {
+            if (data.status === 'success' && data.detail.verified === true) {
+                setMessage('Login Successful, wait while we redirect to your dashboard')
+            } else if (data.status === 'success' && data.detail.verified === false) {
+                setMessage('Account Not Verified. Please check your mail')
+            }
+            console.log(data)
+        }).catch(err => {
+            // console.log(err)
+        })
     }
 
     return (
@@ -28,8 +54,8 @@ const SignInForm = () => {
                     Password
                     <input value={password} onChange={(e) => { setPassword(e.target.value) }} className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Minimum 8 characters' type="password" name="" id="password" />
                 </label>
+                <p className='text-primary text-center'>{message}</p>
                 <button
-                    onClick={submitHandler}
                     className='rounded
                         mx-auto
                         w-1/2

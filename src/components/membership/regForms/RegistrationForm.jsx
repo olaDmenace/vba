@@ -21,8 +21,6 @@ const RegistrationForm = () => {
     })
 
     const submitHandler = (e) => {
-        console.log(formData)
-        const data = { formData }
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
             {
                 method: 'POST',
