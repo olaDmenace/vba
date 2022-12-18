@@ -13,7 +13,7 @@ import SignalGroup from "./components/membership/signalGroups/SignalGroup";
 import SignalManagement from "./components/membership/signalGroups/SignalManagement";
 import MyTrades from "./components/membership/myTrades/MyTrades";
 
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 
 
 
@@ -28,6 +28,9 @@ import { Provider } from 'react-redux';
 **/
 
 function App() {
+  // const confirmUser = {
+  //   const token = useSelector(state.au)
+  // };
   return (
     <div className="App">
       <BrowserRouter>
@@ -35,7 +38,7 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path='/dashboard' element={<Boiler />}>
-            <Route path='' element={<Dashboard />} />
+            <Route path='' index element={<Dashboard />} />
             <Route path='TradeManagers' element={<TradeManager />} />
             <Route path='Bots' element={<Bots />} />
             <Route path='Edit' element={<EditBot />} />

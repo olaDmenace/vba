@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 // Spinner Loader import
 import { Oval } from 'react-loader-spinner'
+import { login } from '../../../store/authSlice';
 // import 'react-loader-spinner/dist/loader/Oval'
 
 const SignInForm = () => {
@@ -12,7 +14,8 @@ const SignInForm = () => {
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -42,7 +45,12 @@ const SignInForm = () => {
             }
         }).then(data => {
             if (data.status === 'success' && data.detail.verified === true) {
+                console.log(data)
                 setMessage('Login Successful, wait while we redirect to your dashboard')
+                dispatch(login({ ...data.detail }))
+                setTimeout(() => {
+                    navigate('/dashboard')
+                }, 2000);
             } else if (data.status === 'success' && data.detail.verified === false) {
                 setMessage('Account Not Verified. Please check your mail')
             }

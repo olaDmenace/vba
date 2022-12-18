@@ -13,7 +13,11 @@ const MenuItem = (props) => {
     return (
         <div>
             <div className='divide-y divide-white/10'>
-                <NavLink to={props.Link} className='text-white/40 flex items-center gap-3 hover:text-primary active:bg-primary'>
+                {/* <NavLink to={props.Link} className='text-white/40 flex items-center gap-3 hover:text-primary'>
+                    <div>{props.Icon}</div>
+                    <p className='font-semibold'>{props.Title}</p>
+                </NavLink> */}
+                <NavLink to={props.Link} className={({ isActive }) => (isActive ? 'text-primary border-l-primary flex items-center gap-3 hover:text-primary' : 'text-white/40 flex items-center gap-3 hover:text-primary')}>
                     <div>{props.Icon}</div>
                     <p className='font-semibold'>{props.Title}</p>
                 </NavLink>
