@@ -45,7 +45,6 @@ const SignInForm = () => {
             }
         }).then(data => {
             if (data.status === 'success' && data.detail.verified === true) {
-                console.log(data)
                 setMessage('Login Successful, wait while we redirect to your dashboard')
                 dispatch(login({ ...data.detail }))
                 setTimeout(() => {
@@ -54,7 +53,6 @@ const SignInForm = () => {
             } else if (data.status === 'success' && data.detail.verified === false) {
                 setMessage('Account Not Verified. Please check your mail')
             }
-            console.log(data.detail.token)
         }).catch(err => {
             // console.log(err)
         })
