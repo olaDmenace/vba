@@ -8,7 +8,7 @@ const TradeManager = () => {
                     <div className='h-6 w-6 bg-white rounded-full'></div>
                     <p className='text-white/70'>CryptoMas</p>
                 </div>
-                <button className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Connect</button>
+                <button className='rounded h-10 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Connect</button>
             </div>
         </div>
     )
