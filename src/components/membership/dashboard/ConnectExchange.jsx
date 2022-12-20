@@ -6,10 +6,10 @@ import { InformationCircleIcon } from '@heroicons/react/24/solid'
 const ConnectExchange = ({ openModal }) => {
     return (
         <div>
-            <div className='bg-[#32393C] pt-8 pb-10 w-full divide-y divide-white/20 relative'>
+            <div className='bg-[#32393C] pt-8 pb-10 w-full divide-y divide-white/20 relative rounded'>
                 <div className='flex justify-between px-8 pb-8'>
-                    <p className='text-white/70'>Connect Exchange</p>
-                    <XCircleIcon onClick={() => openModal()} className='text-white/60 h-6' />
+                    <p className='text-white/70 text-lg font-semibold'>Connect Exchange</p>
+                    <XCircleIcon onClick={() => openModal()} className='text-white/60 h-6 cursor-pointer' />
                 </div>
                 <div className='grid px-8 pt-8 gap-5'>
                     <div className='border border-[#00B6FF] bg-[#76CEF10D] flex gap-2 p-4'>

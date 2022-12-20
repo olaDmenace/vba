@@ -2,6 +2,27 @@ import React from 'react'
 import Button from '../../Button'
 
 const SignalGroup = () => {
+
+    const joinGroup = () => {
+        const token = localStorage.getItem('accessToken');
+
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/signals/connect',
+            {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                console.log(response)
+                return response.json
+            }).then(response => {
+                console.log(response.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
     return (
         <div className='text-white/70 py-5'>
             <table className='w-full'>
@@ -35,7 +56,7 @@ const SignalGroup = () => {
                         <p className='w-32'>93</p>
                     </td>
                     <td>
-                        <Button text={'Connect'} />
+                        <Button Execute={joinGroup} text={'Connect'} />
                     </td>
                 </tr>
             </table>
