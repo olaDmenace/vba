@@ -22,7 +22,7 @@ const SignInForm = () => {
         if (!email && !password) return;
 
         setIsLoading(true)
-        fetch('http://130.185.118.52:1234/api/v1/auth/signin',
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/signin',
             {
                 method: 'POST',
                 body: JSON.stringify({
