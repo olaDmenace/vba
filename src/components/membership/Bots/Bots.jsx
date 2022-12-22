@@ -27,7 +27,7 @@ const Bots = () => {
                         <div className='rounded border py-5 h-full'>
                             <div className='px-5 text-white/70 border-b'>
                                 <div className='pb-5'>
-                                    <p className='font-medium'>Memberships</p>
+                                    <p className='font-medium'>Your VBA Bots</p>
                                 </div>
                             </div>
                             <div className='divide-y'>

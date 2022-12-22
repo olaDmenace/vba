@@ -1,5 +1,6 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
+import { useState } from 'react'
 import Balance from '../dashboard/Balance'
 import ExchangeWallet from '../dashboard/ExchangeWallet'
 import img from './../../../images/Altercation.png'
@@ -8,6 +9,7 @@ import SignalGroupTable from './SignalGroupTable'
 import TotalRevenueTable from './TotalRevenueTable'
 
 const SignalGroup = () => {
+    const [groups, setGroups] = useState(true)
     return (
         <div className='bg-back-back p-5 rounded-lg text-white/70 grid gap-5'>
             <div className='grid gap-5'>
@@ -28,21 +30,27 @@ const SignalGroup = () => {
                     <ExchangeWallet />
                 </div>
             </div>
-            <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
-                <div className='border rounded-lg p-5 grid gap-5'>
-                    <img className='mx-auto' src={img} alt="" />
-                    <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
+            <div className='grid gap-5'>
+                <div className='flex gap-5'>
+                    <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={''}>Groups You Manage</button>
+                    <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={''}>Other Signal Groups</button>
                 </div>
-                <div className='border rounded-lg p-5 h-96 lg:h-full grid'>
-                    <p>We've pre-selected a few premium partners for a trial of their service.</p>
-                    <div className='grid justify-items-center gap-5'>
-                        <button className='border h-12 px-2 flex items-center gap-1 rounded border-primary hover:bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
-                            <PlusCircleIcon className='h-6' />
-                            Connect With a Signal Group
-                        </button>
-                        <p>or</p>
-                        <p className='hover:text-[#66BBDC] text-primary active:text-primary-dark ease-in-out transition-colors duration-500'>Create a New Signal Group</p>
+                <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
+                    <div className='border rounded-lg p-5 grid gap-5'>
+                        <img className='mx-auto' src={img} alt="" />
+                        <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
                     </div>
+                    {groups && <div className='border rounded-lg p-5 h-96 lg:h-full grid'>
+                        <p>We've pre-selected a few premium partners for a trial of their service.</p>
+                        <div className='grid justify-items-center gap-5'>
+                            <button className='border h-12 px-2 flex items-center gap-1 rounded border-primary hover:bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
+                                <PlusCircleIcon className='h-6' />
+                                Connect With a Signal Group
+                            </button>
+                            {/* <p>or</p>
+                            <p className='hover:text-[#66BBDC] text-primary active:text-primary-dark ease-in-out transition-colors duration-500'>Create a New Signal Group</p> */}
+                        </div>
+                    </div>}
                 </div>
             </div>
         </div>

@@ -2,6 +2,23 @@ import React from 'react'
 import Button from '../../Button'
 
 const VBABots = () => {
+
+    const botsList = () => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration', {
+            headers: {
+                Authorization: localStorage.getItem('accssToken')
+            }
+        })
+            .then(res => {
+                return res.json
+            })
+            .then(res => {
+                return console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div className='p-5 flex justify-between text-white/70'>
             <div>

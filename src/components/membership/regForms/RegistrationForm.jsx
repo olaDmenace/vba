@@ -16,11 +16,11 @@ const RegistrationForm = () => {
         email: '',
         password: '',
         // confirmPassword: '',
-        // firstName: '',
-        // lastName: '',
-        // country: '',
+        first_Name: '',
+        last_name: '',
+        country: '',
         // altEmail: '',
-        // dob: ''
+        dob: ''
 
     })
 
@@ -28,6 +28,7 @@ const RegistrationForm = () => {
 
     const submitHandler = (e) => {
         setIsLoading(true)
+        console.log(formData)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
             {
                 method: 'POST',
@@ -91,11 +92,7 @@ const RegistrationForm = () => {
                 ease-in-out transition-colors duration-500'
                 type="submit"
                 onClick={() => {
-                    if (form === 2) {
-                        submitHandler()
-                    } else {
-                        setForm((form) => (form + 1))
-                    }
+                    form === 2 ? submitHandler() : setForm((form) => (form + 1))
                 }}
             >
                 {text()}

@@ -2,11 +2,27 @@ import React from 'react'
 import Button from '../../Button'
 
 const SignalGroup = () => {
+    const token = localStorage.getItem('accessToken');
+    const url = 'https://server.cryptosignal.metrdev.com/api/v1/'
+
+    const listGroup = () => {
+        fetch(`${url}user/sigGroups`, {
+            method: 'GET',
+            headers: {
+                Authorization: `${token}`
+            }
+        }).then(res => {
+            return res.json
+        }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     const joinGroup = () => {
-        const token = localStorage.getItem('accessToken');
 
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/signals/connect',
+        fetch(`${url}signals/connect`,
             {
                 method: 'POST',
                 headers: {
@@ -56,7 +72,7 @@ const SignalGroup = () => {
                         <p className='w-32'>93</p>
                     </td>
                     <td>
-                        <Button Execute={joinGroup} text={'Connect'} />
+                        <Button Execute={listGroup} text={'Connect'} />
                     </td>
                 </tr>
             </table>
