@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Balance from '../dashboard/Balance'
 import ExchangeWallet from '../dashboard/ExchangeWallet'
 import VBABotDetails from './VBABotDetails'
@@ -7,6 +7,27 @@ import VBABots from './VBABots'
 
 
 const Bots = () => {
+
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration', {
+            headers: {
+                Authorization: localStorage.getItem('accessToken')
+            }
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res.detail)
+            // console.log(res.bot_name)
+            setData(res.detail)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+
+
     return (
         <div className='space-y-5'>
             <div className='grid lg:flex gap-5'>
@@ -31,13 +52,12 @@ const Bots = () => {
                                 </div>
                             </div>
                             <div className='divide-y'>
-                                <VBABots />
-                                <VBABots />
+                                {data.map(data => <VBABots key={data.bot_id} name={data.bot_name} type={data.bot_action} />)}
                             </div>
                         </div>
                     </div>
                     <div className='basis-1/2'>
-                        <VBABotDetails />
+                        {data.map(data => <VBABotDetails key={data.bot_id} name={data.bot_name} type={data.bot_action} />)}
                     </div>
                 </div>
             </div>

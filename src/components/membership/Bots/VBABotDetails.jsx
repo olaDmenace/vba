@@ -3,13 +3,13 @@ import { UsersIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import Button from '../../Button'
 
-const VBABotDetails = () => {
+const VBABotDetails = (props) => {
     return (
         <div className='border rounded-lg text-white/70'>
-            <div className='p-5 border-b grid gap-5 md:flex justify-between'>
+            <div className='p-5 border-b gap-5 flex justify-between'>
                 <div>
-                    <h6 className='font-semibold'>EMA Cross 50 200 +ADX (Long)</h6>
-                    <p>Distribution Bot</p>
+                    <h6 className='font-semibold'>{props.name}</h6>
+                    <p>{props.type}</p>
                 </div>
                 <div className='flex items-center gap-3'>
                     <UsersIcon className='h-6' />
