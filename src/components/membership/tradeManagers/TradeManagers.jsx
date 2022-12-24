@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 // import Button from '../../Button'
-import SignalGroup from './SignalGroup'
+import SignalGroup from '../signalGroups/SignalGroupList'
 import TradeManager from './SingleTradeManager'
 
 const TradeManagers = () => {
@@ -26,24 +26,24 @@ const TradeManagers = () => {
 
 
 
-    const joinGroup = () => {
+    // const joinGroup = () => {
 
-        fetch(`${url}signals/connect`,
-            {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                console.log(response)
-                return response.json
-            }).then(response => {
-                console.log(response.data)
-            }).catch(err => {
-                console.log(err)
-            })
-    }
+    //     fetch(`${url}signals/connect`,
+    //         {
+    //             method: 'POST',
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         })
+    //         .then(response => {
+    //             console.log(response)
+    //             return response.json
+    //         }).then(response => {
+    //             console.log(response.data)
+    //         }).catch(err => {
+    //             console.log(err)
+    //         })
+    // }
 
     const [tradeManager, setTradeManager] = useState(true)
 
@@ -53,7 +53,7 @@ const TradeManagers = () => {
     }
 
     return (
-        <div className='grid gap-14'>
+        <div className='grid gap-8'>
             <div className='space-x-5'>
                 {/* <Button text={'Trade Manager'} />
                 <Button text={'Signal Group'} /> */}

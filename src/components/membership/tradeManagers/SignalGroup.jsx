@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../store/authSlice'
 import Button from '../../Button'
 
 const SignalGroup = (props) => {
@@ -16,6 +18,10 @@ const SignalGroup = (props) => {
     //     console.log(err)
     // })
 
+    const dispatch = useDispatch()
+
+
+
     return (
         <div>
             <div className='text-white/70 py-5'>
@@ -30,10 +36,10 @@ const SignalGroup = (props) => {
                         </tr>
                     </thead>
                     <tr>
-                        <td className='flex gap-1 items-center w-44'>
-                            <div className='rounded-full h-8 w-8 bg-white/70'></div>
+                        <td className='flex gap-1 items-center w-48'>
+                            <img className='rounded-full h-8 w-8' src={props.img} alt="" />
                             <div>
-                                <p>{props.Name}</p>
+                                <p className='font-semibold'>{props.Name}</p>
                                 <p>{props.desc}</p>
                             </div>
                         </td>
@@ -53,7 +59,7 @@ const SignalGroup = (props) => {
                             <p className='w-32'>{props.signals}</p>
                         </td>
                         <td>
-                            <Button text={'Connect'} />
+                            <Button Execute={props.execute} text={'Connect'} />
                         </td>
                     </tr>
                 </table>

@@ -18,6 +18,7 @@ const Bots = () => {
         }).then(res => {
             return res.json()
         }).then(res => {
+            console.log(res)
             setData(res.detail)
         }).catch(err => {
 
@@ -55,7 +56,12 @@ const Bots = () => {
                         </div>
                     </div>
                     <div className='basis-1/2'>
-                        {data.map(data => <VBABotDetails key={data.bot_id} name={data.bot_name} type={data.bot_action} />)}
+                        {data.map(data => <VBABotDetails
+                            key={data.bot_id}
+                            name={data.bot_name}
+                            type={data.bot_action}
+                            symbol={data.symbol}
+                        />)}
                     </div>
                 </div>
             </div>
