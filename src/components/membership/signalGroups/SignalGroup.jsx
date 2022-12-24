@@ -1,6 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Balance from '../dashboard/Balance'
 import ExchangeWallet from '../dashboard/ExchangeWallet'
 import img from './../../../images/Altercation.png'
@@ -14,6 +15,8 @@ const SignalGroup = () => {
     const changeGroup = () => {
         setGroups(!groups)
     }
+
+
     return (
         <div className='bg-back-back p-5 rounded-lg text-white/70 grid gap-5'>
             {/* <div className='grid gap-5'>
@@ -47,10 +50,10 @@ const SignalGroup = () => {
                     <div className='border rounded-lg p-5 h-96 lg:h-full grid'>
                         <p>We've pre-selected a few premium partners for a trial of their service.</p>
                         <div className='grid justify-items-center gap-5'>
-                            <button className='border h-12 px-2 flex items-center gap-1 rounded border-primary hover:bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
+                            <Link to={'/dashboard/SignalPage'} className='border h-12 px-2 flex items-center gap-1 rounded border-primary hover:bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
                                 <PlusCircleIcon className='h-6' />
                                 Connect With a Signal Group
-                            </button>
+                            </Link>
                             {/* <p>or</p>
                             <p className='hover:text-[#66BBDC] text-primary active:text-primary-dark ease-in-out transition-colors duration-500'>Create a New Signal Group</p> */}
                         </div>

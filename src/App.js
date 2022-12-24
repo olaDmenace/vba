@@ -9,10 +9,10 @@ import SignUp from "./components/membership/SignUp";
 import Bots from "./components/membership/Bots/Bots";
 import EditBot from "./components/membership/Bots/EditBot";
 import Analytics from "./components/membership/analytics/Analytics";
-import SignalGroup from "./components/membership/signalGroups/SignalGroup";
+import Signal from "./components/membership/signalGroups/SignalGroup";
 import SignalManagement from "./components/membership/signalGroups/SignalManagement";
 import MyTrades from "./components/membership/myTrades/MyTrades";
-import SignalGroups from "./components/membership/signalGroups/SignalGroup";
+import SignalPage from './components/membership/signalGroups/SignalGroupList'
 
 
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -42,8 +42,8 @@ function App() {
             <Route path='Bots' element={<Bots />} />
             <Route path='Edit' element={<EditBot />} />
             <Route path='Analytics' element={<Analytics />} />
-            <Route path='Signal' element={<SignalGroup />} />
-            <Route path={'SignalGroups'} element={<SignalGroups />} />
+            <Route path='Signal' element={<Signal />} />
+            <Route path='SignalPage' element={<SignalPage />} />
             <Route path="SignalManagement" element={<SignalManagement />} />
             <Route path='MyTrades' element={<MyTrades />} />
           </Route>

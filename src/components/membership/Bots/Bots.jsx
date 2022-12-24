@@ -18,11 +18,9 @@ const Bots = () => {
         }).then(res => {
             return res.json()
         }).then(res => {
-            console.log(res.detail)
-            // console.log(res.bot_name)
             setData(res.detail)
         }).catch(err => {
-            console.log(err)
+
         })
     }, [])
 
