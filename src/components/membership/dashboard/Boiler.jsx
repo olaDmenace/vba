@@ -2,14 +2,25 @@ import React from 'react'
 import DashMenu from './DashMenu'
 import Logo from '../../../images/Logo.png'
 import { Link, Outlet } from 'react-router-dom'
+import { BellIcon } from '@heroicons/react/24/solid'
 
 const Boiler = () => {
     return (
         <div className='bg-back'>
-            <div className='px-8 bg-back-light border-b border-white/40 flex justify-between items-center'>
+            <div className='px-8 bg-back-light border-b border-white/40 flex justify-between items-center text-white/70'>
                 <Link>
                     <img src={Logo} alt="VBA Logo" />
                 </Link>
+                <div className='hidden lg:block'>
+                    <div className='flex gap-5 relative'>
+                        <span className='bg-[#F32C2C] w-2 h-2 rounded-full absolute left-[8%] -top-[4%] border-2 border-back-light'></span>
+                        <BellIcon className='h-6' />
+                        <div>
+                            <img className='rounded-full' src="" alt="" />
+                            <p>Martinez George</p>
+                        </div>
+                    </div>
+                </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className='w-8 text-white md:hidden'>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
