@@ -12,6 +12,7 @@ import Analytics from "./components/membership/analytics/Analytics";
 import SignalGroup from "./components/membership/signalGroups/SignalGroup";
 import SignalManagement from "./components/membership/signalGroups/SignalManagement";
 import MyTrades from "./components/membership/myTrades/MyTrades";
+import SignalGroups from "./components/membership/signalGroups/SignalGroup";
 
 
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -42,6 +43,7 @@ function App() {
             <Route path='Edit' element={<EditBot />} />
             <Route path='Analytics' element={<Analytics />} />
             <Route path='Signal' element={<SignalGroup />} />
+            <Route path={'SignalGroups'} element={<SignalGroups />} />
             <Route path="SignalManagement" element={<SignalManagement />} />
             <Route path='MyTrades' element={<MyTrades />} />
           </Route>

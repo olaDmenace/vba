@@ -16,7 +16,7 @@ const SignalGroup = () => {
     }
     return (
         <div className='bg-back-back p-5 rounded-lg text-white/70 grid gap-5'>
-            <div className='grid gap-5'>
+            {/* <div className='grid gap-5'>
                 <h5 className='font-semibold'>Signal Groups</h5>
                 <div className='lg:flex items-center space-y-5 lg:space-y-0 justify-between'>
                     <div className='space-y-5 lg:space-y-0 lg:flex gap-5 items-center'>
@@ -25,7 +25,7 @@ const SignalGroup = () => {
                     </div>
                     <p className='hover:text-[#66BBDC] text-primary active:text-primary-dark ease-in-out transition-colors duration-500'>Create a New Signal Group</p>
                 </div>
-            </div>
+            </div> */}
             <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                 <div className='border rounded-lg mx-auto w-full'>
                     <Balance />
