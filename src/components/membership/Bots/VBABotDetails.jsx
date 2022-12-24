@@ -12,7 +12,6 @@ const VBABotDetails = (props) => {
                     <p>{props.type}</p>
                 </div>
                 <div className='flex items-center gap-3'>
-                    <UsersIcon className='h-6' />
                     <PlayCircleIcon className='h-6' />
                     <Button text={'Edit Bot'} />
                 </div>

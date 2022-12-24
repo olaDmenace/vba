@@ -31,6 +31,7 @@ const SignalGroupList = ({ ...props }) => {
                 dispatch(logout())
                 return
             }
+            console.log(res)
             setUserGroups(res.detail)
             setSignal(userGroups?.group_id)
         }).catch(err => {

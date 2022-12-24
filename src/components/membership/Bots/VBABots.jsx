@@ -9,7 +9,6 @@ const VBABots = (props) => {
                 <h6 className='font-semibold'>{props.name}</h6>
                 <p>{props.type}</p>
             </div>
-            <Button text={'Edit Bot'} />
         </div>
     )
 }
