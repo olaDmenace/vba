@@ -1,9 +1,17 @@
 import React from 'react'
 import { XCircleIcon } from '@heroicons/react/24/outline'
 import { InformationCircleIcon } from '@heroicons/react/24/solid'
+import { useState } from 'react'
+import Button from '../../Button'
 
 
 const ConnectExchange = ({ openModal }) => {
+
+    const [exchange, setExchange] = useState(false)
+    const showKeys = () => {
+        setExchange(true)
+    }
+
     return (
         <div>
             <div className='bg-[#32393C] pt-8 pb-10 w-full divide-y divide-white/20 relative rounded'>
@@ -23,13 +31,24 @@ const ConnectExchange = ({ openModal }) => {
                     <div className='grid gap-3'>
                         <label className='text-[#FFFFFFCC]' htmlFor="">
                             Preferred Exchange
-                            <select className='w-full h-10 bg-transparent border rounded px-2 text-black' name="" id="">
+                            <select onChange={e => setExchange(false)} className='w-full h-10 bg-transparent border rounded px-2 text-black' name="" id="">
                                 <option value="">Binance</option>
-                                <option value="">Bitfix</option>
+                                <option value="">Bybit</option>
                             </select>
                         </label>
-                        <button className='bg-[#F9B520] rounded px-3 py-2 w-2/3'>Conect With Binance</button>
+                        {!exchange && <button onClick={showKeys} className='bg-[#F9B520] rounded px-3 py-2 w-2/3'>Conect With Binance</button>}
                     </div>
+                    {exchange && <div className='text-white/70 grid gap-3'>
+                        <label htmlFor="">
+                            API Key
+                            <input type="text" name="" id="" placeholder='Enter the API key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
+                        </label>
+                        <label htmlFor="">
+                            Secret Key
+                            <input type="text" name="" id="" placeholder='Enter the Secret key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
+                        </label>
+                        <Button text={'Connect'} />
+                    </div>}
                 </div>
             </div>
         </div>

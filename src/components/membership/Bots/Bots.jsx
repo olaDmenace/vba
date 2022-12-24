@@ -16,7 +16,7 @@ const Bots = () => {
 
     //Toggle for botData
     const toggleData = () => {
-        setBotData(!botData)
+        setBotData(true)
     }
 
     useEffect(() => {
