@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 // Spinner Loader import
@@ -16,10 +16,13 @@ const SignInForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation().pathname
+
 
     const submitHandler = (e) => {
         e.preventDefault()
         if (!email && !password) return;
+
 
         setIsLoading(true)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/signin',
@@ -48,7 +51,7 @@ const SignInForm = () => {
                 setMessage('Login Successful, wait while we redirect to your dashboard')
                 dispatch(login({ ...data.detail }))
                 setTimeout(() => {
-                    navigate('/dashboard')
+                    location ? navigate(location) : navigate('/dashboard')
                 }, 2000);
             } else if (data.status === 'success' && data.detail.verified === false) {
                 setMessage('Account Not Verified. Please check your mail')

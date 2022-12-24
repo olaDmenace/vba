@@ -12,9 +12,9 @@ const Boiler = () => {
                     <img src={Logo} alt="VBA Logo" />
                 </Link>
                 <div className='hidden lg:block'>
-                    <div className='flex gap-5 relative'>
-                        <span className='bg-[#F32C2C] w-2 h-2 rounded-full absolute left-[8%] -top-[4%] border-2 border-back-light'></span>
-                        <BellIcon className='h-6' />
+                    <div className='flex gap-5 items-center relative'>
+                        <span className='bg-[#F32C2C] w-4 h-4 rounded-full absolute left-[6%] -top-[20%] border-[3px] border-back-light'></span>
+                        <BellIcon className='h-5' />
                         <div>
                             <img className='rounded-full' src="" alt="" />
                             <p>Martinez George</p>
