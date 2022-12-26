@@ -19,7 +19,7 @@ const SignalGroupList = ({ ...props }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/sigGroups', {
             method: 'GET',
             headers: {
                 Authorization: localStorage.getItem('accessToken')
@@ -31,9 +31,7 @@ const SignalGroupList = ({ ...props }) => {
                 dispatch(logout())
                 return
             }
-            console.log(res)
             setUserGroups(res.detail)
-            setSignal(userGroups?.group_id)
         }).catch(err => {
         })
     }, [])
@@ -42,20 +40,43 @@ const SignalGroupList = ({ ...props }) => {
 
     const title = location.pathname === '/dashboard/SignalPage' ? 'Signal Group' : ''
 
+    const connect = function (arg) {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/subscribe', {
+            method: 'POST',
+            body: JSON.stringify({
+                signal_id: arg
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('accessToken')
+            }
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+                dispatch(logout())
+                return
+            }
+            console.log('first')
+            console.log(res)
+        }).catch(err => {
+        })
+    }
+
     return (
         <div>
             <p className='text-white/70 text-lg'>{title}</p>
             <div className={location.pathname === '/dashboard/SignalPage' ? 'overflow-x-scroll lg:overflow-x-hidden' : ''}>
                 {userGroups.map(userGroups => <SignalGroup
-                    key={userGroups?.group_id}
-                    img={userGroups?.group_data?.group_url}
-                    Name={userGroups?.group_data?.group_name}
-                    desc={userGroups?.group_data?.group_desc}
-                    type={userGroups?.group_data?.pricing_type}
-                    minAll={`Min Allocation: ${userGroups?.group_data?.min_allocation}`}
+                    key={userGroups?.group_data?.group_id}
+                    img={userGroups?.group_url}
+                    Name={userGroups?.group_name}
+                    desc={userGroups?.group_desc}
+                    type={userGroups?.pricing_type}
+                    minAll={`Min Allocation: ${userGroups?.min_allocation}`}
                     signals={userGroups?.group_data?.signals}
                     win_rate={`${userGroups?.group_data?.win_rate}%`}
-                // execute={connect}
+                    execute={() => connect(userGroups?.group_id)}
                 />)}
             </div>
         </div>

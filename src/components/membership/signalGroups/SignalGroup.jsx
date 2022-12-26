@@ -1,12 +1,15 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { logout } from '../../../store/authSlice'
 import Balance from '../dashboard/Balance'
 import ExchangeWallet from '../dashboard/ExchangeWallet'
 import img from './../../../images/Altercation.png'
 import Memberships from './Memberships'
-import SignalGroupTable from './SignalGroupTable'
+import SingleSignalGroup from './SingleSignalGroup'
+// import SignalGroupTable from './SignalGroupTable'
 import TotalRevenueTable from './TotalRevenueTable'
 
 const SignalGroup = () => {
@@ -15,6 +18,31 @@ const SignalGroup = () => {
     const changeGroup = () => {
         setGroups(!groups)
     }
+
+
+    const [groupList, setGroupList] = useState([])
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
+            headers: {
+                Authorization: localStorage.getItem('accessToken')
+            }
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+                dispatch(logout())
+                return
+            }
+            setGroupList(res.detail)
+            // console.log(groupList)
+            // console.log(res.detail)
+        }).catch(err => {
+
+        })
+    }, [])
 
 
     return (
@@ -60,8 +88,24 @@ const SignalGroup = () => {
                     </div>
                 </div>}
                 {!groups && <div className='grid lg:grid-flow-col lg:grid-cols-3 gap-5'>
-                    <SignalGroupTable />
-                    <TotalRevenueTable />
+                    <div className='border rounded-lg divide-y py-3'>
+                        <p className='pb-3 px-5'>Signal Groups You Belong To:</p>
+                        {groupList.map(groupList => <SingleSignalGroup
+                            key={groupList?.group_data?.group_id}
+                            img={groupList?.group_data?.group_url}
+                            name={groupList?.group_data?.group_name}
+                            desc={groupList?.group_data?.group_desc}
+                        />)}
+                    </div>
+                    {groupList.map(groupList => <TotalRevenueTable
+                        key={groupList?.group_data?.group_id}
+                        img={groupList?.group_data?.group_url}
+                        name={groupList?.group_data?.group_name}
+                        visibility={groupList?.group_data?.visibility}
+                        min={`${groupList?.group_data?.min_allocation} USDT`}
+                        max={`${groupList?.group_data?.max_allocation} USDT`}
+                        pfee={groupList?.group_data?.pricing_fee}
+                    />)}
                     <Memberships />
                 </div>}
             </div>

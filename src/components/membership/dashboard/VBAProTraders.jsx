@@ -13,9 +13,6 @@ const VBAProTraders = () => {
                 <Link to={'/dashboard/TradeManagers'} className='text-primary hover:text-primary-light active:text-primary-dark cursor-pointer'>View All</Link>
             </div>
             <TradeManager />
-            <TradeManager />
-            <TradeManager />
-            <TradeManager />
         </div>
     )
 }

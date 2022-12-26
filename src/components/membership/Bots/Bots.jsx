@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { logout } from '../../../store/authSlice'
 import Balance from '../dashboard/Balance'
 import ExchangeWallet from '../dashboard/ExchangeWallet'
 import VBABotDetails from './VBABotDetails'
@@ -11,6 +13,7 @@ const Bots = () => {
 
     const [data, setData] = useState([])
 
+    const dispatch = useDispatch()
     //State for bot summary
     const [botData, setBotData] = useState(false)
 
@@ -27,6 +30,10 @@ const Bots = () => {
         }).then(res => {
             return res.json()
         }).then(res => {
+            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+                dispatch(logout())
+                return
+            }
             console.log(res)
             setData(res.detail)
         }).catch(err => {
@@ -65,12 +72,14 @@ const Bots = () => {
                         </div>
                     </div>
                     {botData && <div className='basis-1/2'>
-                        {data.map(data => <VBABotDetails
-                            key={data.bot_id}
-                            name={data.bot_name}
-                            type={data.bot_action}
-                            symbol={data.symbol}
-                        />)}
+                        {data.map(data =>
+                            <VBABotDetails
+                                key={data.bot_id}
+                                name={data.bot_name}
+                                type={data.bot_action}
+                                symbol={data.symbol}
+                            />)
+                        }
                     </div>}
                 </div>
             </div>

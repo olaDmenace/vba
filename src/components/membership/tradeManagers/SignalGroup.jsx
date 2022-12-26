@@ -18,7 +18,7 @@ const SignalGroup = (props) => {
     //     console.log(err)
     // })
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
 
 

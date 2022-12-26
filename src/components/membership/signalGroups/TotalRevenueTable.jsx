@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
-const TotalRevenueTable = () => {
+const TotalRevenueTable = (props) => {
     return (
         <div className='border rounded-lg py-3 px-5 text-white/70 grid gap-5'>
             {/* <div className='pb-3 px-5 space-y-3'>
@@ -14,25 +14,26 @@ const TotalRevenueTable = () => {
             <div className='flex justify-between'>
                 <div>
                     <div className='flex gap-3'>
-                        <div className='rounded-full bg-back-back h-6 w-6'></div>
-                        <p>ARC 15</p>
+                        {/* <div className='rounded-full bg-back-back h-6 w-6'></div> */}
+                        <img className='rounded-full h-6 w-6' src={props.img} alt="" />
+                        <p>{props.name}</p>
                     </div>
-                    <p>Private Group</p>
+                    <p>{props.visibility}</p>
                 </div>
                 <button className='text-primary hover:text-primary-light active:text-primary-dark'>View Signal Group</button>
             </div>
             <div className='grid grid-flow-row gap-5 content-between'>
                 <div>
                     <p>Minimum Allocation</p>
-                    <h5 className='text-2xl'>100 USDT</h5>
+                    <h5 className='text-2xl'>{props.min}</h5>
                 </div>
                 <div>
                     <p>Maximum Allocation</p>
-                    <h5 className='text-2xl'>100 USDT</h5>
+                    <h5 className='text-2xl'>{props.max}</h5>
                 </div>
                 <div className='flex gap-3'>
                     <p>Subscrition</p>
-                    <button className='text-primary hover:text-primary-light active:text-primary-dark'>Free</button>
+                    <button className='text-primary hover:text-primary-light active:text-primary-dark'>{props.pfee}</button>
                 </div>
                 <div>
                     <p>Total Revenue Generated</p>

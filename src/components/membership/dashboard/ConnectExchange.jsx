@@ -31,7 +31,7 @@ const ConnectExchange = ({ openModal }) => {
                     <div className='grid gap-3'>
                         <label className='text-[#FFFFFFCC]' htmlFor="">
                             Preferred Exchange
-                            <select onChange={e => setExchange(false)} className='w-full h-10 bg-transparent border rounded px-2 text-black' name="" id="">
+                            <select onChange={e => setExchange(false)} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="">
                                 <option value="">Binance</option>
                                 <option value="">Bybit</option>
                             </select>
