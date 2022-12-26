@@ -39,7 +39,7 @@ function App() {
           <Route path='/dashboard' element={<ProtectedRoutes><Boiler /></ProtectedRoutes>}>
             <Route path='' element={<Dashboard />}>
               <Route path='' element={<Signal />} />
-              <Route path='Bots' element={<Bots />} />
+              <Route exact path='Bots' element={<Bots />} />
             </Route>
             <Route path='TradeManagers' element={<TradeManager />} />
             <Route path='Edit' element={<EditBot />} />

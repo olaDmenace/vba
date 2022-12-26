@@ -3,8 +3,17 @@ import DashMenu from './DashMenu'
 import Logo from '../../../images/Logo.png'
 import { Link, Outlet } from 'react-router-dom'
 import { BellIcon } from '@heroicons/react/24/solid'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const Boiler = () => {
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
+    useEffect(() => {
+        setFirstname(localStorage.getItem('firstname'))
+        setLastname(localStorage.getItem('last'))
+    }, [])
+
     return (
         <div className='bg-back'>
             <div className='px-8 bg-back-light border-b border-white/40 flex justify-between items-center text-white/70'>
@@ -17,7 +26,7 @@ const Boiler = () => {
                         <BellIcon className='h-5' />
                         <div>
                             <img className='rounded-full' src="" alt="" />
-                            <p>Martinez George</p>
+                            <p>{`${firstname} ${lastname}`}</p>
                         </div>
                     </div>
                 </div>

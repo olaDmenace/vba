@@ -7,10 +7,15 @@ import Button from '../../Button'
 
 const ConnectExchange = ({ openModal }) => {
 
+    // Controls the selection of the dropdown
     const [exchange, setExchange] = useState(false)
-    const showKeys = () => {
-        setExchange(true)
-    }
+    // Collects the value of the drop down
+    const [drop, setDrop] = useState('Binance')
+
+    // const showKeys = () => {
+    //     setExchange(true)
+    // }
+
 
     return (
         <div>
@@ -31,12 +36,12 @@ const ConnectExchange = ({ openModal }) => {
                     <div className='grid gap-3'>
                         <label className='text-[#FFFFFFCC]' htmlFor="">
                             Preferred Exchange
-                            <select onChange={e => setExchange(false)} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="">
-                                <option value="">Binance</option>
-                                <option value="">Bybit</option>
+                            <select onChange={e => setDrop(e.target.value)} value={drop} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="">
+                                <option>Binance</option>
+                                <option>Bybit</option>
                             </select>
                         </label>
-                        {!exchange && <button onClick={showKeys} className='bg-[#F9B520] rounded px-3 py-2 w-2/3'>Conect With Binance</button>}
+                        {!exchange && <button className='bg-[#F9B520] rounded px-3 py-2 w-2/3'>Conect With {drop}</button>}
                     </div>
                     {exchange && <div className='text-white/70 grid gap-3'>
                         <label htmlFor="">

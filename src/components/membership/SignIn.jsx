@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Menu from '../Menu'
 import MembershipLeft from './MembershipLeft'
 import MembershipRight from './MembershipRight'

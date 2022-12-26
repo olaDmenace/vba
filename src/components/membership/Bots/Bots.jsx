@@ -60,7 +60,7 @@ const Bots = () => {
                 </div>
                 <div className='grid gap-5 lg:flex'>
                     <div className='basis-1/2'>
-                        <div className='rounded border py-5 h-full'>
+                        <div className='rounded border py-5 h-96'>
                             <div className='px-5 text-white/70 border-b'>
                                 <div className='pb-5'>
                                     <p className='font-medium'>Your VBA Bots</p>
