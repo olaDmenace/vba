@@ -1,9 +1,9 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+// import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
 const TotalRevenueTable = (props) => {
     return (
-        <div className='border rounded-lg py-3 px-5 text-white/70 grid gap-5'>
+        <div>
             {/* <div className='pb-3 px-5 space-y-3'>
                 <p>Total Revenue Generated</p>
                 <div className='relative lg:col-span-4'>

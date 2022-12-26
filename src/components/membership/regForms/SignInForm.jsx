@@ -51,7 +51,11 @@ const SignInForm = () => {
                 setMessage('Login Successful, wait while we redirect to your dashboard')
                 dispatch(login({ ...data.detail }))
                 setTimeout(() => {
-                    location ? navigate(location) : navigate('/dashboard')
+                    if (location !== '/') {
+                        navigate(location)
+                    } else {
+                        navigate('/dashboard')
+                    }
                 }, 2000);
             } else if (data.status === 'success' && data.detail.verified === false) {
                 setMessage('Account Not Verified. Please check your mail')

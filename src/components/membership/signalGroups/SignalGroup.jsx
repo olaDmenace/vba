@@ -57,14 +57,14 @@ const SignalGroup = () => {
                     <p className='hover:text-[#66BBDC] text-primary active:text-primary-dark ease-in-out transition-colors duration-500'>Create a New Signal Group</p>
                 </div>
             </div> */}
-            <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
+            {/* <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                 <div className='border rounded-lg mx-auto w-full'>
                     <Balance />
                 </div>
                 <div>
                     <ExchangeWallet />
                 </div>
-            </div>
+            </div> */}
             <div className='grid gap-5'>
                 <div className='flex gap-5'>
                     <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>

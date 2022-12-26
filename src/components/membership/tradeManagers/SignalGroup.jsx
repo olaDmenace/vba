@@ -40,7 +40,7 @@ const SignalGroup = (props) => {
                             <img className='rounded-full h-8 w-8' src={props.img} alt="" />
                             <div>
                                 <p className='font-semibold'>{props.Name}</p>
-                                <p>{props.desc}</p>
+                                <p>{props.visibility}</p>
                             </div>
                         </td>
                         <td>
@@ -52,7 +52,7 @@ const SignalGroup = (props) => {
                         <td>
                             <ul className='list-disc font-semibold w-56'>
                                 <li>{props.win_rate}</li>
-                                <li>Risk-to-Reward ration: 1:1.25</li>
+                                <li>Member Counter: 1:1.25</li>
                             </ul>
                         </td>
                         <td className='font-semibold'>

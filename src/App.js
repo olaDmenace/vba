@@ -37,12 +37,13 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path='/dashboard' element={<ProtectedRoutes><Boiler /></ProtectedRoutes>}>
-            <Route path='' index element={<Dashboard />} />
+            <Route path='' element={<Dashboard />}>
+              <Route path='' element={<Signal />} />
+              <Route path='Bots' element={<Bots />} />
+            </Route>
             <Route path='TradeManagers' element={<TradeManager />} />
-            <Route path='Bots' element={<Bots />} />
             <Route path='Edit' element={<EditBot />} />
             <Route path='Analytics' element={<Analytics />} />
-            <Route path='Signal' element={<Signal />} />
             <Route path='SignalPage' element={<SignalPage />} />
             <Route path="SignalManagement" element={<SignalManagement />} />
             <Route path='MyTrades' element={<MyTrades />} />

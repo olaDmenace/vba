@@ -2,7 +2,7 @@ import React from 'react'
 
 const Memberships = () => {
     return (
-        <div className='rounded border py-5 h-96'>
+        <div className='rounded border py-5'>
             <div className='px-5 flex justify-between gap-5 text-white/70 border-b'>
                 <div className='pb-5 w-2/3'>
                     <p className='font-medium'>Memberships</p>

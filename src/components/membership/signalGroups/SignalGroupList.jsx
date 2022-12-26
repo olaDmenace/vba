@@ -32,6 +32,7 @@ const SignalGroupList = ({ ...props }) => {
                 return
             }
             setUserGroups(res.detail)
+            console.log(res)
         }).catch(err => {
         })
     }, [])
@@ -71,7 +72,7 @@ const SignalGroupList = ({ ...props }) => {
                     key={userGroups?.group_data?.group_id}
                     img={userGroups?.group_url}
                     Name={userGroups?.group_name}
-                    desc={userGroups?.group_desc}
+                    visibility={userGroups?.group_visibility}
                     type={userGroups?.pricing_type}
                     minAll={`Min Allocation: ${userGroups?.min_allocation}`}
                     signals={userGroups?.group_data?.signals}
