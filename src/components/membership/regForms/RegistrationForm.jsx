@@ -3,7 +3,6 @@ import RegForm1 from './RegForm1'
 import RegForm2 from './RegForm2'
 import RegForm3 from './RegForm3'
 import { Link } from 'react-router-dom'
-import { useFormik, Form, Field } from 'formik'
 
 
 // Spinner Loader import
@@ -16,7 +15,7 @@ const RegistrationForm = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        // confirmPassword: '',
+        confirmPassword: '',
         first_Name: '',
         last_name: '',
         country: '',

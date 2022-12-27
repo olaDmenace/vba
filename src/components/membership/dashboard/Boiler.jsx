@@ -5,14 +5,13 @@ import { Link, Outlet } from 'react-router-dom'
 import { BellIcon } from '@heroicons/react/24/solid'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const Boiler = () => {
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
-    useEffect(() => {
-        setFirstname(localStorage.getItem('firstname'))
-        setLastname(localStorage.getItem('last'))
-    }, [])
+
+
+    const { first_name, last_name } = useSelector(state => state.auth.user)
+
 
     return (
         <div className='bg-back'>
@@ -26,7 +25,7 @@ const Boiler = () => {
                         <BellIcon className='h-5' />
                         <div>
                             <img className='rounded-full' src="" alt="" />
-                            <p>{`${firstname} ${lastname}`}</p>
+                            <p>{`${first_name} ${last_name}`}</p>
                         </div>
                     </div>
                 </div>
