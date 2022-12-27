@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../../store/authSlice'
 import Button from '../../Button'
@@ -19,6 +20,7 @@ const SignalGroup = (props) => {
     // })
 
     // const dispatch = useDispatch()
+    // const [res, setRes] = useState('')
 
 
 
