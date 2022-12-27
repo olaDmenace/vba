@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { VictoryPie, VictoryTheme, VictoryLabel } from 'victory'
 
 const Balance = () => {
+
+    useEffect(() => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/balance', {
+            Authorization: localStorage.getItem('accessToken')
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
+
     return (
         <div>
             <svg width={250} height={250}>

@@ -10,11 +10,44 @@ const ConnectExchange = ({ openModal }) => {
     // Controls the selection of the dropdown
     const [exchange, setExchange] = useState(false)
     // Collects the value of the drop down
-    const [drop, setDrop] = useState('Binance')
+    const [platform, setPlatform] = useState('Binance')
 
-    // const showKeys = () => {
-    //     setExchange(true)
+    // Collects values from both API and secret key input
+    const [api_key, setAPI] = useState('')
+    const [api_secret, setSecret] = useState('')
+
+    // hide fields when dropdown changes
+    const showKeys = () => {
+        setExchange(true)
+    }
+
+    // execute connect
+    // const data = {
+    //     // drop: platform,
+    //     // api: api_key,
+    //     // secret: api_secret
+    //     platform: drop,
+    //     api_key: api,
+    //     api_secret: secret
     // }
+    const connectHandle = (e) => {
+        e.preventDefault()
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/connect', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify({
+                platform,
+                api_key,
+                api_secret
+            })
+        }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
 
     return (
@@ -36,23 +69,23 @@ const ConnectExchange = ({ openModal }) => {
                     <div className='grid gap-3'>
                         <label className='text-[#FFFFFFCC]' htmlFor="">
                             Preferred Exchange
-                            <select onChange={e => setDrop(e.target.value)} value={drop} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="">
+                            <select onClick={() => setExchange(false)} onChange={e => setPlatform(e.target.value)} value={platform} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="">
                                 <option>Binance</option>
                                 <option>Bybit</option>
                             </select>
                         </label>
-                        {!exchange && <button className='bg-[#F9B520] rounded px-3 py-2 w-2/3'>Conect With {drop}</button>}
+                        {!exchange && <button onClick={showKeys} className='bg-[#F9B520] rounded px-3 py-2 w-2/3'>Conect With {platform}</button>}
                     </div>
                     {exchange && <div className='text-white/70 grid gap-3'>
                         <label htmlFor="">
                             API Key
-                            <input type="text" name="" id="" placeholder='Enter the API key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
+                            <input type="text" onChange={(e) => { setAPI(e.target.value) }} value={api_key} name="" id="" placeholder='Enter the API key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
                         </label>
                         <label htmlFor="">
                             Secret Key
-                            <input type="text" name="" id="" placeholder='Enter the Secret key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
+                            <input type="text" value={api_secret} name="" onChange={(e) => { setSecret(e.target.value) }} id="" placeholder='Enter the Secret key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
                         </label>
-                        <Button text={'Connect'} />
+                        <Button Execute={connectHandle} text={'Connect'} />
                     </div>}
                 </div>
             </div>
