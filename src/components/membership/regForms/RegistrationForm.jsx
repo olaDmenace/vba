@@ -3,37 +3,59 @@ import RegForm1 from './RegForm1'
 import RegForm2 from './RegForm2'
 import RegForm3 from './RegForm3'
 import { Link } from 'react-router-dom'
-
+import { ErrorMessage, Formik, Form } from 'formik'
+import * as Yup from 'yup'
 
 // Spinner Loader import
 import { Oval } from 'react-loader-spinner'
+import FormComponent from './FormComponent'
 
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Enter a valid email'),
+    password: Yup.string().min(8, 'Password 8 must be characters long').required('Password is required'),
+    confirmPassword: Yup.string().required('Password is compulsory').oneOf([Yup.ref('password')], 'Passwords do not match'),
+    firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Enter your first name'),
+    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Enter your first name'),
+    country: Yup.string().required('Select your Country'),
+    phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+})
 
 const RegistrationForm = () => {
-
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [first_name, setFirst_Name] = useState('')
+    const [last_name, setLast_Name] = useState('')
+    const [country, setCountry] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [dob, setDob] = useState('')
     // Form data collection
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        confirmPassword: '',
-        first_Name: '',
-        last_name: '',
-        country: '',
-        // altEmail: '',
-        dob: ''
+    // const [formData, setFormData] = useState({
+    //     email: '',
+    //     password: '',
+    //     confirmPassword: '',
+    //     first_name: '',
+    //     last_name: '',
+    //     country: '',
+    //     altEmail: '',
+    //     dob: ''
 
-    })
+    // })
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const submitHandler = (e) => {
+    const handleSubmit = async (values) => {
+        console.log('first')
+        console.log(values)
+        // e.preventDefault()
         setIsLoading(true)
-        console.log(formData)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
             {
                 method: 'POST',
                 body: JSON.stringify({
-                    ...formData
+                    // 
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,11 +78,11 @@ const RegistrationForm = () => {
     // Visible for Selector
     const visibleForm = () => {
         if (form === 0) {
-            return <RegForm1 formData={formData} setFormData={setFormData} />
+            return <RegForm1 />
         } else if (form === 1) {
-            return <RegForm2 formData={formData} setFormData={setFormData} />
+            return <RegForm2 />
         } else {
-            return <RegForm3 formData={formData} setFormData={setFormData} />
+            return <RegForm3 />
         }
     }
 
@@ -74,14 +96,24 @@ const RegistrationForm = () => {
             return 'Submit'
         }
     }
-
-    return (
-        <div onSubmit={submitHandler} className='grid gap-10'>
-            <div>
-                {visibleForm()}
-            </div>
-            {!isLoading && <button
-                className='rounded
+    // form === 2 ? submitHandler() : setForm((form) => (form + 1))
+    return (<div className='grid gap-10 text-white/70'>
+        <Formik className='grid gap-10'
+            initialValues={{ firstName: '', lastName: '', email: '', password: '', confirmPassword: '', country: '', dob: '', phoneNumber: '' }}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+        >
+            {({
+                touched,
+                errors,
+                isSubmitting,
+                values,
+                handleSubmit,
+                handleChange
+            }) => <Form onSubmit={handleSubmit} className='grid gap-10'>
+                    <FormComponent values={values} form={form} handleChange={handleChange} />
+                    {/* {!isLoading && <button
+                        className='rounded
                 mx-auto
                 w-1/2
                 py-3
@@ -90,29 +122,31 @@ const RegistrationForm = () => {
                 bg-primary
                 active:bg-primary-dark
                 ease-in-out transition-colors duration-500'
-                type="submit"
-                onClick={() => {
-                    form === 2 ? submitHandler() : setForm((form) => (form + 1))
-                }}
-            >
-                {text()}
-            </button>}
-            {isLoading && <div className='mx-auto w-fit text-center'>
-                <Oval
-                    height={30}
-                    width={30}
-                    color="#00B6FF"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                    visible={true}
-                    ariaLabel='oval-loading'
-                    secondaryColor="#24718C"
-                    strokeWidth={2}
-                    strokeWidthSecondary={2}
-                />
-            </div>}
-            <p className='text-white text-center'>Already have an account? <Link to={'/'}><span className='text-primary hover:text-[#66BBDC] cursor-pointer'>Sign In</span></Link></p>
-        </div>
+                        type='button'
+                        onClick={handleSubmit}
+                    >
+                        {text()}
+                    </button>} */}
+                    <button onClick={() => setForm((form) => (form + 1))}>Next</button>
+                    {isLoading && <div className='mx-auto w-fit text-center'>
+                        <Oval
+                            height={30}
+                            width={30}
+                            color="#00B6FF"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                            ariaLabel='oval-loading'
+                            secondaryColor="#24718C"
+                            strokeWidth={2}
+                            strokeWidthSecondary={2}
+                        />
+                    </div>}
+                    <p className='text-white text-center'>Already have an account? <Link to={'/'}><span className='text-primary hover:text-[#66BBDC] cursor-pointer'>Sign In</span></Link></p>
+                </Form>}
+        </Formik>
+
+    </div>
     )
 }
 
