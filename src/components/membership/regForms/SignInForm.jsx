@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useFormik } from 'formik'
 
 // Spinner Loader import
 import { Oval } from 'react-loader-spinner'

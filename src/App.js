@@ -6,6 +6,7 @@ import Dashboard from "./components/membership/dashboard/Dashboard";
 import TradeManager from "./components/membership/tradeManagers/TradeManagers";
 import SignIn from "./components/membership/SignIn";
 import SignUp from "./components/membership/SignUp";
+import Authentication from "./components/membership/Authentication";
 import Bots from "./components/membership/Bots/Bots";
 import EditBot from "./components/membership/Bots/EditBot";
 import Analytics from "./components/membership/analytics/Analytics";
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Auth" element={<Authentication />} />
           <Route path='/dashboard' element={<ProtectedRoutes><Boiler /></ProtectedRoutes>}>
             <Route path='' element={<Dashboard />}>
               <Route path='' element={<Signal />} />

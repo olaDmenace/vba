@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import RegForm1 from './RegForm1'
-import RegForm2 from './RegForm2'
-import RegForm3 from './RegForm3'
 import { Link } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -22,13 +19,10 @@ const validationSchema = Yup.object().shape({
     phoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
 })
 
-// https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount
-
 const RegistrationForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [response, setResponse] = useState('')
     const handleSubmit = ({ last_name, first_name, email, password, country, dob }) => {
-        // e.preventDefault()
         setIsLoading(true)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
             {
@@ -49,13 +43,9 @@ const RegistrationForm = () => {
             setIsLoading(false)
             return res.json()
         }).then(data => {
-            console.log(data)
             setResponse(data)
         }).catch(err => {
-            console.log(err)
         })
-
-        console.log(last_name, first_name, email, password, country, dob)
     }
 
 
@@ -63,27 +53,27 @@ const RegistrationForm = () => {
     const [form, setForm] = useState(0)
 
     // Visible for Selector
-    const visibleForm = () => {
-        if (form === 0) {
-            return <RegForm1 />
-        } else if (form === 1) {
-            return <RegForm2 />
-        } else {
-            return <RegForm3 />
-        }
-    }
+    // const visibleForm = () => {
+    //     if (form === 0) {
+    //         return <RegForm1 />
+    //     } else if (form === 1) {
+    //         return <RegForm2 />
+    //     } else {
+    //         return <RegForm3 />
+    //     }
+    // }
 
-    // Text on Button
-    const text = () => {
-        if (form === 0) {
-            return 'Sign Up'
-        } else if (form === 1) {
-            return 'Next'
-        } else {
-            return 'Submit'
-        }
-    }
-    // form === 2 ? submitHandler() : setForm((form) => (form + 1))
+    // // Text on Button
+    // const text = () => {
+    //     if (form === 0) {
+    //         return 'Sign Up'
+    //     } else if (form === 1) {
+    //         return 'Next'
+    //     } else {
+    //         return 'Submit'
+    //     }
+    // }
+
     return (<div className='grid gap-10 text-white/70'>
         <Formik className='grid gap-10'
             initialValues={{ last_name: '', first_name: '', email: '', password: '', country: '', dob: '' }}
@@ -99,21 +89,6 @@ const RegistrationForm = () => {
                 handleChange
             }) => <Form onSubmit={handleSubmit} className='grid gap-10'>
                     <FormComponent values={values} form={form} handleChange={handleChange} />
-                    {/* {!isLoading && <button
-                        className='rounded
-                mx-auto
-                w-1/2
-                py-3
-                hover:bg-[#66BBDC]
-                text-white
-                bg-primary
-                active:bg-primary-dark
-                ease-in-out transition-colors duration-500'
-                        type='button'
-                        onClick={handleSubmit}
-                    >
-                        {text()}
-                    </button>} */}
                     {!isLoading && <button disabled={form === 0 || form === 1} className={form === 2 ? 'bg-primary hover:bg-primary-light active:bg-primary-dark mx-auto px-3 py-2 rounded' : 'border-primary border mx-auto px-3 py-2 rounded'} type='submit'>Submit</button>}
                     {/* <button type='submit'>Submit</button> */}
                     {isLoading && <div className='mx-auto w-fit text-center'>
