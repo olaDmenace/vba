@@ -49,6 +49,7 @@ const SignInForm = () => {
             } else {
                 setMessage('Account Not Found')
             }
+            console.log(res)
         }).then(data => {
             if (data.status === 'success' && data.detail.verified === true) {
                 setMessage('Login Successful, wait while we redirect to your dashboard')

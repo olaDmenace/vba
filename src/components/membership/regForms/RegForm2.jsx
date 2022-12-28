@@ -26,12 +26,12 @@ const RegForm2 = ({ values, handleChange }) => {
         <>
             <label htmlFor="">
                 Firstname
-                <Field className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Your First Name' type="text" name="firstName" id="firstName" value={values.firstName} onChange={handleChange} />
+                <Field className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Your First Name' type="text" name="first_name" id="first_name" value={values.first_name} onChange={handleChange} />
                 <ErrorMessage name='email'>{msg => <div className='text-red-500'>{msg}</div>}</ErrorMessage>
             </label>
             <label htmlFor="">
                 Lastname
-                <Field className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Your Last Name' type="text" name="lastName" id="lastName" value={values.lastName} onChange={handleChange} />
+                <Field className='rounded w-full h-10 bg-[#32393C66]/40 px-2' placeholder='Your Last Name' type="text" name="last_name" id="last_name" value={values.last_name} onChange={handleChange} />
                 <ErrorMessage name='password'>{msg => <div className='text-red-500'>{msg}</div>}</ErrorMessage>
             </label>
             <label htmlFor="">

@@ -3,7 +3,7 @@ import React from 'react'
 
 const TotalRevenueTable = (props) => {
     return (
-        <div>
+        <div className='border rounded-lg border-white/70 p-5'>
             {/* <div className='pb-3 px-5 space-y-3'>
                 <p>Total Revenue Generated</p>
                 <div className='relative lg:col-span-4'>

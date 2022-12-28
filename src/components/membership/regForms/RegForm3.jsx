@@ -26,7 +26,7 @@ const RegForm3 = ({ values, handleChange }) => {
             <label htmlFor="">
                 Date of Birth
                 <Field className='rounded w-full h-10 bg-[#32393C66]/40 px-2' type="date" name="dob" id="dob" value={values.dob} onChange={handleChange} />
-                <ErrorMessage name='password'>{msg => <div className='text-red-500'>{msg}</div>}</ErrorMessage>
+                <ErrorMessage name='dob'>{msg => <div className='text-red-500'>{msg}</div>}</ErrorMessage>
             </label>
         </>
     )

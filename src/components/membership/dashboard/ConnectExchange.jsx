@@ -32,16 +32,19 @@ const ConnectExchange = ({ openModal }) => {
     // }
     const connectHandle = (e) => {
         e.preventDefault()
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/connect', {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/connectUserExchange', {
             method: 'POST',
             headers: {
                 Authorization: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
-                platform,
-                api_key,
-                api_secret
+                platform: "binance",
+                api_key: "4d54f6810f68935eb6830cd5b8dda53acc3f1b58d2cf1152417e1be816b6e10c",
+                api_secret: "811807ac4082053ea4ec170e703db2ea240adcdb5e94b3adf350639bfe59b0e5"
             })
+        }).then(res => {
+            console.log(res)
+            res.json()
         }).then(res => {
             console.log(res)
         }).catch(err => {

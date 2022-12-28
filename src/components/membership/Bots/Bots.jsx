@@ -12,6 +12,8 @@ import VBABots from './VBABots'
 const Bots = () => {
 
     const [data, setData] = useState([])
+    const [botSummary, setBotSummary] = useState([])
+    const [botID, setBotID] = useState()
 
     const dispatch = useDispatch()
     //State for bot summary
@@ -43,6 +45,7 @@ const Bots = () => {
 
 
 
+
     return (
         <div className='space-y-5'>
             {/* <div className='grid lg:flex gap-5'>
@@ -60,27 +63,26 @@ const Bots = () => {
                 </div>
                 <div className='grid gap-5 lg:flex'>
                     <div className='basis-1/2'>
-                        <div className='rounded border py-5 h-96'>
+                        <div className='rounded border py-5 h-full'>
                             <div className='px-5 text-white/70 border-b'>
                                 <div className='pb-5'>
                                     <p className='font-medium'>Your VBA Bots</p>
                                 </div>
                             </div>
-                            <div onClick={toggleData} className='divide-y'>
-                                {data.map(data => <VBABots key={data.bot_id} name={data.bot_name} type={data.bot_action} />)}
+                            <div className='divide-y'>
+                                {data.map(data => <VBABots key={data.bot_id} id={data.bot_id} name={data.bot_name} type={data.bot_action} />)}
                             </div>
                         </div>
                     </div>
-                    {botData && <div className='basis-1/2'>
-                        {data.map(data =>
-                            <VBABotDetails
-                                key={data.bot_id}
-                                name={data.bot_name}
-                                type={data.bot_action}
-                                symbol={data.symbol}
-                            />)
-                        }
-                    </div>}
+                    {/* {botData && } */}
+                    <div className='basis-1/2'>
+                        <VBABotDetails
+                            key={data.bot_id}
+                            name={data.bot_name}
+                            type={data.bot_action}
+                            symbol={data.symbol}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
