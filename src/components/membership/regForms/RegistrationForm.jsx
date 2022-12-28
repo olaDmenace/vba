@@ -114,7 +114,7 @@ const RegistrationForm = () => {
                     >
                         {text()}
                     </button>} */}
-                    <button disabled={form === 0 || form === 1} className={form === 2 ? 'bg-primary hover:bg-primary-light active:bg-primary-dark mx-auto px-3 py-2 rounded' : 'border-primary border mx-auto px-3 py-2 rounded'} type='submit'>Submit</button>
+                    {!isLoading && <button disabled={form === 0 || form === 1} className={form === 2 ? 'bg-primary hover:bg-primary-light active:bg-primary-dark mx-auto px-3 py-2 rounded' : 'border-primary border mx-auto px-3 py-2 rounded'} type='submit'>Submit</button>}
                     {/* <button type='submit'>Submit</button> */}
                     {isLoading && <div className='mx-auto w-fit text-center'>
                         <Oval
@@ -132,7 +132,10 @@ const RegistrationForm = () => {
                     </div>}
                 </Form>}
         </Formik>
-        <button className={form === 2 ? 'border-primary border mx-auto px-3 py-2 rounded' : 'bg-primary hover:bg-primary-light active:bg-primary-dark mx-auto px-3 py-2 rounded'} disabled={form === 2} onClick={() => setForm((form) => (form + 1))}>Next</button>
+        {!isLoading && <div className='mx-auto'>
+            <button className={form === 0 ? 'border-primary border mx-auto px-3 py-2 rounded-l' : 'bg-primary border-primary hover:bg-primary-light active:bg-primary-dark mx-auto px-3 py-2 rounded-l'} disabled={form === 0} onClick={() => setForm((form) => (form - 1))}>Prev</button>
+            <button className={form === 2 ? 'border-primary border mx-auto px-3 py-2 rounded-r' : 'bg-primary border-primary hover:bg-primary-light active:bg-primary-dark mx-auto px-3 py-2 rounded-r'} disabled={form === 2} onClick={() => setForm((form) => (form + 1))}>Next</button>
+        </div>}
         <p className='text-primary text-center'>{response.detail}</p>
         <p className='text-white text-center'>Already have an account? <Link to={'/'}><span className='text-primary hover:text-[#66BBDC] cursor-pointer'>Sign In</span></Link></p>
 
