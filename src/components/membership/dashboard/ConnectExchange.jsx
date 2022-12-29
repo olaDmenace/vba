@@ -3,9 +3,17 @@ import { XCircleIcon } from '@heroicons/react/24/outline'
 import { InformationCircleIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 import Button from '../../Button'
+// Spinner Loader import
+import { Oval } from 'react-loader-spinner'
 
 
 const ConnectExchange = ({ openModal }) => {
+
+    // Response State
+    const [response, setResponse] = useState('')
+
+    // Loading state
+    const [isLoading, setIsLoading] = useState(false)
 
     // Controls the selection of the dropdown
     const [exchange, setExchange] = useState(false)
@@ -21,32 +29,31 @@ const ConnectExchange = ({ openModal }) => {
         setExchange(true)
     }
 
-    // execute connect
-    // const data = {
-    //     // drop: platform,
-    //     // api: api_key,
-    //     // secret: api_secret
-    //     platform: drop,
-    //     api_key: api,
-    //     api_secret: secret
-    // }
     const connectHandle = (e) => {
-        e.preventDefault()
+        setIsLoading(true)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/connectUserExchange', {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
-                platform: "binance",
-                api_key: "4d54f6810f68935eb6830cd5b8dda53acc3f1b58d2cf1152417e1be816b6e10c",
-                api_secret: "811807ac4082053ea4ec170e703db2ea240adcdb5e94b3adf350639bfe59b0e5"
+                platform,
+                api_key,
+                api_secret
             })
         }).then(res => {
-            console.log(res)
-            res.json()
-        }).then(res => {
-            console.log(res)
+            setIsLoading(false)
+            if (res.ok) {
+                return res.json()
+            } else if (!res.ok) {
+                setResponse('Please chek your details or try again later')
+            }
+        }).then(data => {
+            if (data) {
+                setResponse(data.detail)
+            }
+            return console.log(data)
         }).catch(err => {
             console.log(err)
         })
@@ -72,7 +79,7 @@ const ConnectExchange = ({ openModal }) => {
                     <div className='grid gap-3'>
                         <label className='text-[#FFFFFFCC]' htmlFor="">
                             Preferred Exchange
-                            <select onClick={() => setExchange(false)} onChange={e => setPlatform(e.target.value)} value={platform} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="">
+                            <select onClick={() => setExchange(false)} onChange={e => setPlatform(e.target.value)} value={platform} className='w-full h-10 bg-[#32393C] border rounded px-2' name="" id="platform">
                                 <option>Binance</option>
                                 <option>Bybit</option>
                             </select>
@@ -82,14 +89,29 @@ const ConnectExchange = ({ openModal }) => {
                     {exchange && <div className='text-white/70 grid gap-3'>
                         <label htmlFor="">
                             API Key
-                            <input type="text" onChange={(e) => { setAPI(e.target.value) }} value={api_key} name="" id="" placeholder='Enter the API key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
+                            <input type="text" onChange={(e) => setAPI(e.target.value)} value={api_key} name="" id="api_key" placeholder='Enter the API key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
                         </label>
                         <label htmlFor="">
                             Secret Key
-                            <input type="text" value={api_secret} name="" onChange={(e) => { setSecret(e.target.value) }} id="" placeholder='Enter the Secret key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
+                            <input type="text" value={api_secret} name="" onChange={(e) => setSecret(e.target.value)} id="api_secret" placeholder='Enter the Secret key' className='w-full h-10 bg-transparent border rounded px-2 text-white/70' />
                         </label>
-                        <Button Execute={connectHandle} text={'Connect'} />
+                        {isLoading && <div className='mx-auto w-fit text-center'>
+                            <Oval
+                                height={30}
+                                width={30}
+                                color="#00B6FF"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                                visible={true}
+                                ariaLabel='oval-loading'
+                                secondaryColor="#24718C"
+                                strokeWidth={2}
+                                strokeWidthSecondary={2}
+                            />
+                        </div>}
+                        {!isLoading && <Button Execute={connectHandle} text={'Connect'} />}
                     </div>}
+                    <div className='text-primary text-center'>{response}</div>
                 </div>
             </div>
         </div>
