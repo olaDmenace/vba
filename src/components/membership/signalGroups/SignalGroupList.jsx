@@ -43,25 +43,46 @@ const SignalGroupList = ({ ...props }) => {
 
     const connect = function (arg) {
         console.log('first')
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connnectToSignalGroup', {
+        // fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connectToSignalGroup', {
+        //     method: 'POST',
+        //     headers: {
+        //         Authorization: localStorage.getItem('accessToken')
+        //     },
+        //     body: JSON.stringify({
+        //         signal_id: arg
+        //     })
+        // }).then(res => {
+        //     return res.json()
+        // }).then(res => {
+        //     if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+        //         dispatch(logout())
+        //         return
+        //     }
+        //     console.log(res)
+        // }).catch(err => {
+        // })
+
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connectToSignalGroup', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('accessToken')
+            },
             body: JSON.stringify({
                 signal_id: arg
-            }),
-            headers: {
-                Authorization: localStorage.getItem('accessToken')
-            }
+            })
         }).then(res => {
             return res.json()
-        }).then(res => {
-            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
-                dispatch(logout())
-                return
-            }
-            console.log(res)
+        }).then(data => {
+            console.log(data)
+            setResponse(data)
+            console.log(data.detail)
         }).catch(err => {
+            // console.log(err)
         })
     }
+
+    const [response, setResponse] = useState('')
 
     return (
         <div>
