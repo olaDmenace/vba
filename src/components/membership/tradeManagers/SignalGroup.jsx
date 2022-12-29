@@ -53,7 +53,7 @@ const SignalGroup = (props) => {
                         </td>
                         <td>
                             <ul className='list-disc font-semibold w-56'>
-                                <li>{props.win_rate}</li>
+                                <li>Win Rate: {props.win_rate}</li>
                                 <li>Member Counter: 1:1.25</li>
                             </ul>
                         </td>

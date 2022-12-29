@@ -42,13 +42,13 @@ const SignalGroupList = ({ ...props }) => {
     const title = location.pathname === '/dashboard/SignalPage' ? 'Signal Group' : ''
 
     const connect = function (arg) {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/subscribe', {
+        console.log('first')
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connnectToSignalGroup', {
             method: 'POST',
             body: JSON.stringify({
                 signal_id: arg
             }),
             headers: {
-                'Content-Type': 'application/json',
                 Authorization: localStorage.getItem('accessToken')
             }
         }).then(res => {
@@ -58,7 +58,6 @@ const SignalGroupList = ({ ...props }) => {
                 dispatch(logout())
                 return
             }
-            console.log('first')
             console.log(res)
         }).catch(err => {
         })
@@ -76,8 +75,8 @@ const SignalGroupList = ({ ...props }) => {
                     type={userGroups?.pricing_type}
                     minAll={`Min Allocation: ${userGroups?.min_allocation}`}
                     signals={userGroups?.group_data?.signals}
-                    win_rate={`${userGroups?.group_data?.win_rate}%`}
-                    execute={() => connect(userGroups?.group_id)}
+                    win_rate={`${userGroups?.win_rate}%`}
+                    execute={() => connect(userGroups?.signal_id)}
                 />)}
             </div>
         </div>
