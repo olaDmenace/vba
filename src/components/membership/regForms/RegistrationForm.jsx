@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
@@ -22,6 +22,7 @@ const validationSchema = Yup.object().shape({
 const RegistrationForm = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [response, setResponse] = useState('')
+    const navigate = useNavigate()
     const handleSubmit = ({ last_name, first_name, email, password, country, dob }) => {
         setIsLoading(true)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/auth/createAccount',
@@ -44,6 +45,9 @@ const RegistrationForm = () => {
             return res.json()
         }).then(data => {
             setResponse(data)
+            setTimeout(() => {
+                navigate('/')
+            }, 3000)
         }).catch(err => {
         })
     }

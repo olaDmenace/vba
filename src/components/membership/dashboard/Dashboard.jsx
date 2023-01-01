@@ -12,6 +12,9 @@ import { logout } from '../../../store/authSlice'
 import { Outlet } from 'react-router-dom'
 
 
+// Spinner Loader import
+import { Oval } from 'react-loader-spinner'
+
 // Import handles the price chart
 import { VictoryPie, VictoryLabel } from 'victory'
 
@@ -27,6 +30,11 @@ const Dashboard = () => {
 
     const dispatch = useDispatch()
 
+    // State for collecting and storing balance in pie chart
+    const [balance, setBalancce] = useState('')
+
+    // State for showing balance if wallet has been connected
+    const [ajite, setAjite] = useState(false)
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/balance', {
             headers: {
@@ -39,36 +47,16 @@ const Dashboard = () => {
             if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
                 dispatch(logout())
                 return
+            } else if (res.status === 'success') {
+                setBalancce(res.detail.balances)
+                setAjite(true)
             }
-            setBalancce(res.detail.balances)
         }).catch(err => {
             console.log(err)
         })
     }, [])
 
-    const [balance, setBalancce] = useState('')
 
-    // const [groupList, setGroupList] = useState([])
-
-    // useEffect(() => {
-    //     fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
-    //         headers: {
-    //             Authorization: localStorage.getItem('accessToken')
-    //         }
-    //     }).then(res => {
-    //         return res.json()
-    //     }).then(res => {
-    //         if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
-    //             dispatch(logout())
-    //             return
-    //         }
-    //         setGroupList(res.detail)
-    //         // console.log(groupList)
-    //         // console.log(res.detail)
-    //     }).catch(err => {
-
-    //     })
-    // }, [])
 
     return (
         <div className='space-y-5'>
@@ -79,12 +67,12 @@ const Dashboard = () => {
             </div>}
             <div className='grid gap-5 lg:flex'>
                 <div className='grid md:flex md:justify-between bg-back-back basis-1/2 p-6 rounded-lg'>
-                    <div className='text-white/70 grid gap-5 md:gap-0'>
+                    {!ajite && <div className='text-white/70 grid gap-5'>
                         <h3>My Wallet</h3>
                         <h6>Your profile is almost complete!</h6>
                         <button onClick={openModal} className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Connect Wallet</button>
-                    </div>
-                    <div className='mx-auto'>
+                    </div>}
+                    {ajite && <div className='mx-auto'>
                         <svg width={250} height={250}>
                             <VictoryPie
                                 standalone={false}
@@ -113,11 +101,11 @@ const Dashboard = () => {
                                 text={[`$${balance}`, "Total Balance"]}
                             />
                         </svg>
-                    </div>
+                    </div>}
                 </div>
-                <div className='basis-1/2'>
+                {ajite && <div className='basis-1/2'>
                     <ExchangeWallet />
-                </div>
+                </div>}
             </div>
             <Outlet />
         </div>

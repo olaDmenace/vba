@@ -53,6 +53,9 @@ const ConnectExchange = ({ openModal }) => {
             if (data) {
                 setResponse(data.detail)
             }
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000);
             return console.log(data)
         }).catch(err => {
             console.log(err)

@@ -6,11 +6,19 @@ import { useLocation } from 'react-router-dom'
 import { logout } from '../../../store/authSlice'
 import SignalGroup from '../tradeManagers/SignalGroup'
 
+
+// Spinner Loader import
+import { Oval } from 'react-loader-spinner'
+
+
 const SignalGroupList = ({ ...props }) => {
 
 
     // Get user Subscribed Signal Groups
     const [userGroups, setUserGroups] = useState([])
+
+    // State for loading
+    const [isLoading, setIsLoading] = useState(true)
 
     // State for signal_id for POST Request
     const [signal, setSignal] = useState()
@@ -32,6 +40,7 @@ const SignalGroupList = ({ ...props }) => {
                 return
             }
             setUserGroups(res.detail)
+            setIsLoading(false)
             console.log(res)
         }).catch(err => {
         })
@@ -87,7 +96,21 @@ const SignalGroupList = ({ ...props }) => {
     return (
         <div>
             <p className='text-white/70 text-lg'>{title}</p>
-            <div className={location.pathname === '/dashboard/SignalPage' ? 'overflow-x-scroll lg:overflow-x-hidden' : ''}>
+            {isLoading && <div className='mx-auto w-fit text-center pt-10'>
+                <Oval
+                    height={50}
+                    width={50}
+                    color="#00B6FF"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor="#24718C"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                />
+            </div>}
+            {!isLoading && <div className={location.pathname === '/dashboard/SignalPage' ? 'overflow-x-scroll lg:overflow-x-hidden' : ''}>
                 {userGroups.map(userGroups => <SignalGroup
                     key={userGroups?.group_data?.group_id}
                     img={userGroups?.group_url}
@@ -99,7 +122,7 @@ const SignalGroupList = ({ ...props }) => {
                     win_rate={`${userGroups?.win_rate}%`}
                     execute={() => connect(userGroups?.signal_id)}
                 />)}
-            </div>
+            </div>}
         </div>
     )
 }

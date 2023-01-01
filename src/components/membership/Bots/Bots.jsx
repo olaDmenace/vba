@@ -10,42 +10,6 @@ import VBABots from './VBABots'
 
 
 const Bots = () => {
-
-    const [data, setData] = useState([])
-    const [botSummary, setBotSummary] = useState([])
-    const [botID, setBotID] = useState()
-
-    const dispatch = useDispatch()
-    //State for bot summary
-    const [botData, setBotData] = useState(false)
-
-    //Toggle for botData
-    const toggleData = () => {
-        setBotData(true)
-    }
-
-    useEffect(() => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration', {
-            headers: {
-                Authorization: localStorage.getItem('accessToken')
-            }
-        }).then(res => {
-            return res.json()
-        }).then(res => {
-            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
-                dispatch(logout())
-                return
-            }
-            console.log(res)
-            setData(res.detail)
-        }).catch(err => {
-
-        })
-    }, [])
-
-
-
-
     return (
         <div className='space-y-5'>
             {/* <div className='grid lg:flex gap-5'>
@@ -61,7 +25,8 @@ const Bots = () => {
                     <p className='font-semibold text-white/70'>VBA Bots</p>
                     <Link to='/dashboard/Edit' className='text-primary hover:text-primary-light active:text-primary-dark cursor-pointer'>Create New Bot</Link>
                 </div>
-                <div className='grid gap-5 lg:flex'>
+                <VBABots />
+                {/* <div className='grid gap-5 lg:flex'>
                     <div className='basis-1/2'>
                         <div className='rounded border py-5 h-full'>
                             <div className='px-5 text-white/70 border-b'>
@@ -74,7 +39,6 @@ const Bots = () => {
                             </div>
                         </div>
                     </div>
-                    {/* {botData && } */}
                     <div className='basis-1/2'>
                         <VBABotDetails
                             key={data.bot_id}
@@ -83,7 +47,7 @@ const Bots = () => {
                             symbol={data.symbol}
                         />
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
