@@ -46,6 +46,7 @@ const VBABots = (props) => {
             }
             console.log(res)
             setData(res.detail)
+            setBotSummary(res.detail[0])
             setIsLoading(false)
         }).catch(err => {
 
@@ -68,7 +69,7 @@ const VBABots = (props) => {
             console.log('')
             return res.json()
         }).then(res => {
-            setBotSummary(res)
+            setBotSummary(res.detail)
             console.log(res)
         })
         console.log('first')
@@ -106,8 +107,8 @@ const VBABots = (props) => {
                 <div className='border rounded-lg divide-y'>
                     <div className='p-5 gap-5 flex justify-between'>
                         <div>
-                            {/* <h6 className='font-semibold'>{botSummary?.detail?.bot_name}</h6> */}
-                            {/* <p>{`${botSummary?.detail?.bot_action} Bot`}</p> */}
+                            <h6 className='font-semibold'>{botSummary?.bot_name}</h6>
+                            <p>{`${botSummary?.bot_action} Bot`}</p>
                         </div>
                         <div className='flex items-center gap-3'>
                             <PlayCircleIcon className='h-6' />
@@ -117,14 +118,14 @@ const VBABots = (props) => {
                     <div className='grid md:grid-cols-2'>
                         <div className='grid p-5 gap-3'>
                             <span className='flex gap-2'>Exchange: <p>BINANCE</p></span>
-                            {/* <span className='flex gap-2'>Coin Pair: <p>{botSummary.detail.symbol}</p></span> */}
+                            <span className='flex gap-2'>Coin Pair: <p>{botSummary?.symbol}</p></span>
                             <span>Take Profit: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
                             <span>Stop Loss: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
-                            <span>Margin Mode: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
+                            <span>Margin Mode: <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.margin_mode}</button></span>
                         </div>
                         <div className='grid p-5 gap-3'>
-                            <p>Leverage: 213</p>
-                            <p>Entry Mode: Automatic</p>
+                            <span className='flex gap-2'>Leverage: <p>{botSummary?.leverage}</p></span>
+                            <apan className='flex gap-2'>Entry Mode: <p>{botSummary?.entry_method}</p></apan>
                             <span>Win Rate: <button className='text-primary hover:text-primary-light active:text-primary-dark'>65%</button></span>
                         </div>
                     </div>
