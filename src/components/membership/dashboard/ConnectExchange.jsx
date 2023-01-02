@@ -48,6 +48,7 @@ const ConnectExchange = ({ openModal }) => {
                 return res.json()
             } else if (!res.ok) {
                 setResponse('Please chek your details or try again later')
+                return
             }
         }).then(data => {
             if (data) {

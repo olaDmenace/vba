@@ -5,16 +5,20 @@ import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { logout } from '../../../store/authSlice'
 import SignalGroup from '../tradeManagers/SignalGroup'
-import { ChevronLeftIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Popup from '../../utils/Popup'
+import { XMarkIcon } from '@heroicons/react/24/solid'
+
 
 
 
 // Spinner Loader import
-import { Oval } from 'react-loader-spinner'
+// import { Oval } from 'react-loader-spinner'
 
 
-const SignalGroupList = ({ ...props }) => {
+const SignalGroupList = () => {
+
+    const [popup, setPopup] = useState(false)
 
 
     // Get user Subscribed Signal Groups
@@ -55,25 +59,6 @@ const SignalGroupList = ({ ...props }) => {
 
     const connect = function (arg) {
         console.log('first')
-        // fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connectToSignalGroup', {
-        //     method: 'POST',
-        //     headers: {
-        //         Authorization: localStorage.getItem('accessToken')
-        //     },
-        //     body: JSON.stringify({
-        //         signal_id: arg
-        //     })
-        // }).then(res => {
-        //     return res.json()
-        // }).then(res => {
-        //     if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
-        //         dispatch(logout())
-        //         return
-        //     }
-        //     console.log(res)
-        // }).catch(err => {
-        // })
-
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connectToSignalGroup', {
             method: 'POST',
             headers: {
@@ -86,16 +71,32 @@ const SignalGroupList = ({ ...props }) => {
         }).then(res => {
             return res.json()
         }).then(data => {
+            if (data.status === 'error') {
+                setResponse(data.status)
+                setSummary(data.detail)
+                setIcon(<XMarkIcon className='bg-red-500 h-10 rounded place-self-center mx-auto' />)
+                setPopup(true)
+            } else if (data.status === 'success') {
+                setResponse(data.status)
+                setSummary('You have sent a connection request to Fortune Crypto Signals')
+                setIcon(<CheckIcon className='bg-green-600 h-10 rounded place-self-center mx-auto' />)
+                setPopup(true)
+            }
             console.log(data)
-            setResponse(data)
             console.log(data.detail)
         }).catch(err => {
-            // console.log(err)
+            console.log(err)
         })
     }
 
     const [response, setResponse] = useState('')
+    const [summary, setSummary] = useState('')
+    const [icon, setIcon] = useState()
     const navigate = useNavigate()
+
+    const closePopup = () => {
+        setPopup(false)
+    }
 
     return (
         <div className='overflow-x-scroll lg:overflow-hidden'>
@@ -131,7 +132,7 @@ const SignalGroupList = ({ ...props }) => {
                     execute={() => connect(userGroups?.signal_id)}
                 />)}
             </div>} */}
-            <Popup />
+            {popup && <Popup status={response} icon={icon} summary={summary} click={closePopup} />}
         </div>
     )
 }
