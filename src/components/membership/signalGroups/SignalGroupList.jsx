@@ -5,11 +5,13 @@ import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { logout } from '../../../store/authSlice'
 import SignalGroup from '../tradeManagers/SignalGroup'
+import { ChevronLeftIcon } from '@heroicons/react/24/outline'
+import Popup from '../../utils/Popup'
+
 
 
 // Spinner Loader import
 import { Oval } from 'react-loader-spinner'
-import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 
 
 const SignalGroupList = ({ ...props }) => {
@@ -129,6 +131,7 @@ const SignalGroupList = ({ ...props }) => {
                     execute={() => connect(userGroups?.signal_id)}
                 />)}
             </div>} */}
+            <Popup />
         </div>
     )
 }
