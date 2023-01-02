@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../../../store/authSlice'
 import Balance from '../dashboard/Balance'
@@ -30,6 +30,8 @@ const SignalGroup = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
 
+    const { role } = useSelector(state => state.auth.user)
+
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
             headers: {
@@ -42,7 +44,12 @@ const SignalGroup = () => {
                 dispatch(logout())
                 return
             }
+            if (role[0] === 'base_user') {
+                setGroups(false)
+                setManager('Connect with a New Signal Group')
+            }
             setGroupList(res.detail)
+            setGroupDetail(res.detail[0])
             setIsLoading(false)
             // console.log(groupList)
             // console.log(res.detail)
@@ -54,7 +61,7 @@ const SignalGroup = () => {
 
     const [groupDetail, setGroupDetail] = useState([])
     const getDetails = (arg) => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?' + new URLSearchParams({ bot_id: arg }), {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleGroupConfig?' + new URLSearchParams({ group_id: arg }), {
             // body: JSON.stringify({
             //     bot_id: props.id
             // }),
@@ -73,6 +80,7 @@ const SignalGroup = () => {
     }
 
 
+    const [manager, setManager] = useState('Become a Trade Manager')
 
 
     return (
@@ -96,10 +104,13 @@ const SignalGroup = () => {
                 </div>
             </div> */}
             <div className='grid gap-5'>
-                <div className='flex gap-5'>
+                {role[0] === "base_user" ? <div className='flex justify-between'>
+                    <p>Signal Groups</p>
+                    <button className='text-primary hover:text-primary-light active:text-primary-dark'>{manager}</button>
+                </div> : <div className='flex gap-5'>
                     <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>
                     <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>
-                </div>
+                </div>}
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
                         <img className='mx-auto' src={img} alt="" />
@@ -117,7 +128,7 @@ const SignalGroup = () => {
                         </div>
                     </div>
                 </div>}
-                {!groups && <div className='grid lg:grid-flow-col lg:grid-cols-3 gap-5'>
+                {!groups && <div className={role[0] === 'base_user' ? `grid grid-flow-col lg:grid-cols-2 gap-5` : 'grid lg:grid-flow-col lg:grid-cols-3 gap-5'}>
                     <div className='border rounded-lg divide-y py-3'>
                         <p className='pb-3 px-5'>Signal Groups You Belong To:</p>
                         {isLoading && <div className='mx-auto w-fit text-center pt-5'>
@@ -145,15 +156,22 @@ const SignalGroup = () => {
                         </div>}
                     </div>
                     <TotalRevenueTable
-                        key={groupList?.group_data?.group_id}
-                        img={groupList?.group_data?.group_url}
-                        name={groupList?.group_data?.group_name}
-                        visibility={groupList?.group_data?.visibility}
-                        min={`${groupList?.group_data?.min_allocation} USDT`}
-                        max={`${groupList?.group_data?.max_allocation} USDT`}
-                        pfee={groupList?.group_data?.pricing_fee}
+                        key={groupDetail?.group_data?.group_id}
+                        img={groupDetail?.group_data?.group_url}
+                        name={groupDetail?.group_data?.group_name}
+                        visibility={groupDetail?.group_data?.visibility}
+                        min={`${groupDetail?.group_data?.min_allocation} USDT`}
+                        max={`${groupDetail?.group_data?.max_allocation} USDT`}
+                        pfee={groupDetail?.group_data?.pricing_fee}
+                    // key={groupList[0]?.group_data?.group_id}
+                    // img={groupList[0]?.group_data?.group_url}
+                    // name={groupList[0]?.group_data?.group_name}
+                    // visibility={groupList[0]?.group_data?.visibility}
+                    // min={`${groupList[0]?.group_data?.min_allocation} USDT`}
+                    // max={`${groupList[0]?.group_data?.max_allocation} USDT`}
+                    // pfee={groupList[0]?.group_data?.pricing_fee}
                     />
-                    <Memberships />
+                    {role[0] === 'base_user' ? '' : <Memberships />}
                 </div>}
             </div>
         </div>

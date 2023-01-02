@@ -32,7 +32,7 @@ const TotalRevenueTable = (props) => {
                     <h5 className='text-2xl'>{props.max}</h5>
                 </div>
                 <div className='flex gap-3'>
-                    <p>Subscrition</p>
+                    <p>Subscription</p>
                     <button className='text-primary hover:text-primary-light active:text-primary-dark'>{props.pfee}</button>
                 </div>
                 <div>
