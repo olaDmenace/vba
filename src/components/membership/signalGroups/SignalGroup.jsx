@@ -73,7 +73,7 @@ const SignalGroup = () => {
             console.log('')
             return res.json()
         }).then(res => {
-            setGroupDetail(res)
+            setGroupDetail(res.detail)
             console.log(res)
         })
         console.log('first')
