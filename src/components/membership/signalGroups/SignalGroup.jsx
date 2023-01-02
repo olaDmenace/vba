@@ -12,6 +12,11 @@ import SingleSignalGroup from './SingleSignalGroup'
 // import SignalGroupTable from './SignalGroupTable'
 import TotalRevenueTable from './TotalRevenueTable'
 
+
+
+// Spinner Loader import
+import { Oval } from 'react-loader-spinner'
+
 const SignalGroup = () => {
     const [groups, setGroups] = useState(true)
 
@@ -23,6 +28,7 @@ const SignalGroup = () => {
     const [groupList, setGroupList] = useState([])
 
     const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
@@ -37,12 +43,36 @@ const SignalGroup = () => {
                 return
             }
             setGroupList(res.detail)
+            setIsLoading(false)
             // console.log(groupList)
             // console.log(res.detail)
         }).catch(err => {
 
         })
     }, [])
+
+
+    const [groupDetail, setGroupDetail] = useState([])
+    const getDetails = (arg) => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?' + new URLSearchParams({ bot_id: arg }), {
+            // body: JSON.stringify({
+            //     bot_id: props.id
+            // }),
+            headers: {
+                Authorization: localStorage.getItem('accessToken')
+            }
+        }).then(res => {
+            console.log(localStorage.getItem('accessToken'))
+            console.log('')
+            return res.json()
+        }).then(res => {
+            setGroupDetail(res)
+            console.log(res)
+        })
+        console.log('first')
+    }
+
+
 
 
     return (
@@ -90,14 +120,31 @@ const SignalGroup = () => {
                 {!groups && <div className='grid lg:grid-flow-col lg:grid-cols-3 gap-5'>
                     <div className='border rounded-lg divide-y py-3'>
                         <p className='pb-3 px-5'>Signal Groups You Belong To:</p>
-                        {groupList.map(groupList => <SingleSignalGroup
-                            key={groupList?.group_data?.group_id}
-                            img={groupList?.group_data?.group_url}
-                            name={groupList?.group_data?.group_name}
-                            desc={groupList?.group_data?.group_desc}
-                        />)}
+                        {isLoading && <div className='mx-auto w-fit text-center pt-5'>
+                            <Oval
+                                height={50}
+                                width={50}
+                                color="#00B6FF"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                                visible={true}
+                                ariaLabel='oval-loading'
+                                secondaryColor="#24718C"
+                                strokeWidth={2}
+                                strokeWidthSecondary={2}
+                            />
+                        </div>}
+                        {!isLoading && <div>
+                            {groupList.map(groupList => <SingleSignalGroup
+                                onClick={() => getDetails(groupList.group_data.group_id)}
+                                key={groupList?.group_data?.group_id}
+                                img={groupList?.group_data?.group_url}
+                                name={groupList?.group_data?.group_name}
+                                desc={groupList?.group_data?.group_desc}
+                            />)}
+                        </div>}
                     </div>
-                    {groupList.map(groupList => <TotalRevenueTable
+                    <TotalRevenueTable
                         key={groupList?.group_data?.group_id}
                         img={groupList?.group_data?.group_url}
                         name={groupList?.group_data?.group_name}
@@ -105,7 +152,7 @@ const SignalGroup = () => {
                         min={`${groupList?.group_data?.min_allocation} USDT`}
                         max={`${groupList?.group_data?.max_allocation} USDT`}
                         pfee={groupList?.group_data?.pricing_fee}
-                    />)}
+                    />
                     <Memberships />
                 </div>}
             </div>

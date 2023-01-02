@@ -82,7 +82,7 @@ const VBABots = (props) => {
                     <div className='border-b-white/70 border-b'>
                         <p className='font-semibold px-5 py-3'>Your VBA Bots</p>
                     </div>
-                    {isLoading && <div className='mx-auto w-fit text-center'>
+                    {isLoading && <div className='mx-auto w-fit text-center pt-5'>
                         <Oval
                             height={50}
                             width={50}
