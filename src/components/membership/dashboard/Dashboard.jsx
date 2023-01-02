@@ -31,7 +31,7 @@ const Dashboard = () => {
     const dispatch = useDispatch()
 
     // State for collecting and storing balance in pie chart
-    const [balance, setBalancce] = useState('')
+    const [balance, setBalance] = useState('')
 
     // State for showing balance if wallet has been connected
     const [ajite, setAjite] = useState(false)
@@ -48,7 +48,7 @@ const Dashboard = () => {
                 dispatch(logout())
                 return
             } else if (res.status === 'success') {
-                setBalancce(res.detail.balances)
+                setBalance(res.detail.balances)
                 setAjite(true)
             }
         }).catch(err => {
@@ -98,7 +98,7 @@ const Dashboard = () => {
                                 ]}
                                 x={250 * 0.5}
                                 y={250 * 0.525}
-                                text={[`$${balance}`, "Total Balance"]}
+                                text={[`$${balance[2]?.balance}`, "Total Balance"]}
                             />
                         </svg>
                     </div>}
