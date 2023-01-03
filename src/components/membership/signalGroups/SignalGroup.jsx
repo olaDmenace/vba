@@ -106,7 +106,7 @@ const SignalGroup = () => {
             <div className='grid gap-5'>
                 {role[0] === "base_user" ? <div className='flex justify-between'>
                     <p>Signal Groups</p>
-                    <button className='text-primary hover:text-primary-light active:text-primary-dark'>{manager}</button>
+                    <Link to={'/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>{manager}</Link>
                 </div> : <div className='flex gap-5'>
                     <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>
                     <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>

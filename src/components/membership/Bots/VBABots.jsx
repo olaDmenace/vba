@@ -130,7 +130,7 @@ const VBABots = (props) => {
                         </div>
                     </div>
                     <div className='p-5 space-y-5 md:space-y-0 md:flex items-center gap-5'>
-                        <button className='bg-[#76CEF11A] px-3 py-2 rounded'>Edit Bot</button>
+                        <button className='bg-[#76CEF11A] px-3 py-2 rounded'>Active</button>
                         <div className='flex gap-3'>
                             <ArrowPathRoundedSquareIcon className='w-10 h-6' />
                             <p>Firing Indefinitely</p>
