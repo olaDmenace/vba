@@ -117,10 +117,10 @@ const VBABots = (props) => {
                     </div>
                     <div className='grid md:grid-cols-2'>
                         <div className='grid p-5 gap-3'>
-                            <span className='flex gap-2'>Exchange: <p>BINANCE</p></span>
-                            <span className='flex gap-2'>Coin Pair: <p>{botSummary?.symbol}</p></span>
-                            <span>Take Profit: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
-                            <span>Stop Loss: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
+                            <span className='flex gap-2'>Signan Group: <p>BINANCE</p></span>
+                            <span className='flex gap-2'>Symbol: <p>{botSummary?.symbol}</p></span>
+                            <span>Risk Amount: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
+                            <span>Position Capital: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
                             <span>Margin Mode: <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.margin_mode}</button></span>
                         </div>
                         <div className='grid p-5 gap-3'>

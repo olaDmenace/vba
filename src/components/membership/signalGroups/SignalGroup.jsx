@@ -30,7 +30,7 @@ const SignalGroup = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
 
-    const { role } = useSelector(state => state.auth.user)
+    const role = useSelector(state => state.auth.trade_manager)
 
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
@@ -44,7 +44,7 @@ const SignalGroup = () => {
                 dispatch(logout())
                 return
             }
-            if (role[0] === 'base_user') {
+            if (role === false) {
                 setGroups(false)
                 setManager('Connect with a New Signal Group')
             }
@@ -104,7 +104,7 @@ const SignalGroup = () => {
                 </div>
             </div> */}
             <div className='grid gap-5'>
-                {role[0] === "base_user" ? <div className='flex justify-between'>
+                {role === false ? <div className='flex justify-between'>
                     <p>Signal Groups</p>
                     <Link to={'/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>{manager}</Link>
                 </div> : <div className='flex gap-5'>
@@ -128,7 +128,7 @@ const SignalGroup = () => {
                         </div>
                     </div>
                 </div>}
-                {!groups && <div className={role[0] === 'base_user' ? `grid grid-flow-col lg:grid-cols-2 gap-5` : 'grid lg:grid-flow-col lg:grid-cols-3 gap-5'}>
+                {!groups && <div className={role === false ? `grid grid-flow-col lg:grid-cols-2 gap-5` : 'grid lg:grid-flow-col lg:grid-cols-3 gap-5'}>
                     <div className='border rounded-lg divide-y py-3'>
                         <p className='pb-3 px-5'>Signal Groups You Belong To:</p>
                         {isLoading && <div className='mx-auto w-fit text-center pt-5'>
@@ -171,7 +171,7 @@ const SignalGroup = () => {
                     // max={`${groupList[0]?.group_data?.max_allocation} USDT`}
                     // pfee={groupList[0]?.group_data?.pricing_fee}
                     />
-                    {role[0] === 'base_user' ? '' : <Memberships />}
+                    {role === false ? '' : <Memberships />}
                 </div>}
             </div>
         </div>
