@@ -1,7 +1,8 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline"
+import EditBot0 from "./EditBot0"
 import EditBot1 from './EditBot1'
 import EditBot2 from './EditBot2'
-import EditBot3 from "./EditBot3"
+// import EditBot3 from "./EditBot3"
 import { useState } from 'react'
 
 const EditBot = () => {
@@ -10,11 +11,11 @@ const EditBot = () => {
 
     const showForm = () => {
         if (form === 0) {
-            return (<EditBot1 />)
+            return (<EditBot0 />)
         } else if (form === 1) {
-            return (<EditBot2 />)
+            return (<EditBot1 />)
         } else {
-            return (<EditBot3 />)
+            return (<EditBot2 />)
         }
     }
     return (

@@ -10,7 +10,7 @@ const EditBot1 = () => {
         <div>
             <div className='text-white/70 space-y-10 lg:space-y-0 lg:flex lg:justify-between border-b pb-5'>
                 <EditBotHeader number={'1'} title={'Compose Your Portfolio'} desc={'Define the set of coins that your bot should monitor.'} />
-                <Currency />
+                {/* <Currency /> */}
             </div>
             <div className='py-5 grid lg:grid-cols-5 gap-5'>
                 <div className='grid gap-5 lg:col-span-3'>

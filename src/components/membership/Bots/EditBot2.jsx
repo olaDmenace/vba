@@ -12,7 +12,7 @@ const EditBot2 = () => {
         <div className='text-white/70 grid gap-5'>
             <div className='text-white/70 space-y-10 lg:space-y-0 lg:flex lg:justify-between border-b pb-5'>
                 <EditBotHeader number={'2'} title={'Automate Settings'} desc={'Define the entry and exit automation.'} />
-                <Currency />
+                {/* <Currency /> */}
             </div>
             <div className='grid gap-5 lg:grid-cols-2'>
                 <AutoInvestEditBot2 />
