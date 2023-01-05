@@ -1,11 +1,28 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import React from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 import CoinCard from './CoinCard'
 import Currency from './Currency'
 import EditBotHeader from './EditBotHeader'
 import SelectedCoin from './SelectedCoin'
 
 const EditBot1 = () => {
+
+    const [coinPair, setCoinPair] = useState([])
+
+    useEffect(() => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/FetchTradePairs')
+            .then(res => {
+                return res.json()
+            }).then(data => {
+                console.log(data)
+                setCoinPair(data.detail)
+            }).catch(err => {
+                console.log(err)
+            })
+    }, [])
+
     return (
         <div>
             <div className='text-white/70 space-y-10 lg:space-y-0 lg:flex lg:justify-between border-b pb-5'>
@@ -22,10 +39,7 @@ const EditBot1 = () => {
                         <input className='bg-back-back w-full h-12 rounded-lg px-2 text-white/70 pl-12' placeholder='Filter Items' type="search" name="" id="" />
                     </div>
                     <div className='grid lg:grid-cols-2 gap-5'>
-                        <CoinCard />
-                        <CoinCard />
-                        <CoinCard />
-                        <CoinCard />
+                        {coinPair.map(coinPair => <CoinCard logo={coinPair.coin_logo} symbol={coinPair.symbol} name={coinPair.name} />)}
                     </div>
                 </div>
                 <div className='border rounded-lg p-5 text-white/70 grid gap-5 lg:col-span-2'>
