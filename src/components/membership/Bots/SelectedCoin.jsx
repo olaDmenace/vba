@@ -15,13 +15,13 @@ const SelectedCoin = () => {
                 </div>
                 <TrashIcon className='h-6' />
             </div>
-            <div className='flex justify-between items-baseline'>
+            {/* <div className='flex justify-between items-baseline'>
                 <div className='flex gap-3'>
                     <button className='py-3 px-4 rounded bg-[#76CEF11A]'>Mineable</button>
                     <button className='py-3 px-4 rounded bg-[#76CEF11A]'>+6</button>
                 </div>
                 <p className='text-lg font-medium'>#Rank 7</p>
-            </div>
+            </div> */}
         </div>
     )
 }

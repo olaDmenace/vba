@@ -28,8 +28,8 @@ const EditBot = () => {
                         <ChevronLeftIcon className='h-6' />
                     </div>
                     <div>
-                        <h6 className="font-bold text-2xl">Edit Bot</h6>
-                        <p>You are editing Bot EMA Cross 50  200 + ADX (Long)</p>
+                        <h6 className="font-bold text-2xl">Create Bot</h6>
+                        {/* <p>You are editing Bot EMA Cross 50  200 + ADX (Long)</p> */}
                     </div>
                 </div>
                 <div className="hidden lg:block">

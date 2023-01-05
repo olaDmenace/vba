@@ -117,9 +117,9 @@ const VBABots = (props) => {
                     </div>
                     <div className='grid md:grid-cols-2'>
                         <div className='grid p-5 gap-3'>
-                            <span className='flex gap-2'>Signan Group: <p>BINANCE</p></span>
+                            <span className='flex gap-2'>Signal Group: <p>BINANCE</p></span>
                             <span className='flex gap-2'>Symbol: <p>{botSummary?.symbol}</p></span>
-                            <span>Risk Amount: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
+                            <span>Risk Amount: <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.risk_amount}</button></span>
                             <span>Position Capital: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
                             <span>Margin Mode: <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.margin_mode}</button></span>
                         </div>
@@ -130,7 +130,7 @@ const VBABots = (props) => {
                         </div>
                     </div>
                     <div className='p-5 space-y-5 md:space-y-0 md:flex items-center gap-5'>
-                        <button className='bg-[#76CEF11A] px-3 py-2 rounded'>Active</button>
+                        <button className='bg-[#76CEF11A] px-3 py-2 rounded'>{botSummary.bot_active === false ? 'Inactive' : 'Active'}</button>
                         <div className='flex gap-3'>
                             <ArrowPathRoundedSquareIcon className='w-10 h-6' />
                             <p>Firing Indefinitely</p>

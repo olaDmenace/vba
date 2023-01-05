@@ -1,10 +1,11 @@
-import { ChevronLeftIcon } from '@heroicons/react/24/solid'
+import { CheckIcon, ChevronLeftIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../../store/authSlice'
 import CreateSignal0 from './CreateSignal0'
 import CreateSignal1 from './CreateSignal1'
+import Popup from '../../utils/Popup'
 
 
 const CreateSignal = () => {
@@ -21,31 +22,35 @@ const CreateSignal = () => {
     const [formData, setFormData] = useState({
         group_name: '',
         group_desc: '',
-        group_url: '',
-        pricing_fee: '',
-        min_allocation: '',
+        group_url: 'https://res.cloudinary.com/dgpnmwhra/image/upload/v1655242003/neutron_images/dash_mqaxfv.png',
+        pricing_fee: 0,
+        min_allocation: 0,
         max_allocation: '',
         pricing_type: '',
         privacy: ''
     })
 
+    const [response, setResponse] = useState('')
+    const [show, setShow] = useState(false)
     const dispatch = useDispatch()
     const submitHandler = () => {
         console.log(formData)
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups', {
-            method: 'POST',
-            headers: {
-                Authorization: localStorage.getItem('accessToken')
-            },
-            body: {
-                formData
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: localStorage.getItem('accessToken')
+                },
+                body: JSON.stringify({
+                    ...formData
+                })
             }
-        }).then(res => {
+        ).then(res => {
             return res.json()
         }).then(data => {
-            if (data.detail.toLowerCase() === 'token expired' && data.status === 'fail') {
-                dispatch(logout())
-            }
+            setResponse(data)
+            setShow(true)
             console.log(data)
         }).catch(err => {
             console.log(err)
@@ -75,10 +80,10 @@ const CreateSignal = () => {
                             <p className={form === 1 ? `rounded-full bg-primary h-10 w-10 text-center text-3xl` : `rounded-full bg-[#FFFFFF1A] h-10 w-10 text-center text-3xl`}>2</p>
                             <p>Configuration</p>
                         </div>
-                        <div className="grid justify-items-center">
+                        {/* <div className="grid justify-items-center">
                             <p className={form === 2 ? `rounded-full bg-primary h-10 w-10 text-center text-3xl` : `rounded-full bg-[#FFFFFF1A] h-10 w-10 text-center text-3xl`}>3</p>
                             <p>Contact</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -91,6 +96,7 @@ const CreateSignal = () => {
                     {form === 1 ? 'Submit' : 'Next'}
                 </button>
             </div>
+            {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => setShow(false)} />}
         </div>
     )
 }
