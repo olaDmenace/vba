@@ -1,15 +1,22 @@
 import { CameraIcon } from '@heroicons/react/24/outline'
 import React from 'react'
+import { useState } from 'react'
 import EditBotHeader from '../Bots/EditBotHeader'
 
 const CreateSignal0 = () => {
+    const [file, setFile] = useState([])
+    // const [upload, setUpload] = useState(true)
+
+    const fileUpload = (e) => {
+        setFile(URL.createObjectURL(e.target.file[0]))
+    }
     return (
         <div className='text-white/70 grid gap-10'>
             <EditBotHeader number={'1'} title={'Group Description'} desc={'Enter your service description, details about your signals and trading strategy.'} />
             <div className='grid gap-5'>
                 <label className='cursor-pointer w-fit' for="upload">
                     <CameraIcon className='h-32 border border-dashed rounded-full p-10' />
-                    <input type="file" name="" id="upload" className='hidden' />
+                    <input type="file" name="" onChange={fileUpload} id="upload" className='hidden' />
                 </label>
                 <label className='space-y-3' htmlFor="">
                     Group Name <br />

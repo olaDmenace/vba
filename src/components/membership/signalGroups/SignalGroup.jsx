@@ -30,7 +30,7 @@ const SignalGroup = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
 
-    const role = useSelector(state => state.auth.trade_manager)
+    const role = useSelector(state => state.auth.user.trade_manager)
 
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration', {
@@ -44,10 +44,9 @@ const SignalGroup = () => {
                 dispatch(logout())
                 return
             }
-            if (role === false) {
-                setGroups(false)
-                setManager('Connect with a New Signal Group')
-            }
+            // if (role === false) {
+            //     setGroups(false)
+            // }
             setGroupList(res.detail)
             setGroupDetail(res.detail[0])
             setIsLoading(false)
@@ -57,7 +56,6 @@ const SignalGroup = () => {
 
         })
     }, [])
-
 
     const [groupDetail, setGroupDetail] = useState([])
     const getDetails = (arg) => {
@@ -78,9 +76,6 @@ const SignalGroup = () => {
         })
         console.log('first')
     }
-
-
-    const [manager, setManager] = useState('Become a Trade Manager')
 
 
     return (
@@ -104,13 +99,14 @@ const SignalGroup = () => {
                 </div>
             </div> */}
             <div className='grid gap-5'>
-                {role === false ? <div className='flex justify-between'>
-                    <p>Signal Groups</p>
-                    <Link to={'/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>{manager}</Link>
-                </div> : <div className='flex gap-5'>
-                    <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>
-                    <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>
-                </div>}
+                <div className='flex justify-between'>
+                    {role === true ?
+                        <div className='flex gap-5'>
+                            <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>
+                            <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>
+                        </div> : <p>Signal Groups</p>}
+                    <Link to={role === true ? '/dashboard/CreateSignal' : '/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : 'Connect with a Signal Group'}</Link>
+                </div>
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
                         <img className='mx-auto' src={img} alt="" />

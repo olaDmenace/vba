@@ -11,7 +11,7 @@ const CreateSignal = () => {
     const activeform = () => {
         if (form === 0) {
             return <CreateSignal0 />
-        } else if (form === 1) {
+        } else {
             return <CreateSignal1 />
         }
     }
@@ -50,7 +50,7 @@ const CreateSignal = () => {
             <div className='flex gap-5'>
                 <button onClick={() => { setForm((form) => form - 1) }} disabled={form === 0} className='py-3 px-4 rounded bg-back-back text-white/70'>Back</button>
                 <button onClick={() => { setForm((form) => form + 1) }} className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
-                    {form === 2 ? 'Submit' : 'Next'}
+                    {form === 1 ? 'Submit' : 'Next'}
                 </button>
             </div>
         </div>
