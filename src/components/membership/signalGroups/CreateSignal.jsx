@@ -2,11 +2,19 @@ import { ChevronLeftIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { useState } from 'react'
 import CreateSignal0 from './CreateSignal0'
+import CreateSignal1 from './CreateSignal1'
 
 
 const CreateSignal = () => {
 
     const [form, setForm] = useState(0)
+    const activeform = () => {
+        if (form === 0) {
+            return <CreateSignal0 />
+        } else if (form === 1) {
+            return <CreateSignal1 />
+        }
+    }
     return (
         <div className='grid gap-10'>
             <div className="grid gap-5 lg:flex justify-between">
@@ -37,7 +45,7 @@ const CreateSignal = () => {
                 </div>
             </div>
             <div>
-                <CreateSignal0 />
+                {activeform()}
             </div>
             <div className='flex gap-5'>
                 <button onClick={() => { setForm((form) => form - 1) }} disabled={form === 0} className='py-3 px-4 rounded bg-back-back text-white/70'>Back</button>
