@@ -16,7 +16,6 @@ const EditBot0 = () => {
             return res.json()
         }).then(data => {
             setUserGroups(data.detail)
-            console.log(data)
         })
     }, [])
 
@@ -49,7 +48,7 @@ const EditBot0 = () => {
                     What Signal Group are you creating this Bot for?
                     <select className='h-10 px-2 bg-transparent border rounded-lg' name="" id="">
                         <option value=""></option>
-                        {userGroups.map(userGroups => <option className='text-black' value="">{userGroups.group_name}</option>)}
+                        {userGroups.map(userGroups => <option className='text-black' value="" key={userGroups.signal_id}>{userGroups.group_name}</option>)}
                     </select>
                     {/* <input className='h-10 px-2 bg-transparent border rounded-lg' type="text" name="" id="" /> */}
                 </label>

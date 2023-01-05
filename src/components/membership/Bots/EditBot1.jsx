@@ -10,6 +10,7 @@ import SelectedCoin from './SelectedCoin'
 const EditBot1 = () => {
 
     const [coinPair, setCoinPair] = useState([])
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/exchange/FetchTradePairs')
@@ -36,10 +37,10 @@ const EditBot1 = () => {
                     </select>
                     <div className='relative'>
                         <MagnifyingGlassIcon className='text-white/70 h-6 absolute top-3 left-2' />
-                        <input className='bg-back-back w-full h-12 rounded-lg px-2 text-white/70 pl-12' placeholder='Filter Items' type="search" name="" id="" />
+                        <input className='bg-back-back w-full h-12 rounded-lg px-2 text-white/70 pl-12' onChange={(e) => setSearch(e.target.value)} placeholder='Filter Items' type="search" name="" id="" />
                     </div>
                     <div className='grid lg:grid-cols-2 gap-5'>
-                        {coinPair.map(coinPair => <CoinCard logo={coinPair.coin_logo} symbol={coinPair.symbol} name={coinPair.name} />)}
+                        {coinPair.filter((coinPair) => { return search.toLowerCase() === '' ? coinPair : coinPair.symbol.toLowerCase().includes(search) }).map(coinPair => <CoinCard key={coinPair.symbol} logo={coinPair.coin_logo} symbol={coinPair.symbol} name={coinPair.name} />)}
                     </div>
                 </div>
                 <div className='border rounded-lg p-5 text-white/70 grid gap-5 lg:col-span-2'>
