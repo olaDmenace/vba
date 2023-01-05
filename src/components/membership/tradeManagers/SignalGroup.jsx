@@ -94,7 +94,7 @@ const SignalGroup = (props) => {
                             <p className='w-32'>{userGroups?.signals}</p>
                         </td>
                         <td>
-                            <Button Execute={props.execute} text={'Connect'} />
+                            <Button text={'Connect'} Execute={() => props.execute(userGroups?.signal_id)} />
                         </td>
                     </tr>)}
                 </table>

@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import EditBotHeader from '../Bots/EditBotHeader'
 
-const CreateSignal0 = () => {
+const CreateSignal0 = ({ formData, setFormData }) => {
     const [file, setFile] = useState([])
     const [upload, setUpload] = useState(false)
 
@@ -21,13 +21,13 @@ const CreateSignal0 = () => {
                     <input type="file" name="group_url" onChange={fileUpload} id="group_id" className='hidden' />
                 </label>}
                 {upload && <img className='object-cover w-1/3' onClick={() => setUpload(false)} src={file} alt="" />}
-                <label className='space-y-3' htmlFor="">
+                <label className='space-y-3' htmlFor="group_name">
                     Group Name <br />
-                    <input className='h-10 px-2 bg-[#2C2C2C] rounded-lg w-2/3' type="text" name="group_name" id="" />
+                    <input className='h-10 px-2 bg-[#2C2C2C] rounded-lg w-2/3' type="text" name="group_name" id="group_name" value={formData.group_name} onChange={(e) => setFormData({ ...formData, group_name: e.target.value })} />
                 </label>
-                <label className='space-y-3' htmlFor="">
+                <label className='space-y-3' htmlFor="group_desc">
                     Group Discription <br />
-                    <textarea className='px-2 bg-[#2c2c2c] rounded-lg w-2/3' name="group_desc" id="" cols="30" rows="10"></textarea>
+                    <textarea className='p-2 bg-[#2c2c2c] rounded-lg w-2/3' name="group_desc" id="group_desc" cols="30" rows="10" value={formData.group_desc} onChange={(e) => setFormData({ ...formData, group_desc: e.target.value })}></textarea>
                 </label>
             </div>
         </div>

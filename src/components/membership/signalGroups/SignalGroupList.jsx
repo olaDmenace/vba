@@ -33,32 +33,33 @@ const SignalGroupList = () => {
     // Dispatch for token expiry
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/sigGroups', {
-            method: 'GET',
-            headers: {
-                Authorization: localStorage.getItem('accessToken')
-            }
-        }).then(res => {
-            return res.json()
-        }).then(res => {
-            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
-                dispatch(logout())
-                return
-            }
-            setUserGroups(res.detail)
-            setIsLoading(false)
-            console.log(res)
-        }).catch(err => {
-        })
-    }, [])
+    // useEffect(() => {
+    //     fetch('https://server.cryptosignal.metrdev.com/api/v1/user/sigGroups', {
+    //         method: 'GET',
+    //         headers: {
+    //             Authorization: localStorage.getItem('accessToken')
+    //         }
+    //     }).then(res => {
+    //         return res.json()
+    //     }).then(res => {
+    //         if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+    //             dispatch(logout())
+    //             return
+    //         }
+    //         setUserGroups(res.detail)
+    //         setIsLoading(false)
+    //         console.log(res)
+    //     }).catch(err => {
+    //     })
+    // }, [])
 
     const location = useLocation()
 
     const title = location.pathname === '/dashboard/SignalPage' ? 'Signal Group' : ''
 
     const connect = function (arg) {
-        console.log('first')
+        console.log(arg)
+        // console.log(userGroups?.signal_id)
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/connectToSignalGroup', {
             method: 'POST',
             headers: {
@@ -118,7 +119,7 @@ const SignalGroupList = () => {
                     strokeWidthSecondary={2}
                 />
             </div>} */}
-            <SignalGroup execute={() => connect(userGroups?.signal_id)} />
+            <SignalGroup execute={connect} />
             {/* {!isLoading && <div className={location.pathname === '/dashboard/SignalPage' ? 'overflow-x-scroll lg:overflow-x-hidden' : ''}>
                 {userGroups.map(userGroups => <SignalGroup
                     key={userGroups?.group_data?.group_id}
