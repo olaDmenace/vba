@@ -41,15 +41,17 @@ const Dashboard = () => {
                 Authorization: localStorage.getItem('accessToken')
             }
         }).then(res => {
-            return res.json()
+            if (res.ok) {
+                return res.json()
+            }
         }).then(res => {
             console.log(res)
             if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
                 dispatch(logout())
                 return
-            } else if (res.status === 'success') {
-                setBalance(res.detail.balances)
+            } else if (res.status === 'success' && res.detail.message !== 'keys unavailable for user') {
                 setAjite(true)
+                setBalance(res.detail.balances)
             }
         }).catch(err => {
             console.log(err)

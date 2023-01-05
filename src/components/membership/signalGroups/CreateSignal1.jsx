@@ -10,11 +10,11 @@ const CreateSignal1 = () => {
                     <p>Privacy</p>
                     <div className='flex gap-10'>
                         <label className='flex gap-3 justify-start' htmlFor="">
-                            <input type="radio" name="" id="" />
+                            <input type="radio" name="privacy" id="" />
                             Private
                         </label>
                         <label className='flex gap-3 justify-start' htmlFor="">
-                            <input type="radio" name="" id="" />
+                            <input type="radio" name="privacy" id="" />
                             Public
                         </label>
                     </div>
@@ -23,15 +23,15 @@ const CreateSignal1 = () => {
                     <p>Subscription Type</p>
                     <div className='flex gap-10'>
                         <label className='flex gap-3 justify-start' htmlFor="">
-                            <input type="radio" name="" id="" />
+                            <input type="radio" name="pricing_type" id="" />
                             Free
                         </label>
                         <label className='flex gap-3 justify-start' htmlFor="">
-                            <input type="radio" name="" id="" />
+                            <input type="radio" name="pricing_type" id="" />
                             Monthly
                         </label>
                         <label className='flex gap-3 justify-start' htmlFor="">
-                            <input type="radio" name="" id="" />
+                            <input type="radio" name="pricing_type" id="" />
                             Yearly
                         </label>
                     </div>
@@ -40,7 +40,7 @@ const CreateSignal1 = () => {
                     <p>Subscription</p>
                     <label htmlFor="">
                         Subscription Price <br />
-                        <input className='h-10 w-2/3 lg:w-1/3 px-2 rounded-lg bg-transparent border border-white/70' type="text" name="" id="" />
+                        <input className='h-10 w-2/3 lg:w-1/3 px-2 rounded-lg bg-transparent border border-white/70' type="text" name="pricing_fee" id="" />
                     </label>
                 </div>
                 <div className='grid gap-5 p-5'>
@@ -48,11 +48,11 @@ const CreateSignal1 = () => {
                     <div className='flex gap-10'>
                         <label htmlFor="">
                             Minimum Allocation <br />
-                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" name="" id="" />
+                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" name="min_allocation" id="" />
                         </label>
                         <label htmlFor="">
                             Maxximum Allocation <br />
-                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" name="" id="" />
+                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" name="max_allocation" id="" />
                         </label>
                     </div>
                 </div>
