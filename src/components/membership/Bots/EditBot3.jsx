@@ -6,7 +6,7 @@ const EditBot3 = () => {
     return (
         <div className='grid gap-5 text-white/70'>
             <div className='text-white/70 space-y-10 lg:space-y-0 border-b pb-5'>
-                <EditBotHeader number={'3'} title={'Launch'} desc={'Review your data, define the recurrency and your bot will be ready to be launched'} />
+                <EditBotHeader number={'4'} title={'Launch'} desc={'Review your data, define the recurrency and your bot will be ready to be launched'} />
             </div>
             <div className='p-5 bg-back-back rounded-lg space-y-5'>
                 <h6 className='text-lg font-semibold'>Review your strategy</h6>

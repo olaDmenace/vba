@@ -14,6 +14,7 @@ import Signal from "./components/membership/signalGroups/SignalGroup";
 import SignalManagement from "./components/membership/signalGroups/SignalManagement";
 import MyTrades from "./components/membership/myTrades/MyTrades";
 import SignalPage from './components/membership/signalGroups/SignalGroupList'
+import CreateSignal from "./components/membership/signalGroups/CreateSignal";
 
 
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -49,6 +50,7 @@ function App() {
             <Route path='SignalPage' element={<SignalPage />} />
             <Route path="SignalManagement" element={<SignalManagement />} />
             <Route path='MyTrades' element={<MyTrades />} />
+            <Route path='CreateSignal' element={<CreateSignal />} />
           </Route>
         </Routes>
       </BrowserRouter>
