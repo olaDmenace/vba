@@ -22,6 +22,7 @@ const EditBot0 = ({ formData, setFormData }) => {
                 dispatch(logout())
                 return
             }
+            console.log(data.detail)
             setUserGroups(data.detail)
         })
     }, [])
@@ -54,9 +55,9 @@ const EditBot0 = ({ formData, setFormData }) => {
                 </label>
                 <label className='grid gap-3' htmlFor="group_id">
                     What Signal Group are you creating this Bot for?
-                    <select className='h-10 px-2 bg-transparent border rounded-lg text-white/70' name="group_id" onChange={(e) => { setFormData({ ...formData, group_id: e.target.value }) }}>
+                    <select className='h-10 px-2 bg-transparent border rounded-lg text-white/70' name="group_id" onChange={(e) => { console.log(formData.group_id); setFormData({ ...formData, group_id: e.target.value }) }}>
                         <option value=""></option>
-                        {userGroups.map(userGroups => <option className='text-black' value={userGroups?.signal_id} key={userGroups.signal_id}>{userGroups.group_name}</option>)}
+                        {userGroups.map(item => <option className='text-black' value={item?.signal_id} key={item?.signal_id}>{item.group_name}</option>)}
                     </select>
                     {/* <input className='h-10 px-2 bg-transparent border rounded-lg' type="text" name="" id="" /> */}
                 </label>

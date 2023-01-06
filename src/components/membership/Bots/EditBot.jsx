@@ -32,6 +32,7 @@ const EditBot = () => {
     const [response, setResponse] = useState('')
 
     const handleSubmit = () => {
+        console.log(typeof (formData))
         fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageBotConfiguration', {
             method: 'POST',
             headers: {
@@ -43,14 +44,19 @@ const EditBot = () => {
             })
         }).then(res => {
             return res.json()
-        }).then(res => {
-            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+        }).then(data => {
+            if (data.status === 'fail' && data?.detail?.toLowerCase() === 'token expired') {
                 dispatch(logout())
                 return
             }
-            setResponse(res)
+            setResponse(data)
             setShow(true)
-            console.log(res)
+            if (data.detail === "bot created" && data.status === "success") {
+                setTimeout(() => {
+                    navigate('/dashboard/Bots')
+                }, 3000);
+            }
+            console.log(data)
         }).catch(err => {
 
         })

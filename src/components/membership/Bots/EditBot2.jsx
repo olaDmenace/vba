@@ -26,7 +26,7 @@ const EditBot2 = ({ formData, setFormData }) => {
                         <div className='flex items-center gap-5'>
                             <div className='flex items-center relative rounded-lg border w-2/5 pr-3'>
                                 <p className='text-lg absolute left-2'>$</p>
-                                <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="risk_amount" id="risk_amount" value={formData.risk_amount} onChange={(e) => { setFormData({ ...formData, risk_amount: e.target.value }) }} />
+                                <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" min={1} max={100} name="leverage" id="leverage" value={formData.leverage} onChange={(e) => { setFormData({ ...formData, leverage: +e.target.value }) }} />
                             </div>
                         </div>
                         <div className='flex gap-3'>
@@ -51,7 +51,7 @@ const EditBot2 = ({ formData, setFormData }) => {
                     <div>
                         <div className='flex items-center relative rounded-lg border w-2/5 pr-3'>
                             <p className='text-lg absolute left-2'>$</p>
-                            <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="leverage" id="leverage" value={formData.leverage} onChange={(e) => { setFormData({ ...formData, leverage: e.target.value }) }} />
+                            <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="risk_amount" id="risk_amount" value={formData.risk_amount} onChange={(e) => { setFormData({ ...formData, risk_amount: +e.target.value }) }} />
                         </div>
                     </div>
                     <div className='grid gap-5'>
@@ -83,7 +83,7 @@ const EditBot2 = ({ formData, setFormData }) => {
                             </label>
                             <label className='flex gap-3' htmlFor="crossed">
                                 <input type="radio" name="margin_mode" id="crossed" value={formData.margin_mode} onChange={(e) => { setFormData({ ...formData, margin_mode: e.target.id }) }} />
-                                Cross
+                                Crossed
                             </label>
                         </div>
                     </div>

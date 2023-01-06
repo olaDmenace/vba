@@ -40,11 +40,11 @@ const EditBot3 = ({ formData, setFormData }) => {
                 </div>
                 <div className='flex gap-10'>
                     <label className='flex gap-3' htmlFor="isolated">
-                        <input type="radio" name="margin_mode" id="isolated" value={formData.margin_mode} />
+                        <input type="radio" name="margin_mode" id="isolated" defaultValue={formData.margin_mode} />
                         Isolated
                     </label>
                     <label className='flex gap-3' htmlFor="crossed">
-                        <input type="radio" name="margin_mode" id="crossed" value={formData.margin_mode} />
+                        <input type="radio" name="margin_mode" id="crossed" defaultValue={formData.margin_mode} />
                         Cross
                     </label>
                 </div>
