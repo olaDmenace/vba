@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../store/authSlice'
 import EditBotHeader from './EditBotHeader'
 
 const EditBot0 = () => {
 
     const [userGroups, setUserGroups] = useState([])
+    const dispatch = useDispatch()
 
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups', {
@@ -15,9 +18,14 @@ const EditBot0 = () => {
         }).then(res => {
             return res.json()
         }).then(data => {
+            if (data.status === 'fail' && data?.detail?.toLowerCase() === 'token expired') {
+                dispatch(logout())
+                return
+            }
             setUserGroups(data.detail)
         })
     }, [])
+
 
     return (
         <div className='text-white/70 grid gap-5'>
@@ -44,9 +52,9 @@ const EditBot0 = () => {
                     Name Your Bot
                     <input className='h-10 px-2 bg-transparent border rounded-lg' type="text" name="bot_name" id="bot_name" />
                 </label>
-                <label className='grid gap-3' htmlFor="">
+                <label className='grid gap-3' htmlFor="group_id">
                     What Signal Group are you creating this Bot for?
-                    <select className='h-10 px-2 bg-transparent border rounded-lg' name="" id="">
+                    <select className='h-10 px-2 bg-transparent border rounded-lg' name="group_id" id={userGroups.signal_id}>
                         <option value=""></option>
                         {userGroups.map(userGroups => <option className='text-black' value="" key={userGroups.signal_id}>{userGroups.group_name}</option>)}
                     </select>

@@ -15,12 +15,12 @@ const EditSummary = () => {
                 <p>Exchange:</p>
                 <p> Binance</p>
             </div>
-            <div className='flex'>
-                <p>Portfolio:</p>
+            <div className='flex gap-2'>
+                <p>Leverage:</p>
                 <p>BTC, ETH, ADA, Link, AVAX</p>
             </div>
             <div className='flex gap-2'>
-                <p>Position:</p>
+                <p>Entry Mode:</p>
                 <p>Long</p>
             </div>
         </div>

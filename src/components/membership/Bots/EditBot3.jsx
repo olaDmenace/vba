@@ -10,18 +10,42 @@ const EditBot3 = () => {
             </div>
             <div className='p-5 bg-back-back rounded-lg space-y-5'>
                 <h6 className='text-lg font-semibold'>Review your strategy</h6>
-                <EditSummary />
+                <div className='border border-white/70 rounded-lg p-5 grid grid-cols-2 gap-2'>
+                    <div className='flex gap-2'>
+                        <p>Action:</p>
+                        <p>Invest</p>
+                    </div>
+                    <div className='flex gap-2'>
+                        <p>Currency:</p>
+                        <p>USDT</p>
+                    </div>
+                    <div className='flex gap-2'>
+                        <p>Exchange:</p>
+                        <p> Binance</p>
+                    </div>
+                    <div className='flex gap-2'>
+                        <p>Leverage:</p>
+                        <p>BTC, ETH, ADA, Link, AVAX</p>
+                    </div>
+                    <div className='flex gap-2'>
+                        <p>Entry Mode:</p>
+                        <p>Long</p>
+                    </div>
+                </div>
             </div>
-            <div className='p-5 bg-back-back rounded-lg space-y-5'>
-                <h6 className='text-lg font-semibold'>Fire Times</h6>
-                <div className='flex gap-5'>
-                    <label className='flex gap-2' htmlFor="">
-                        <input type="radio" name="fire_times" id="" />
-                        Limited
+            <div className='p-5 bg-back-back grid gap-5 rounded-lg h-full'>
+                <div className='space-y-2'>
+                    <h6 className='font-medium'>Margin Mode</h6>
+                    {/* <p>Defines the maximum exposure of your allocated capital in active trades. When the limit is hit, new positions will not be opened for this provider until the existing ones are closed or the stop-loss orders shift to lower risk areas.</p> */}
+                </div>
+                <div className='flex gap-10'>
+                    <label className='flex gap-3' htmlFor="isolated">
+                        <input type="radio" name="margin_mode" id="isolated" />
+                        Isolated
                     </label>
-                    <label className='flex gap-2' htmlFor="">
-                        <input type="radio" name="fire_times" id="" />
-                        Unlimited
+                    <label className='flex gap-3' htmlFor="crossed">
+                        <input type="radio" name="margin_mode" id="crossed" />
+                        Cross
                     </label>
                 </div>
             </div>
