@@ -78,6 +78,27 @@ const SignalGroup = () => {
     }
 
 
+    // fetch for trade manager's signal group
+    const [managerGroups, setManagerGroups] = useState([])
+    const [exist, setExist] = useState(true)
+    useEffect(() => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups', {
+            headers: {
+                Authorization: localStorage.getItem('accessToken')
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data.detail)
+            setManagerGroups(data.detail)
+            setExist(false)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+
+
     return (
         <div className='bg-back-back p-5 rounded-lg text-white/70 grid gap-5'>
             {/* <div className='grid gap-5'>
@@ -109,8 +130,19 @@ const SignalGroup = () => {
                 </div>
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
-                        <img className='mx-auto' src={img} alt="" />
-                        <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
+                        {role === true && !exist && <div>
+                            {managerGroups.map(item => <SingleSignalGroup
+                                img={item.group_url}
+                                name={item.group_name}
+                            />)}
+                        </div>}
+                        {role === false ? !exist && <div>
+                            <img className='mx-auto' src={img} alt="" />
+                            <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
+                        </div> : exist && <div>
+                            <img className='mx-auto' src={img} alt="" />
+                            <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
+                        </div>}
                     </div>
                     <div className='border rounded-lg p-5 h-96 lg:h-full grid'>
                         <p>We've pre-selected a few premium partners for a trial of their service.</p>

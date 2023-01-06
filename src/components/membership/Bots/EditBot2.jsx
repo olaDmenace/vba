@@ -96,7 +96,7 @@ const EditBot2 = ({ formData, setFormData }) => {
                         </div>
                         <div className='flex gap-10'>
                             <label className='flex gap-3' htmlFor="automatic">
-                                <input type="radio" name="entry_method" id="automatic" value={formData.entry_method} onChange={(e) => { setFormData({ ...formData, entry_method: e.target.id }) }} />
+                                <input type="radio" name="entry_method" id="auto" value={formData.entry_method} onChange={(e) => { setFormData({ ...formData, entry_method: e.target.id }) }} />
                                 Automatic
                             </label>
                             <label className='flex gap-3' htmlFor="manual">
