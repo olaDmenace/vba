@@ -7,17 +7,35 @@ import { useState } from 'react'
 
 const EditBot = () => {
 
+
+
+    const [formData, setFormData] = useState({
+        symbol: '',
+        group_id: '',
+        bot_name: '',
+        leverage: '',
+        bot_action: '',
+        margin_mode: '',
+        risk_amount: '',
+        entry_method: ''
+    })
+
+
+    const handleSubmit = () => {
+        console.log(formData)
+    }
+
     const [form, setForm] = useState(0)
 
     const showForm = () => {
         if (form === 0) {
-            return (<EditBot0 />)
+            return (<EditBot0 formData={formData} setFormData={setFormData} />)
         } else if (form === 1) {
-            return (<EditBot1 />)
+            return (<EditBot1 formData={formData} setFormData={setFormData} />)
         } else if (form === 2) {
-            return (<EditBot2 />)
+            return (<EditBot2 formData={formData} setFormData={setFormData} />)
         } else {
-            return (<EditBot3 />)
+            return (<EditBot3 formData={formData} setFormData={setFormData} />)
         }
     }
     return (
@@ -56,8 +74,8 @@ const EditBot = () => {
             {showForm()}
             <div className='flex gap-5'>
                 <button onClick={() => { setForm((form) => form - 1) }} className='py-3 px-4 rounded bg-back-back text-white/70'>Back</button>
-                <button onClick={() => { setForm((form) => form + 1) }} className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
-                    {form === 3 ? 'Submit' : 'Next'}
+                <button onClick={() => { form === 3 ? handleSubmit() : setForm((form) => form + 1) }} className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
+                    {form === 3 ? 'Launch' : 'Next'}
                 </button>
             </div>
         </div>

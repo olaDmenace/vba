@@ -8,7 +8,7 @@ import PositionSze from './PositionSze'
 import RiskLimit from './RiskLimit'
 import SettingsCard from './SettingsCard'
 
-const EditBot2 = () => {
+const EditBot2 = ({ formData, setFormData }) => {
     return (
         <div className='text-white/70 grid gap-5'>
             <div className='text-white/70 space-y-10 lg:space-y-0 lg:flex lg:justify-between border-b pb-5'>
@@ -26,7 +26,7 @@ const EditBot2 = () => {
                         <div className='flex items-center gap-5'>
                             <div className='flex items-center relative rounded-lg border w-2/5 pr-3'>
                                 <p className='text-lg absolute left-2'>$</p>
-                                <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="risk_amount" id="risk_amount" />
+                                <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="risk_amount" id="risk_amount" value={formData.risk_amount} onChange={(e) => { setFormData({ ...formData, risk_amount: e.target.value }) }} />
                             </div>
                         </div>
                         <div className='flex gap-3'>
@@ -51,7 +51,7 @@ const EditBot2 = () => {
                     <div>
                         <div className='flex items-center relative rounded-lg border w-2/5 pr-3'>
                             <p className='text-lg absolute left-2'>$</p>
-                            <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="leverage" id="leverage" />
+                            <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" name="leverage" id="leverage" value={formData.leverage} onChange={(e) => { setFormData({ ...formData, leverage: e.target.value }) }} />
                         </div>
                     </div>
                     <div className='grid gap-5'>
@@ -78,11 +78,11 @@ const EditBot2 = () => {
                         </div>
                         <div className='flex gap-10'>
                             <label className='flex gap-3' htmlFor="isolated">
-                                <input type="radio" name="margin_mode" id="isolated" />
+                                <input type="radio" name="margin_mode" id="isolated" value={formData.margin_mode} onChange={(e) => { setFormData({ ...formData, margin_mode: e.target.id }) }} />
                                 Isolated
                             </label>
                             <label className='flex gap-3' htmlFor="crossed">
-                                <input type="radio" name="margin_mode" id="crossed" />
+                                <input type="radio" name="margin_mode" id="crossed" value={formData.margin_mode} onChange={(e) => { setFormData({ ...formData, margin_mode: e.target.id }) }} />
                                 Cross
                             </label>
                         </div>
@@ -96,11 +96,11 @@ const EditBot2 = () => {
                         </div>
                         <div className='flex gap-10'>
                             <label className='flex gap-3' htmlFor="automatic">
-                                <input type="radio" name="entry_method" id="automatic" />
+                                <input type="radio" name="entry_method" id="automatic" value={formData.entry_method} onChange={(e) => { setFormData({ ...formData, entry_method: e.target.id }) }} />
                                 Automatic
                             </label>
                             <label className='flex gap-3' htmlFor="manual">
-                                <input type="radio" name="entry_method" id="manual" />
+                                <input type="radio" name="entry_method" id="manual" value={formData.entry_method} onChange={(e) => { setFormData({ ...formData, entry_method: e.target.id }) }} />
                                 Manual
                             </label>
                         </div>

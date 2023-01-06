@@ -2,7 +2,7 @@ import React from 'react'
 import EditBotHeader from './EditBotHeader'
 import EditSummary from './EditSummary'
 
-const EditBot3 = () => {
+const EditBot3 = ({ formData, setFormData }) => {
     return (
         <div className='grid gap-5 text-white/70'>
             <div className='text-white/70 space-y-10 lg:space-y-0 border-b pb-5'>
