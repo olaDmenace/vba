@@ -13,11 +13,11 @@ const EditBot3 = ({ formData, setFormData }) => {
                 <div className='border border-white/70 rounded-lg p-5 grid grid-cols-2 gap-2'>
                     <div className='flex gap-2'>
                         <p>Action:</p>
-                        <p>Invest</p>
+                        <p>{formData.bot_action}</p>
                     </div>
                     <div className='flex gap-2'>
                         <p>Currency:</p>
-                        <p>USDT</p>
+                        <p>{formData.symbol}</p>
                     </div>
                     <div className='flex gap-2'>
                         <p>Exchange:</p>
@@ -25,11 +25,11 @@ const EditBot3 = ({ formData, setFormData }) => {
                     </div>
                     <div className='flex gap-2'>
                         <p>Leverage:</p>
-                        <p>BTC, ETH, ADA, Link, AVAX</p>
+                        <p>{formData.leverage}</p>
                     </div>
                     <div className='flex gap-2'>
                         <p>Entry Mode:</p>
-                        <p>Long</p>
+                        <p>{formData.entry_mode}</p>
                     </div>
                 </div>
             </div>
@@ -40,18 +40,18 @@ const EditBot3 = ({ formData, setFormData }) => {
                 </div>
                 <div className='flex gap-10'>
                     <label className='flex gap-3' htmlFor="isolated">
-                        <input type="radio" name="margin_mode" id="isolated" />
+                        <input type="radio" name="margin_mode" id="isolated" value={formData.margin_mode} />
                         Isolated
                     </label>
                     <label className='flex gap-3' htmlFor="crossed">
-                        <input type="radio" name="margin_mode" id="crossed" />
+                        <input type="radio" name="margin_mode" id="crossed" value={formData.margin_mode} />
                         Cross
                     </label>
                 </div>
             </div>
             <div className='p-5 bg-back-back rounded-lg space-y-5'>
                 <h6 className='text-lg font-semibold'>Rename Your Bot</h6>
-                <input className='border rounded-lg w-2/3 h-10 px-2 bg-transparent active:outline' type="text" name="" id="" />
+                <input className='border rounded-lg w-2/3 h-10 px-2 bg-transparent active:outline' type="text" name="" id="" value={formData.bot_name} />
             </div>
         </div>
     )

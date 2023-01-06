@@ -12,7 +12,7 @@ const CoinCard = (props) => {
                     <p>{props.name}</p>
                 </div>
             </div>
-            <PlusCircleIcon onClick={props.click} className='h-6' />
+            <PlusCircleIcon onClick={props.click} className='h-6 cursor-pointer' />
         </div>
     )
 }

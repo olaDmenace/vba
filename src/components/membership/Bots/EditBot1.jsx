@@ -31,22 +31,21 @@ const EditBot1 = ({ formData, setFormData }) => {
             })
     }, [])
 
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState('')
     const [count, setCount] = useState(0)
     const handleSelect = (arg) => {
-        if (items.some(item => item.symbol === arg.symbol)) return;
-        setItems((prev) => [...prev, arg])
-        setFormData((prev) => ({ ...prev, symbol: [...prev.symbol, arg.symbol] }))
-        setCount(count + 1)
+        // if (items.some(item => item.symbol === arg.symbol)) return;
+        setItems(arg)
+        setFormData((prev) => ({ ...prev, symbol: arg.symbol }))
+        setCount(1)
     }
 
-    const handleDelete = (arg) => {
-        setItems(items => {
-            return items.filter(item => item.symbol !== arg.symbol)
-        })
-        setFormData((prev) => ({ ...prev, symbol: [...prev.symbol].filter((item => item !== arg.symbol)) }))
+    const handleDelete = () => {
+        setItems('')
+        setFormData()
         setCount(count - 1)
     }
+
 
     return (
         <div>
@@ -67,10 +66,10 @@ const EditBot1 = ({ formData, setFormData }) => {
                         {coinPair?.filter((coinPair) => { return search.toLowerCase() === '' ? coinPair : coinPair.symbol.toLowerCase().includes(search) }).map(coinPair => <CoinCard click={() => handleSelect(coinPair)} key={coinPair.symbol} logo={coinPair.coin_logo} symbol={coinPair.symbol} name={coinPair.name} />)}
                     </div>
                 </div>
-                <div className='border rounded-lg p-5 text-white/70 grid gap-5 lg:col-span-2'>
+                <div className='border rounded-lg p-5 text-white/70 space-y-5 lg:col-span-2'>
                     <h4>Select Your Portfolio</h4>
                     <p>You have selected {count} Coins. You have reached the limit.</p>
-                    {items?.map(item => <SelectedCoin key={item.symbol} symbol={item.symbol} name={item.name} execute={() => handleDelete(item)} value={formData.symbol} onChange={(e) => { setFormData({ ...formData, risk_amount: e.target.symbol }) }} />)}
+                    {items && <SelectedCoin key={items.symbol} symbol={items.symbol} name={items.name} img={items.coin_logo} execute={() => handleDelete()} value={formData.symbol} />}
                 </div>
             </div>
         </div>
