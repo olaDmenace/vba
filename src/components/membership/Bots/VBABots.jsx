@@ -56,6 +56,9 @@ const VBABots = (props) => {
     // const params = new URLSearchParams({
     //     query: bot_id
     // })
+
+    // Bot Summary State
+    const [mikey, setMikey] = useState(false)
     const botDetails = (arg) => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?' + new URLSearchParams({ bot_id: arg }), {
             // body: JSON.stringify({
@@ -70,6 +73,7 @@ const VBABots = (props) => {
             return res.json()
         }).then(res => {
             setBotSummary(res.detail)
+            setMikey(true)
             console.log(res)
         })
         console.log('first')
@@ -115,7 +119,7 @@ const VBABots = (props) => {
                             <button className='bg-[#76CEF11A] px-3 py-2 rounded'>Edit Bot</button>
                         </div>
                     </div>
-                    <div className='grid md:grid-cols-2'>
+                    {mikey && <div className='grid md:grid-cols-2'>
                         <div className='grid p-5 gap-3'>
                             <span className='flex gap-2'>Signal Group: <p>BINANCE</p></span>
                             <span className='flex gap-2'>Symbol: <p>{botSummary?.symbol}</p></span>
@@ -128,9 +132,9 @@ const VBABots = (props) => {
                             <apan className='flex gap-2'>Entry Mode: <p>{botSummary?.entry_method}</p></apan>
                             <span>Win Rate: <button className='text-primary hover:text-primary-light active:text-primary-dark'>65%</button></span>
                         </div>
-                    </div>
+                    </div>}
                     <div className='p-5 space-y-5 md:space-y-0 md:flex items-center gap-5'>
-                        <button className='bg-[#76CEF11A] px-3 py-2 rounded'>{botSummary.bot_active === false ? 'Inactive' : 'Active'}</button>
+                        <button className='bg-[#76CEF11A] px-3 py-2 rounded'>{botSummary?.bot_active === false ? 'Inactive' : 'Active'}</button>
                         <div className='flex gap-3'>
                             <ArrowPathRoundedSquareIcon className='w-10 h-6' />
                             <p>Firing Indefinitely</p>
