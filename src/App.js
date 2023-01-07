@@ -41,8 +41,8 @@ function App() {
           <Route path="/Auth" element={<Authentication />} />
           <Route path='/dashboard' element={<ProtectedRoutes><Boiler /></ProtectedRoutes>}>
             <Route path='' element={<Dashboard />}>
-              <Route path='' element={<Signal />} />
-              <Route exact path='Bots' element={<Bots />} />
+              <Route path='' exact element={<Signal />} />
+              <Route path='Bots' element={<Bots />} />
             </Route>
             <Route path='TradeManagers' element={<TradeManager />} />
             <Route path='Edit' element={<EditBot />} />
