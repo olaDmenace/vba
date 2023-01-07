@@ -11,7 +11,7 @@ import Memberships from './Memberships'
 import SingleSignalGroup from './SingleSignalGroup'
 // import SignalGroupTable from './SignalGroupTable'
 import TotalRevenueTable from './TotalRevenueTable'
-
+import Popup from '../../utils/Popup'
 
 
 // Spinner Loader import
@@ -98,6 +98,38 @@ const SignalGroup = () => {
     }, [])
 
 
+    // Become a trade manager request
+    const [tradeRequest, setTraderequest] = useState('')
+    const [requestSummary, setRequestSummary] = useState('')
+    const tradeManager = () => {
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/becomeTradeManager', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.getItem('accessToken')
+            }
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            setPopup(true)
+            setTraderequest(res.detail)
+            if (res.detail === 'success') {
+                setRequestSummary('Please, login again to continue')
+                setTimeout(() => {
+                    dispatch(logout())
+                }, 3000);
+            } else {
+                setRequestSummary('Please, try again')
+            }
+            console.log(res)
+        }).catch(res => {
+            console.log(res)
+        })
+    }
+
+    // Popup Control
+    const [popup, setPopup] = useState(false)
+
+
 
     return (
         <div className='bg-back-back p-5 rounded-lg text-white/70 grid gap-5'>
@@ -126,8 +158,9 @@ const SignalGroup = () => {
                             <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>
                             <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>
                         </div> : <p>Signal Groups</p>}
-                    <Link to={role === true ? '/dashboard/CreateSignal' : '/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : 'Connect with a Signal Group'}</Link>
+                    <Link to={role === true ? '/dashboard/CreateSignal' : ''} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : <button onClick={() => tradeManager()}>Become a Trade Manager</button>}</Link>
                 </div>
+                {popup && <Popup status={tradeRequest} summary={requestSummary} click={setPopup(!popup)} />}
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
                         {role === true && !exist && <div>
@@ -139,7 +172,7 @@ const SignalGroup = () => {
                         {role === false ? !exist && <div>
                             <img className='mx-auto' src={img} alt="" />
                             <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
-                        </div> : exist && <div>
+                        </div> : !exist && <div>
                             <img className='mx-auto' src={img} alt="" />
                             <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
                         </div>}
