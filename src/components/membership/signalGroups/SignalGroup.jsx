@@ -113,11 +113,13 @@ const SignalGroup = () => {
             if (role === true && res.detail.length > 0) {
                 setExist(false)
                 setGroupDetail(res.detail)
+                setIsLoading(false)
             } else if (role === false && res.detail.length > 0) {
                 console.log(res)
                 setExist(false)
+                setGroupDetail(res.detail)
+                setIsLoading(false)
             }
-            setIsLoading(false)
             // setUserGroups(res.detail)
             // setIsLoading(false)
         }).catch(err => {
@@ -211,7 +213,7 @@ const SignalGroup = () => {
                                 {!exist && <div>{
                                     groupDetail.map(list => <SingleSignalGroup
                                         img={list?.group_data?.group_url}
-                                        name={list?.group_name}
+                                        name={list?.group_data?.group_name}
                                     />)
                                 }</div>}</div>}
                         {/* {role === false && !exist && <div>

@@ -51,13 +51,20 @@ const VBABots = (props) => {
                 dispatch(logout())
                 return
             }
-            console.log(res)
-            setData(res.detail)
-            setBotSummary(res.detail[0])
-            setIsLoading(false)
-            if (res.detail.length !== 0) {
-                setExist(false)
+            if (role === true) {
+                // setExist(false)
+                // setGroupDetail(res.detail)
+                console.log(res)
+            } else if (role === false) {
+                console.log(res)
+                // setExist(false)
             }
+            // setData(res.detail)
+            // setBotSummary(res.detail[0])
+            // setIsLoading(false)
+            // if (res.detail.length !== 0) {
+            //     setExist(false)
+            // }
         }).catch(err => {
 
         })
