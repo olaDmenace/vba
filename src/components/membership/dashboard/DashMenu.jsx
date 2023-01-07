@@ -1,10 +1,20 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../store/authSlice'
 import DashMenuBottom from './DashMenuBottom'
 import DashMenuTop from './DashMenuTop'
 import MenuItem from './MenuItem'
 
 
 const DashMenu = () => {
+
+    const dispatch = useDispatch()
+
+    const signOut = () => {
+        dispatch(logout())
+
+    }
+
     return (
         <div className='bg-back-light h-full'>
             <div className='grid gap-6 divide-y divide-white/40 border-y border-white/40 py-6'>
@@ -24,12 +34,10 @@ const DashMenu = () => {
                     </div>
                     <p className='font-semibold'>Dark Mode</p>
                 </div>
-                <div className={('text-white/40 flex items-center gap-3 hover:text-primary')}>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                        </svg>
-                    </div>
+                <div className={('text-white/40 flex items-center gap-3 hover:text-primary')} onClick={() => signOut()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
                     <p className='font-semibold'>Logout</p>
                 </div>
                 {/* <MenuItem
