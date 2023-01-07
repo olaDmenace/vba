@@ -15,7 +15,7 @@ const TotalRevenueTable = (props) => {
                 <div>
                     <div className='flex gap-3'>
                         {/* <div className='rounded-full bg-back-back h-6 w-6'></div> */}
-                        <img className='rounded-full h-6 w-6' src={props.img} alt="" />
+                        {props.show && <img className='rounded-full h-6 w-6' src={props?.img} alt="" />}
                         <p>{props.name}</p>
                     </div>
                     <p>{props.visibility}</p>
@@ -25,15 +25,15 @@ const TotalRevenueTable = (props) => {
             <div className='grid grid-flow-row gap-5 content-between'>
                 <div>
                     <p>Minimum Allocation</p>
-                    <h5 className='text-2xl'>{props.min}</h5>
+                    {props.show && <h5 className='text-2xl'>{props?.min}</h5>}
                 </div>
                 <div>
                     <p>Maximum Allocation</p>
-                    <h5 className='text-2xl'>{props.max}</h5>
+                    {props.show && < h5 className='text-2xl'>{props?.max}</h5>}
                 </div>
                 <div className='flex gap-3'>
                     <p>Subscription</p>
-                    <button className='text-primary hover:text-primary-light active:text-primary-dark'>{props.pfee}</button>
+                    <button className='text-primary hover:text-primary-light active:text-primary-dark'>{props?.pfee}</button>
                 </div>
                 <div>
                     <p>Total Revenue Generated</p>

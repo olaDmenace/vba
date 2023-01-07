@@ -48,7 +48,7 @@ const SignalGroup = () => {
             //     setGroups(false)
             // }
             setGroupList(res.detail)
-            setGroupDetail(res.detail[0])
+            // setGroupDetail(res.detail[0])
             setIsLoading(false)
             // console.log(groupList)
             // console.log(res.detail)
@@ -72,6 +72,7 @@ const SignalGroup = () => {
             return res.json()
         }).then(res => {
             setGroupDetail(res.detail)
+            setShow(true)
             console.log(res)
         })
         console.log('first')
@@ -82,16 +83,38 @@ const SignalGroup = () => {
     const [managerGroups, setManagerGroups] = useState([])
     const [exist, setExist] = useState(true)
     useEffect(() => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups', {
+        // fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups', {
+        //     headers: {
+        //         Authorization: localStorage.getItem('accessToken')
+        //     }
+        // }).then(res => {
+        //     return res.json()
+        // }).then(data => {
+        //     console.log(data)
+        //     // setManagerGroups(data.detail)
+        //     // setExist(false)
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+        const URL = role === true ? 'https://server.cryptosignal.metrdev.com/api/v1/managers/manageSignalGroups' : 'https://server.cryptosignal.metrdev.com/api/v1/user/viewGroupConfiguration'
+        fetch(URL, {
+            method: 'GET',
             headers: {
                 Authorization: localStorage.getItem('accessToken')
             }
         }).then(res => {
             return res.json()
-        }).then(data => {
-            console.log(data.detail)
-            setManagerGroups(data.detail)
-            setExist(false)
+        }).then(res => {
+            if (res.status === 'fail' && res?.detail?.toLowerCase() === 'token expired') {
+                dispatch(logout())
+                return
+            }
+            // setGroupList(res.detail)
+            setGroupDetail(res.detail)
+            setIsLoading(false)
+            // setUserGroups(res.detail)
+            // setIsLoading(false)
+            console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -128,6 +151,7 @@ const SignalGroup = () => {
 
     // Popup Control
     const [popup, setPopup] = useState(false)
+    const [show, setShow] = useState(false)
 
 
 
@@ -164,18 +188,22 @@ const SignalGroup = () => {
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
                         {role === true && !exist && <div>
-                            {managerGroups.map(item => <SingleSignalGroup
+                            {setGroupList.map(item => <SingleSignalGroup
                                 img={item.group_url}
                                 name={item.group_name}
                             />)}
                         </div>}
-                        {role === false ? !exist && <div>
+                        {role === false && !exist && <div>
+                            {groupDetail.map(list => <SingleSignalGroup
+                                img={list?.group_data?.group_url}
+                                name={list?.group_data?.group_name}
+                            />)}
                             <img className='mx-auto' src={img} alt="" />
-                            <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
-                        </div> : !exist && <div>
-                            <img className='mx-auto' src={img} alt="" />
-                            <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
                         </div>}
+                        {/* {role === false ? !exist && <div>
+                            <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
+                        </div> : exist && <div>
+                        </div>} */}
                     </div>
                     <div className='border rounded-lg p-5 h-96 lg:h-full grid'>
                         <p>We've pre-selected a few premium partners for a trial of their service.</p>
@@ -217,6 +245,7 @@ const SignalGroup = () => {
                         </div>}
                     </div>
                     {!isLoading && <TotalRevenueTable
+                        show={show}
                         key={groupDetail?.group_data?.group_id}
                         img={groupDetail?.group_data?.group_url}
                         name={groupDetail?.group_data?.group_name}

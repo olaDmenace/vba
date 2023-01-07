@@ -48,8 +48,8 @@ const SignalGroup = (props) => {
                 dispatch(logout())
                 return
             }
-            setUserGroups(res.detail)
-            setIsLoading(false)
+            // setUserGroups(res.detail)
+            // setIsLoading(false)
             console.log(res)
         }).catch(err => {
         })
