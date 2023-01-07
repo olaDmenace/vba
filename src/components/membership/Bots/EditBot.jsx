@@ -4,6 +4,11 @@ import EditBot1 from './EditBot1'
 import EditBot2 from './EditBot2'
 import EditBot3 from "./EditBot3"
 import { useState } from 'react'
+import { useDispatch } from "react-redux"
+import { logout } from "../../../store/authSlice"
+import Popup from "../../utils/Popup"
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/solid"
+import { useNavigate } from "react-router-dom"
 
 const EditBot = () => {
 
@@ -20,12 +25,46 @@ const EditBot = () => {
         entry_method: ''
     })
 
+    const dispatch = useDispatch()
+
+
+    const [show, setShow] = useState(false)
+    const [response, setResponse] = useState('')
 
     const handleSubmit = () => {
+        console.log(typeof (formData))
+        fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/manageBotConfiguration', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify({
+                ...formData
+            })
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if (data.status === 'fail' && data?.detail?.toLowerCase() === 'token expired') {
+                dispatch(logout())
+                return
+            }
+            setResponse(data)
+            setShow(true)
+            if (data.detail === "bot created" && data.status === "success") {
+                setTimeout(() => {
+                    navigate('/dashboard/Bots')
+                }, 3000);
+            }
+            console.log(data)
+        }).catch(err => {
+
+        })
         console.log(formData)
     }
 
     const [form, setForm] = useState(0)
+    const navigate = useNavigate()
 
     const showForm = () => {
         if (form === 0) {
@@ -38,12 +77,13 @@ const EditBot = () => {
             return (<EditBot3 formData={formData} setFormData={setFormData} />)
         }
     }
+
     return (
         <div className="grid gap-10">
             <div className="grid gap-5 lg:flex justify-between">
                 <div className="flex items-center gap-3 text-white/70">
                     <div>
-                        <ChevronLeftIcon className='h-6' />
+                        <ChevronLeftIcon onClick={() => navigate(-1)} className='h-6 cursor-pointer' />
                     </div>
                     <div>
                         <h6 className="font-bold text-2xl">Create Bot</h6>
@@ -78,6 +118,7 @@ const EditBot = () => {
                     {form === 3 ? 'Launch' : 'Next'}
                 </button>
             </div>
+            {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => setShow(false)} />}
         </div>
     )
 }

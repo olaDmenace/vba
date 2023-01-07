@@ -6,6 +6,7 @@ import { logout } from '../../../store/authSlice'
 import CreateSignal0 from './CreateSignal0'
 import CreateSignal1 from './CreateSignal1'
 import Popup from '../../utils/Popup'
+import { useNavigate } from 'react-router-dom'
 
 
 const CreateSignal = () => {
@@ -57,13 +58,15 @@ const CreateSignal = () => {
         })
     }
 
+    const navigate = useNavigate()
+
 
     return (
         <div className='grid gap-10'>
             <div className="grid gap-5 lg:flex justify-between">
                 <div className="flex items-center gap-3 text-white/70">
                     <div>
-                        <ChevronLeftIcon className='h-6' />
+                        <ChevronLeftIcon onClick={() => navigate(-1)} className='h-6 cursor-pointer' />
                     </div>
                     <div>
                         <h6 className="font-bold text-2xl">New Signal Group</h6>

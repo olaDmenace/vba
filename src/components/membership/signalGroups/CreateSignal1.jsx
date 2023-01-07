@@ -48,11 +48,11 @@ const CreateSignal1 = ({ formData, setFormData }) => {
                     <div className='flex gap-10'>
                         <label htmlFor="min_allocation">
                             Minimum Allocation <br />
-                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" name="min_allocation" id="min_allocation" value={formData.min_allocation} onChange={(e) => setFormData({ ...formData, min_allocation: e.target.value })} />
+                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" min={1} name="min_allocation" id="min_allocation" value={formData.min_allocation} onChange={(e) => setFormData({ ...formData, min_allocation: e.target.value })} />
                         </label>
                         <label htmlFor="max_allocation">
                             Maxximum Allocation <br />
-                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" name="max_allocation" id="max_allocation" value={formData.max_allocation} onChange={(e) => setFormData({ ...formData, max_allocation: e.target.value })} />
+                            <input className='h-10 text-right px-2 rounded-lg bg-transparent border border-white/70' type="number" min={formData.min_allocation + 1} name="max_allocation" id="max_allocation" value={formData.max_allocation} onChange={(e) => setFormData({ ...formData, max_allocation: e.target.value })} />
                         </label>
                     </div>
                 </div>
