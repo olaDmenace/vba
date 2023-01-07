@@ -35,6 +35,9 @@ const VBABots = (props) => {
 
     const [exist, setExist] = useState(true)
 
+    const role = ''
+    const URL = 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots'
+
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration', {
             headers: {
