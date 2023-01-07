@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../../store/authSlice'
 import Button from '../../Button'
+import img from './../../../images/Altercation.png'
 import { useParams } from 'react-router-dom'
 
 
@@ -32,6 +33,8 @@ const VBABots = (props) => {
         setBotData(true)
     }
 
+    const [exist, setExist] = useState(true)
+
     useEffect(() => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration', {
             headers: {
@@ -48,6 +51,9 @@ const VBABots = (props) => {
             setData(res.detail)
             setBotSummary(res.detail[0])
             setIsLoading(false)
+            if (res.detail.length !== 0) {
+                setExist(false)
+            }
         }).catch(err => {
 
         })
@@ -101,11 +107,15 @@ const VBABots = (props) => {
                             strokeWidthSecondary={2}
                         />
                     </div>}
-                    <div className='divide-y'>
+                    <div className='py-10'>
                         {data.map(data => <div className='px-5 py-3' key={data.bot_id} id={data.bot_id} onClick={() => botDetails(data.bot_id)}>
                             <h6>{data.bot_name}</h6>
                             <p>{`${data.bot_action} Bot`}</p>
                         </div>)}
+                        {exist && <div>
+                            <img className='mx-auto' src={img} alt="" />
+                            <p className='text-center px-auto'>You have not joined any signal group at the moment</p>
+                        </div>}
                     </div>
                 </div>
                 <div className='border rounded-lg divide-y'>
