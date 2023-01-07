@@ -80,7 +80,7 @@ const RegistrationForm = () => {
 
     return (<div className='grid gap-10 text-white/70'>
         <Formik className='grid gap-10'
-            initialValues={{ last_name: '', first_name: '', email: '', password: '', country: '', dob: '' }}
+            initialValues={{ last_name: '', first_name: '', email: '', password: '', country: 'afghanistan', dob: '' }}
             onSubmit={handleSubmit}
             validationSchema={validationSchema}
         >

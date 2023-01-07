@@ -110,6 +110,7 @@ const SignalGroup = () => {
                 return
             }
             // setGroupList(res.detail)
+            setExist(false)
             setGroupDetail(res.detail)
             setIsLoading(false)
             // setUserGroups(res.detail)
@@ -187,19 +188,25 @@ const SignalGroup = () => {
                 {popup && <Popup status={tradeRequest} summary={requestSummary} click={() => setPopup(!popup)} />}
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
-                        {role === true && !exist && <div>
+                        {/* <div>
                             {setGroupList.map(item => <SingleSignalGroup
                                 img={item.group_url}
                                 name={item.group_name}
                             />)}
-                        </div>}
-                        {role === false && !exist && <div>
+                        </div> */}
+                        {exist && <img className='mx-auto' src={img} alt="" />}
+                        {!exist && <div>{
+                            groupDetail.map(list => <SingleSignalGroup
+                                img={list?.group_url}
+                                name={list?.group_name}
+                            />)
+                        }</div>}
+                        {/* {role === false && !exist && <div>
                             {groupDetail.map(list => <SingleSignalGroup
                                 img={list?.group_data?.group_url}
                                 name={list?.group_data?.group_name}
                             />)}
-                            <img className='mx-auto' src={img} alt="" />
-                        </div>}
+                        </div>} */}
                         {/* {role === false ? !exist && <div>
                             <p className='text-center mx-auto'>You do not manage any signal group at the moment</p>
                         </div> : exist && <div>

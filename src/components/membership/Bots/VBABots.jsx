@@ -3,7 +3,7 @@ import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../../store/authSlice'
 import Button from '../../Button'
 import img from './../../../images/Altercation.png'
@@ -35,11 +35,13 @@ const VBABots = (props) => {
 
     const [exist, setExist] = useState(true)
 
-    const role = ''
+
+    const role = useSelector(state => state.auth.user.trade_manager)
     const URL = 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots'
 
     useEffect(() => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration', {
+        const URL = role === true ? 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots' : 'https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration'
+        fetch(URL, {
             headers: {
                 Authorization: localStorage.getItem('accessToken')
             }
