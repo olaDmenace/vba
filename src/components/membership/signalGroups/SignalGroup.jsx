@@ -110,12 +110,16 @@ const SignalGroup = () => {
                 return
             }
             // setGroupList(res.detail)
-            setExist(false)
-            setGroupDetail(res.detail)
+            if (role === true && res.detail.length > 0) {
+                setExist(false)
+                setGroupDetail(res.detail)
+            } else if (role === false && res.detail.length > 0) {
+                console.log(res)
+                setExist(false)
+            }
             setIsLoading(false)
             // setUserGroups(res.detail)
             // setIsLoading(false)
-            console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -195,12 +199,21 @@ const SignalGroup = () => {
                             />)}
                         </div> */}
                         {exist && <img className='mx-auto' src={img} alt="" />}
-                        {!exist && <div>{
-                            groupDetail.map(list => <SingleSignalGroup
-                                img={list?.group_url}
-                                name={list?.group_name}
-                            />)
-                        }</div>}
+                        {role === true ? <div>
+                            {!exist && <div>{
+                                groupDetail.map(list => <SingleSignalGroup
+                                    img={list?.group_url}
+                                    name={list?.group_name}
+                                />)
+                            }</div>}
+                        </div> :
+                            <div>
+                                {!exist && <div>{
+                                    groupDetail.map(list => <SingleSignalGroup
+                                        img={list?.group_data?.group_url}
+                                        name={list?.group_name}
+                                    />)
+                                }</div>}</div>}
                         {/* {role === false && !exist && <div>
                             {groupDetail.map(list => <SingleSignalGroup
                                 img={list?.group_data?.group_url}

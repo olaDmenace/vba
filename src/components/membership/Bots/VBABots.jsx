@@ -33,11 +33,10 @@ const VBABots = (props) => {
         setBotData(true)
     }
 
-    const [exist, setExist] = useState(true)
+    const [exist, setExist] = useState(false)
 
 
     const role = useSelector(state => state.auth.user.trade_manager)
-    const URL = 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots'
 
     useEffect(() => {
         const URL = role === true ? 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots' : 'https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration'
@@ -71,7 +70,8 @@ const VBABots = (props) => {
     // Bot Summary State
     const [mikey, setMikey] = useState(false)
     const botDetails = (arg) => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?' + new URLSearchParams({ bot_id: arg }), {
+        const URL = role === true ? '' : 'https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?'
+        fetch(URL + new URLSearchParams({ bot_id: arg }), {
             // body: JSON.stringify({
             //     bot_id: props.id
             // }),
