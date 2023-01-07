@@ -160,7 +160,7 @@ const SignalGroup = () => {
                         </div> : <p>Signal Groups</p>}
                     <Link to={role === true ? '/dashboard/CreateSignal' : ''} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : <button onClick={() => tradeManager()}>Become a Trade Manager</button>}</Link>
                 </div>
-                {popup && <Popup status={tradeRequest} summary={requestSummary} click={setPopup(!popup)} />}
+                {popup && <Popup status={tradeRequest} summary={requestSummary} click={() => setPopup(!popup)} />}
                 {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'>
                     <div className='border rounded-lg p-5 grid gap-5'>
                         {role === true && !exist && <div>
@@ -216,7 +216,7 @@ const SignalGroup = () => {
                             />)}
                         </div>}
                     </div>
-                    <TotalRevenueTable
+                    {!isLoading && <TotalRevenueTable
                         key={groupDetail?.group_data?.group_id}
                         img={groupDetail?.group_data?.group_url}
                         name={groupDetail?.group_data?.group_name}
@@ -231,7 +231,7 @@ const SignalGroup = () => {
                     // min={`${groupList[0]?.group_data?.min_allocation} USDT`}
                     // max={`${groupList[0]?.group_data?.max_allocation} USDT`}
                     // pfee={groupList[0]?.group_data?.pricing_fee}
-                    />
+                    />}
                     {role === false ? '' : <Memberships />}
                 </div>}
             </div>
