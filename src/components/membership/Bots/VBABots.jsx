@@ -33,11 +33,10 @@ const VBABots = (props) => {
         setBotData(true)
     }
 
-    const [exist, setExist] = useState(true)
+    const [exist, setExist] = useState(false)
 
 
     const role = useSelector(state => state.auth.user.trade_manager)
-    const URL = 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots'
 
     useEffect(() => {
         const URL = role === true ? 'https://server.cryptosignal.metrdev.com/api/v1/managers/viewBots' : 'https://server.cryptosignal.metrdev.com/api/v1/user/viewBotConfiguration'
@@ -52,7 +51,16 @@ const VBABots = (props) => {
                 dispatch(logout())
                 return
             }
-            console.log(res)
+            if (role === true) {
+                setExist(false)
+                setMikey(true)
+                // setGroupDetail(res.detail)
+                console.log(res)
+            } else if (role === false) {
+                console.log(res)
+                setMikey(true)
+                setExist(false)
+            }
             setData(res.detail)
             setBotSummary(res.detail[0])
             setIsLoading(false)
@@ -71,7 +79,8 @@ const VBABots = (props) => {
     // Bot Summary State
     const [mikey, setMikey] = useState(false)
     const botDetails = (arg) => {
-        fetch('https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?' + new URLSearchParams({ bot_id: arg }), {
+        const URL = 'https://server.cryptosignal.metrdev.com/api/v1/user/viewSingleBotConfig?'
+        fetch(URL + new URLSearchParams({ bot_id: arg }), {
             // body: JSON.stringify({
             //     bot_id: props.id
             // }),
@@ -80,7 +89,6 @@ const VBABots = (props) => {
             }
         }).then(res => {
             console.log(localStorage.getItem('accessToken'))
-            console.log('')
             return res.json()
         }).then(res => {
             setBotSummary(res.detail)
@@ -112,7 +120,7 @@ const VBABots = (props) => {
                             strokeWidthSecondary={2}
                         />
                     </div>}
-                    <div className='py-10'>
+                    <div className='py-10 cursor-pointer'>
                         {data.map(data => <div className='px-5 py-3' key={data.bot_id} id={data.bot_id} onClick={() => botDetails(data.bot_id)}>
                             <h6>{data.bot_name}</h6>
                             <p>{`${data.bot_action} Bot`}</p>
@@ -134,20 +142,20 @@ const VBABots = (props) => {
                             <button className='bg-[#76CEF11A] px-3 py-2 rounded'>Edit Bot</button>
                         </div>
                     </div>
-                    {mikey && <div className='grid md:grid-cols-2'>
+                    <div className='grid md:grid-cols-2'>
                         <div className='grid p-5 gap-3'>
                             <span className='flex gap-2'>Signal Group: <p>BINANCE</p></span>
-                            <span className='flex gap-2'>Symbol: <p>{botSummary?.symbol}</p></span>
-                            <span>Risk Amount: <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.risk_amount}</button></span>
-                            <span>Position Capital: <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button></span>
-                            <span>Margin Mode: <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.margin_mode}</button></span>
+                            <span className='flex gap-2'>Symbol: {mikey && <p>{botSummary?.symbol}</p>}</span>
+                            <span>Risk Amount: {mikey && <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.risk_amount}</button>}</span>
+                            <span>Position Capital: {mikey && <button className='text-primary hover:text-primary-light active:text-primary-dark'>Trading View</button>}</span>
+                            <span>Margin Mode: {mikey && <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.margin_mode}</button>}</span>
                         </div>
                         <div className='grid p-5 gap-3'>
                             <span className='flex gap-2'>Leverage: <p>{botSummary?.leverage}</p></span>
                             <apan className='flex gap-2'>Entry Mode: <p>{botSummary?.entry_method}</p></apan>
-                            <span>Win Rate: <button className='text-primary hover:text-primary-light active:text-primary-dark'>65%</button></span>
+                            <span>Win Rate: {mikey && <button className='text-primary hover:text-primary-light active:text-primary-dark'>{botSummary?.win_rate}</button>}</span>
                         </div>
-                    </div>}
+                    </div>
                     <div className='p-5 space-y-5 md:space-y-0 md:flex items-center gap-5'>
                         <button className='bg-[#76CEF11A] px-3 py-2 rounded'>{botSummary?.bot_active === false ? 'Inactive' : 'Active'}</button>
                         <div className='flex gap-3'>

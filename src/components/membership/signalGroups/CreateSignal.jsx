@@ -59,6 +59,12 @@ const CreateSignal = () => {
     }
 
     const navigate = useNavigate()
+    const closeModal = () => {
+        setShow(false)
+        setTimeout(() => {
+            navigate(-2)
+        }, 2000);
+    }
 
 
     return (
@@ -99,7 +105,7 @@ const CreateSignal = () => {
                     {form === 1 ? 'Submit' : 'Next'}
                 </button>
             </div>
-            {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => setShow(false)} />}
+            {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => closeModal()} />}
         </div>
     )
 }

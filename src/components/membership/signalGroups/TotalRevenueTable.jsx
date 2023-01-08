@@ -38,8 +38,8 @@ const TotalRevenueTable = (props) => {
                 <div>
                     <p>Total Revenue Generated</p>
                     <div className='flex justify-between items-center'>
-                        <p>This Month</p>
-                        <h5 className='text-2xl'>100 USDT</h5>
+                        <p>Win Rate</p>
+                        <h5 className='text-2xl'>{props.win}</h5>
                     </div>
                 </div>
             </div>

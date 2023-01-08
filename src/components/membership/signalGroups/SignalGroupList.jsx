@@ -97,6 +97,9 @@ const SignalGroupList = () => {
 
     const closePopup = () => {
         setPopup(false)
+        setTimeout(() => {
+            navigate(-1)
+        }, 2000);
     }
 
     return (
