@@ -195,7 +195,10 @@ const SignalGroup = () => {
                             <button className={groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={groups ? true : false} onClick={changeGroup}>Groups You Manage</button>
                             <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>
                         </div> : <p>Signal Groups</p>}
-                    <Link to={role === true ? '/dashboard/CreateSignal' : ''} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : <button onClick={() => tradeManager()}>Become a Trade Manager</button>}</Link>
+                    <div className='grid lg:grid-flow-col gap-5'>
+                        <Link to={role === true ? '/dashboard/CreateSignal' : ''} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : <button onClick={() => tradeManager()}>Become a Trade Manager</button>}</Link>
+                        {role === false ? <Link to={'/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>Connect to Signal Group</Link> : ''}
+                    </div>
                 </div>
                 {popup && <Popup
                     status={tradeRequest}

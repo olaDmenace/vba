@@ -31,22 +31,10 @@ const EditBot3 = ({ formData, setFormData }) => {
                         <p>Entry Mode:</p>
                         <p>{formData.entry_mode}</p>
                     </div>
-                </div>
-            </div>
-            <div className='p-5 bg-back-back grid gap-5 rounded-lg h-full'>
-                <div className='space-y-2'>
-                    <h6 className='font-medium'>Margin Mode</h6>
-                    {/* <p>Defines the maximum exposure of your allocated capital in active trades. When the limit is hit, new positions will not be opened for this provider until the existing ones are closed or the stop-loss orders shift to lower risk areas.</p> */}
-                </div>
-                <div className='flex gap-10'>
-                    <label className='flex gap-3' htmlFor="isolated">
-                        <input type="radio" name="margin_mode" id="isolated" defaultValue={formData.margin_mode} />
-                        Isolated
-                    </label>
-                    <label className='flex gap-3' htmlFor="crossed">
-                        <input type="radio" name="margin_mode" id="crossed" defaultValue={formData.margin_mode} />
-                        Cross
-                    </label>
+                    <div className='flex gap-2'>
+                        <p>Margin Mode:</p>
+                        <p>{formData.margin_mode}</p>
+                    </div>
                 </div>
             </div>
             <div className='p-5 bg-back-back rounded-lg space-y-5'>

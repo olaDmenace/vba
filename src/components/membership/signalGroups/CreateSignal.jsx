@@ -62,7 +62,7 @@ const CreateSignal = () => {
     const closeModal = () => {
         setShow(false)
         setTimeout(() => {
-            navigate(-2)
+            navigate('/dashboard')
         }, 2000);
     }
 
