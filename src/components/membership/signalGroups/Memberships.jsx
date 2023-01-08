@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Memberships = () => {
+const Memberships = (props) => {
     return (
         <div className='border rounded-lg p-5 h-96 lg:h-full grid'>
             <p>Memberships</p>
@@ -11,7 +11,7 @@ const Memberships = () => {
             </div>
             <div>
                 <p>Members</p>
-                <p className='font-semibold text-3xl'>78</p>
+                <p className='font-semibold text-3xl'>{props.number}</p>
             </div>
             <div className='grid'>
                 {/* <div>
@@ -20,7 +20,7 @@ const Memberships = () => {
                 </div> */}
                 <p>Active Member Emails</p>
                 <div>
-                    <p>jdt****jfg@gmail.com</p>
+                    <p>{props.email}</p>
                 </div>
             </div>
         </div>
