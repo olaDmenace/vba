@@ -36,10 +36,9 @@ const TotalRevenueTable = (props) => {
                     <button className='text-primary hover:text-primary-light active:text-primary-dark'>{props?.pfee}</button>
                 </div>
                 <div>
-                    <p>Total Revenue Generated</p>
                     <div className='flex justify-between items-center'>
                         <p>Win Rate</p>
-                        <h5 className='text-2xl'>{props.win}</h5>
+                        <h5 className=''>{props.win}</h5>
                     </div>
                 </div>
             </div>
