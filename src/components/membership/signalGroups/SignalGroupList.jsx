@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { logout } from '../../../store/authSlice'
 import SignalGroup from '../tradeManagers/SignalGroup'
-import { CheckIcon, ChevronLeftIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, ChevronLeftIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import Popup from '../../utils/Popup'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
@@ -136,7 +136,19 @@ const SignalGroupList = () => {
                     execute={() => connect(userGroups?.signal_id)}
                 />)}
             </div>} */}
-            {popup && <Popup status={response} icon={icon} summary={summary} click={closePopup} />}
+            {/* {!popup && <Popup status={response} icon={icon} summary={summary} click={closePopup} />} */}
+            {popup && <Popup>
+                <div className='grid gap-10'>
+                    < div className='flex justify-between items-center' >
+                        <p className='text-2xl'>{response}</p>
+                        <XCircleIcon onClick={() => (closePopup())} className='h-6 cursor-pointer' />
+                    </div >
+                    <div className='space-y-10 pb-10'>
+                        <span>{icon}</span>
+                        <p className='text-center w-2/3 mx-auto'>{summary}</p>
+                    </div>
+                </div>
+            </Popup>}
         </div>
     )
 }
