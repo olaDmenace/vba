@@ -7,6 +7,7 @@ import CreateSignal0 from './CreateSignal0'
 import CreateSignal1 from './CreateSignal1'
 import Popup from '../../utils/Popup'
 import { useNavigate } from 'react-router-dom'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 
 
 const CreateSignal = () => {
@@ -105,7 +106,19 @@ const CreateSignal = () => {
                     {form === 1 ? 'Submit' : 'Next'}
                 </button>
             </div>
-            {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => closeModal()} />}
+            {/* {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => closeModal()} />} */}
+            {show && <Popup>
+                <div className='grid gap-10'>
+                    < div className='flex justify-between items-center' >
+                        <p className='text-2xl'>{response}</p>
+                        <XCircleIcon onClick={() => (closeModal())} className='h-6 cursor-pointer' />
+                    </div >
+                    <div className='space-y-10 pb-10'>
+                        <span>{response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />}</span>
+                        <p className='text-center w-2/3 mx-auto'>{response.detail}</p>
+                    </div>
+                </div>
+            </Popup>}
         </div>
     )
 }
