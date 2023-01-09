@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from "@heroicons/react/24/outline"
+import { ChevronLeftIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import EditBot0 from "./EditBot0"
 import EditBot1 from './EditBot1'
 import EditBot2 from './EditBot2'
@@ -118,7 +118,19 @@ const EditBot = () => {
                     {form === 3 ? 'Launch' : 'Next'}
                 </button>
             </div>
-            {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => setShow(false)} />}
+            {/* {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => setShow(false)} />} */}
+            {show && <Popup>
+                <div className='grid gap-10'>
+                    < div className='flex justify-between items-center' >
+                        <p className='text-2xl'>{response}</p>
+                        <XCircleIcon onClick={() => (setShow(false))} className='h-6 cursor-pointer' />
+                    </div >
+                    <div className='space-y-10 pb-10'>
+                        <span>{response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />}</span>
+                        <p className='text-center w-2/3 mx-auto'>{response.status}</p>
+                    </div>
+                </div>
+            </Popup>}
         </div>
     )
 }
