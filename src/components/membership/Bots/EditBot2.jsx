@@ -25,21 +25,22 @@ const EditBot2 = ({ formData, setFormData }) => {
                         </div>
                         <div className='flex items-center gap-5'>
                             <div className='flex items-center relative rounded-lg border w-2/5 pr-3'>
-                                <p className='text-lg absolute left-2'>$</p>
+                                {/* <p className='text-lg absolute left-2'>$</p> */}
                                 <input className='h-10 bg-transparent pl-6 w-full focus:outline-none text-right' placeholder='0' type="number" min={1} max={100} name="leverage" id="leverage" value={formData.leverage} onChange={(e) => { setFormData({ ...formData, leverage: +e.target.value }) }} />
                             </div>
                         </div>
-                        <div className='flex gap-3'>
-                            <MinusCircleIcon className='h-5' />
-                            <input type="range" name="" id="" />
-                            <PlusCircleIcon className='h-5' />
+                        <div className='flex gap-3 items-center'>
+                            <button disabled={formData.leverage === 0} onClick={(e) => { setFormData({ ...formData, leverage: formData.leverage - 5 }) }}><MinusCircleIcon className='h-5' /></button>
+                            {/* <input type="range" value='0' min='0' max='100' step='10' name="" id="" /> */}
+                            <input className='h-[2px]' type="range" name="leverage" id="leverage" min='0' max='100' step={5} value={formData.leverage} onChange={(e) => { setFormData({ ...formData, leverage: +e.target.value }) }} />
+                            <button disabled={formData.leverage === 100} onClick={(e) => { setFormData({ ...formData, leverage: formData.leverage + 5 }) }}><PlusCircleIcon className='h-5' /></button>
                         </div>
                         <div className='flex justify-between border rounded-lg px-3 py-2 w-2/3'>
-                            <p>5%</p>
-                            <p>10%</p>
-                            <p>25%</p>
-                            <p>50%</p>
-                            <p>100%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, leverage: 5 }) }}>5%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, leverage: 10 }) }}>10%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, leverage: 25 }) }}>25%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, leverage: 50 }) }}>50%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, leverage: 100 }) }}>100%</p>
                         </div>
                     </div>
                 </div>
@@ -55,17 +56,17 @@ const EditBot2 = ({ formData, setFormData }) => {
                         </div>
                     </div>
                     <div className='grid gap-5'>
-                        <div className='flex gap-3'>
-                            <MinusCircleIcon className='h-5' />
-                            <input type="range" name="" id="" />
-                            <PlusCircleIcon className='h-5' />
+                        <div className='flex gap-3 items-center'>
+                            <MinusCircleIcon className='h-5' onClick={(e) => { setFormData({ ...formData, risk_amount: formData.risk_amount - 5 }) }} />
+                            <input className='h-[2px]' type="range" name="risk_amount" id="risk_amount" min='' max={''} step={5} value={formData.risk_amount} onChange={(e) => { setFormData({ ...formData, risk_amount: +e.target.value }) }} />
+                            <PlusCircleIcon className='h-5' onClick={(e) => { setFormData({ ...formData, risk_amount: formData.risk_amount + 5 }) }} />
                         </div>
                         <div className='flex justify-between border rounded-lg px-3 py-2 w-2/3'>
-                            <p>5%</p>
-                            <p>10%</p>
-                            <p>25%</p>
-                            <p>50%</p>
-                            <p>100%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, risk_amount: 5 }) }}>5%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, risk_amount: 10 }) }}>10%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, risk_amount: 25 }) }}>25%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, risk_amount: 50 }) }}>50%</p>
+                            <p className='cursor-pointer' onClick={(e) => { setFormData({ ...formData, risk_amount: 100 }) }}>100%</p>
                         </div>
                     </div>
                 </div>
@@ -77,11 +78,11 @@ const EditBot2 = ({ formData, setFormData }) => {
                             <p>Defines the maximum exposure of your allocated capital in active trades. When the limit is hit, new positions will not be opened for this provider until the existing ones are closed or the stop-loss orders shift to lower risk areas.</p>
                         </div>
                         <div className='flex gap-10'>
-                            <label className='flex gap-3' htmlFor="isolated">
+                            <label className='flex gap-3 items-center' htmlFor="isolated">
                                 <input type="radio" name="margin_mode" id="isolated" value={formData.margin_mode} onChange={(e) => { setFormData({ ...formData, margin_mode: e.target.id }) }} />
                                 Isolated
                             </label>
-                            <label className='flex gap-3' htmlFor="crossed">
+                            <label className='flex gap-3 items-center' htmlFor="crossed">
                                 <input type="radio" name="margin_mode" id="crossed" value={formData.margin_mode} onChange={(e) => { setFormData({ ...formData, margin_mode: e.target.id }) }} />
                                 Crossed
                             </label>
@@ -95,11 +96,11 @@ const EditBot2 = ({ formData, setFormData }) => {
                             <p>Automatically creates an entry order at the moment a new signal is published or sends a message requesting authorization to enter the signal.</p>
                         </div>
                         <div className='flex gap-10'>
-                            <label className='flex gap-3' htmlFor="automatic">
+                            <label className='flex gap-3 items-center' htmlFor="auto">
                                 <input type="radio" name="entry_method" id="auto" value={formData.entry_method} onChange={(e) => { setFormData({ ...formData, entry_method: e.target.id }) }} />
                                 Automatic
                             </label>
-                            <label className='flex gap-3' htmlFor="manual">
+                            <label className='flex gap-3 items-center' htmlFor="manual">
                                 <input type="radio" name="entry_method" id="manual" value={formData.entry_method} onChange={(e) => { setFormData({ ...formData, entry_method: e.target.id }) }} />
                                 Manual
                             </label>

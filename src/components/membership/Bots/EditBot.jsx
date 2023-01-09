@@ -13,15 +13,19 @@ import { useNavigate } from "react-router-dom"
 const EditBot = () => {
 
 
+    const [minMax, setMinMax] = useState({
+        min_allocation: '',
+        max_allocation: ''
+    })
 
     const [formData, setFormData] = useState({
         symbol: '',
         group_id: '',
         bot_name: '',
-        leverage: '',
+        leverage: 0,
         bot_action: '',
         margin_mode: '',
-        risk_amount: '',
+        risk_amount: 0,
         entry_method: ''
     })
 
@@ -68,7 +72,7 @@ const EditBot = () => {
 
     const showForm = () => {
         if (form === 0) {
-            return (<EditBot0 formData={formData} setFormData={setFormData} />)
+            return (<EditBot0 formData={formData} setFormData={setFormData} minMax={minMax} setMinMax={setMinMax} />)
         } else if (form === 1) {
             return (<EditBot1 formData={formData} setFormData={setFormData} />)
         } else if (form === 2) {
@@ -113,21 +117,23 @@ const EditBot = () => {
             </div>
             {showForm()}
             <div className='flex gap-5'>
-                <button onClick={() => { setForm((form) => form - 1) }} className='py-3 px-4 rounded bg-back-back text-white/70'>Back</button>
+                <button disabled={form === 0} onClick={() => { setForm((form) => form - 1) }} className='py-3 px-4 rounded bg-back-back text-white/70'>Back</button>
                 <button onClick={() => { form === 3 ? handleSubmit() : setForm((form) => form + 1) }} className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>
                     {form === 3 ? 'Launch' : 'Next'}
                 </button>
             </div>
             {/* {show && <Popup summary={response.detail} icon={response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />} status={response.status} click={() => setShow(false)} />} */}
             {show && <Popup>
-                <div className='grid gap-10'>
-                    < div className='flex justify-between items-center' >
-                        <p className='text-2xl'>{response}</p>
-                        <XCircleIcon onClick={() => (setShow(false))} className='h-6 cursor-pointer' />
-                    </div >
-                    <div className='space-y-10 pb-10'>
-                        <span>{response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />}</span>
-                        <p className='text-center w-2/3 mx-auto'>{response.status}</p>
+                <div>
+                    <div className='grid gap-10'>
+                        <div className='flex justify-between items-center'>
+                            <p className='text-2xl'>{response.status}</p>
+                            <XCircleIcon onClick={() => (setShow(false))} className='h-6 cursor-pointer' />
+                        </div>
+                        <div className='space-y-10 pb-10'>
+                            <span>{response.status === 'success' ? <CheckIcon className='h-10 mx-auto bg-green-600 rounded' /> : <XMarkIcon className='h-10 mx-auto bg-red-500 rounded' />}</span>
+                            <p className='text-center w-2/3 mx-auto'>{response.detail}</p>
+                        </div>
                     </div>
                 </div>
             </Popup>}

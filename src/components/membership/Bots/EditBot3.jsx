@@ -29,7 +29,7 @@ const EditBot3 = ({ formData, setFormData }) => {
                     </div>
                     <div className='flex gap-2'>
                         <p>Entry Mode:</p>
-                        <p>{formData.entry_mode}</p>
+                        <p>{formData.entry_method}</p>
                     </div>
                     <div className='flex gap-2'>
                         <p>Margin Mode:</p>
@@ -39,7 +39,7 @@ const EditBot3 = ({ formData, setFormData }) => {
             </div>
             <div className='p-5 bg-back-back rounded-lg space-y-5'>
                 <h6 className='text-lg font-semibold'>Rename Your Bot</h6>
-                <input className='border rounded-lg w-2/3 h-10 px-2 bg-transparent active:outline' type="text" name="" id="" value={formData.bot_name} />
+                <input className='border rounded-lg w-2/3 h-10 px-2 bg-transparent active:outline' type="text" name="" id="" value={formData.bot_name} onChange={(e) => { setFormData({ ...formData, bot_name: e.target.value }) }} />
             </div>
         </div>
     )
