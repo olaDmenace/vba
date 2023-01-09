@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../../store/authSlice'
 import EditBotHeader from './EditBotHeader'
 
-const EditBot0 = ({ formData, setFormData }) => {
+const EditBot0 = ({ formData, setFormData, minmax, setMinMax }) => {
 
     const [userGroups, setUserGroups] = useState([])
     const dispatch = useDispatch()
@@ -26,6 +26,7 @@ const EditBot0 = ({ formData, setFormData }) => {
             setUserGroups(data.detail)
         })
     }, [])
+
 
 
     return (
@@ -55,7 +56,7 @@ const EditBot0 = ({ formData, setFormData }) => {
                 </label>
                 <label className='grid gap-3' htmlFor="group_id">
                     What Signal Group are you creating this Bot for?
-                    <select className='h-10 px-2 bg-transparent border rounded-lg text-white/70' name="group_id" onChange={(e) => { console.log(formData.group_id); setFormData({ ...formData, group_id: e.target.value }) }}>
+                    <select className='h-10 px-2 bg-transparent border rounded-lg text-white/70' name="group_id" onChange={(e) => { setFormData({ ...formData, group_id: e.target.value }); }}>
                         <option value=""></option>
                         {userGroups.map(item => <option className='text-black' value={item?.signal_id} key={item?.signal_id}>{item.group_name}</option>)}
                     </select>

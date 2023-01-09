@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from '@heroicons/react/24/outline'
+import { PlusCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ import SingleSignalGroup from './SingleSignalGroup'
 // import SignalGroupTable from './SignalGroupTable'
 import TotalRevenueTable from './TotalRevenueTable'
 import Popup from '../../utils/Popup'
+import Button from '../../Button'
 
 
 // Spinner Loader import
@@ -196,15 +197,28 @@ const SignalGroup = () => {
                             <button className={!groups ? `text-white/70 bg-[#00B6FF33] py-2 px-2 rounded` : `text-white/70`} disabled={!groups ? true : false} onClick={changeGroup}>Other Signal Groups</button>
                         </div> : <p>Signal Groups</p>}
                     <div className='grid lg:grid-flow-col gap-5'>
-                        <Link to={role === true ? '/dashboard/CreateSignal' : ''} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : <button onClick={() => tradeManager()}>Become a Trade Manager</button>}</Link>
+                        <Link to={role === true ? '/dashboard/CreateSignal' : ''} className='text-primary hover:text-primary-light active:text-primary-dark'>{role === true ? 'Create a New Signal Group' : <button onClick={() => setPopup(true)}>Become a Trade Manager</button>}</Link>
                         {role === false ? <Link to={'/dashboard/SignalPage'} className='text-primary hover:text-primary-light active:text-primary-dark'>Connect to Signal Group</Link> : ''}
                     </div>
                 </div>
-                {popup && <Popup
+                {/* {popup && <Popup
                     status={tradeRequest}
                     summary={requestSummary}
                     icon={icon} click={() => setPopup(!popup)}
-                />}
+                />} */}
+                {popup && <Popup>
+                    <div className='grid gap-10'>
+                        < div className='flex justify-between items-center' >
+                            <p className='text-2xl'>{tradeRequest}</p>
+                            <XCircleIcon onClick={() => setPopup(!popup)} className='h-6 cursor-pointer' />
+                        </div >
+                        <div className='space-y-10 pb-10'>
+                            <span>{icon}</span>
+                            <p className='text-center w-2/3 mx-auto'>{requestSummary}</p>
+                        </div>
+                        <Button text={'Confirm'} Execute={() => tradeManager()} />
+                    </div>
+                </Popup>}
                 {/* {groups && <div className='grid lg:grid-flow-col gap-5 lg:grid-cols-2'> */}
                 {groups && <div className={role === false ? `grid grid-flow-col lg:grid-cols-2 gap-5` : 'grid lg:grid-flow-col lg:grid-cols-3 gap-5'}>
                     <div className='border rounded-lg p-5 grid gap-5'>
