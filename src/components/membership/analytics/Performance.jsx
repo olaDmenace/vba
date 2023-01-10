@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryArea, VictoryAxis, VictoryChart, VictoryPolarAxis, VictoryTheme } from 'victory'
+// import { VictoryArea, VictoryAxis, VictoryChart, VictoryPolarAxis, VictoryTheme } from 'victory'
 
 const Performance = () => {
     return (
@@ -7,12 +7,12 @@ const Performance = () => {
             <p className='font-semibold'>Performance</p>
             <p>Success Ratio: 0/0(%)</p>
             <div>
-                <VictoryChart
+                {/* <VictoryChart
                     theme={VictoryTheme.material}
                 >
                     <VictoryArea data={''} />
                     <VictoryAxis />
-                </VictoryChart>
+                </VictoryChart> */}
             </div>
         </div>
     )

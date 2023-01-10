@@ -16,7 +16,9 @@ import { Outlet } from 'react-router-dom'
 import { Oval } from 'react-loader-spinner'
 
 // Import handles the price chart
-import { VictoryPie, VictoryLabel } from 'victory'
+// import { VictoryPie, VictoryLabel } from 'victory'
+// import { Legend, Pie, PieChart, ResponsiveContainer, PieLabel, Tooltip, Label, Cell } from 'recharts'
+import { Chart } from "react-google-charts";
 
 
 const Dashboard = () => {
@@ -58,7 +60,22 @@ const Dashboard = () => {
         })
     }, [])
 
+    const data = [
+        ["Task", "Hours per Day"],
+        ["Work", 11],
+        ["Eat", 2],
+        ["Commute", 2],
+        ["Watch TV", 2],
+        ["Sleep", 7]
+    ];
 
+    const options = {
+        pieHole: 0.9,
+        is3D: false,
+        backgroundColor: '',
+        legend: { position: 'left', alignment: 'end', textStyle: { color: 'dddddd', fontSize: 12 } },
+        tooltip: { textStyle: { color: '#FF0000' }, showColorCode: true }
+    }
 
     return (
         <div className='space-y-5'>
@@ -75,7 +92,26 @@ const Dashboard = () => {
                         <button onClick={openModal} className='rounded h-12 px-5 hover:bg-[#66BBDC] text-white bg-primary active:bg-primary-dark ease-in-out transition-colors duration-500'>Connect Wallet</button>
                     </div>}
                     {ajite && <div className='mx-auto'>
-                        <svg width={250} height={250}>
+                        <Chart
+                            chartType='PieChart'
+                            data={data}
+                            options={options}
+                            height='250px'
+                        />
+                        {/* <PieChart height={300} width={300}>
+                            <Pie
+                                data={data}
+                                fill="#8884d8"
+                                paddingAngle={5}
+                                innerRadius={90}
+                            />
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                            <Tooltip />
+                            <Legend />
+                        </PieChart> */}
+                        {/* <svg width={250} height={250}>
                             <VictoryPie
                                 standalone={false}
                                 width={250}
@@ -102,7 +138,7 @@ const Dashboard = () => {
                                 y={250 * 0.525}
                                 text={[`$${balance[2]?.balance}`, "Total Balance"]}
                             />
-                        </svg>
+                        </svg> */}
                     </div>}
                 </div>
                 {ajite && <div className='basis-1/2'>

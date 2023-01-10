@@ -162,7 +162,7 @@ const SignalGroup = () => {
     const [show, setShow] = useState(false)
 
     // Fetch for memberships list and group summary created by the group manager
-    const [mems, setMems] = useState()
+    const [mems, setMems] = useState([])
     const [memberSum, setMemmberSum] = useState()
     const listMembers = (arg) => {
         fetch('https://server.cryptosignal.metrdev.com/api/v1/managers/viewSingleGroupConfig?' + new URLSearchParams({ group_id: arg }), {
@@ -208,10 +208,10 @@ const SignalGroup = () => {
                 />} */}
                 {popup && <Popup>
                     <div className='grid gap-10'>
-                        < div className='flex justify-between items-center' >
+                        <div className='flex justify-between items-center'>
                             <p className='text-2xl'>{tradeRequest}</p>
                             <XCircleIcon onClick={() => setPopup(!popup)} className='h-6 cursor-pointer' />
-                        </div >
+                        </div>
                         <div className='space-y-10 pb-10'>
                             <span>{icon}</span>
                             <p className='text-center w-2/3 mx-auto'>{requestSummary}</p>
@@ -269,7 +269,7 @@ const SignalGroup = () => {
                         pfee={memberSum?.pricing_fee}
                         win={memberSum?.win_rate}
                     />}
-                    {role === false ? '' : <Memberships number={mems?.length} />}
+                    {role === false ? '' : <Memberships number={mems?.length} email={''} />}
                 </div>}
                 {!groups && <div className='grid grid-flow-col lg:grid-cols-2 gap-5'>
                     <div className='border rounded-lg divide-y py-3'>
